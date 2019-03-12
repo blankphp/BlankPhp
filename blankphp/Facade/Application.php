@@ -2,22 +2,20 @@
 /**
  * Created by PhpStorm.
  * User: Administrator
- * Date: 2019/3/10
- * Time: 18:55
+ * Date: 2019/3/12
+ * Time: 19:46
  */
 
-namespace App\Facade;
+namespace Blankphp\Facade;
 
 
-use App\Service\Mysql;
-use App\Service\Oracle;
 use Blankphp\Facade;
 
-class DB extends Facade
+class Application extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'db';
+       return 'app';
     }
 
 }

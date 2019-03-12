@@ -9,11 +9,10 @@
 namespace Blankphp;
 
 
-use App\Service\Mysql;
-use App\Service\Oracle;
+use App\Provider\RouteProvider;
 use Blankphp\Kernel\Blankphp;
+use Blankphp\Provider\Provider;
 use Blankphp\Request\Request;
-use Blankphp\Route\Kernel;
 use Blankphp\Route\Route;
 
 class Application extends Container
@@ -24,18 +23,17 @@ class Application extends Container
         $this->registerBase();
 
         $this->registerService();
+        $this->registerProviders();
     }
 
     public function registerService()
     {
         $binds = [
-            'mysql'             => Mysql::class,
-            'oracle'            => Oracle::class,
-            'db'                => Oracle::class,
-            'route'             => Route::class,
-            'kernel'            => Blankphp::class,
-            'request'           =>Request::class,
+            'kernel' => Blankphp::class,
+            'request' => Request::class,
+            'route' => Route::class,
             \Blankphp\Kernel\Contract\Kernel::class => Blankphp::class,
+            \Blankphp\Route\Contract\Route::class => Route::class,
         ];
         foreach ($binds as $k => $v)
             $this->bind($k, $v);
@@ -54,7 +52,13 @@ class Application extends Container
     public function registerBase()
     {
         $this->instance('app', $this);
+
     }
+    public function registerProviders()
+    {
+        $this->instance('route', $this->make('route'));
+    }
+
 
 
 }

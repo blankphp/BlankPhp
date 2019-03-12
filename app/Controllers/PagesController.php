@@ -6,15 +6,19 @@
  * Time: 19:58
  */
 
-namespace App\Controller;
+namespace App\Controllers;
 
 
 use Blankphp\Request\Request;
 
 class PagesController
 {
-    public function __construct(Request $request){
+    public function index(){
+        echo "123";
+    }
 
+    public function indx(){
+        echo "a1sda5w1";
     }
 
 }

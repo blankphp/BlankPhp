@@ -8,10 +8,11 @@
 namespace Blankphp\Kernel\Contract;
 
 use Blankphp\Application;
+use \Blankphp\Route\Route;
 
 interface Kernel{
     
-    public function __construct(Application $app);
+    public function __construct(Route $route);
     public function handle($request);
 
 }

@@ -42,7 +42,7 @@ abstract class Facade
     {
         $obj = static::resolveFacadeInstance();
         //通过反射解决依赖
-        return  $obj->$method(...$args);
+        return $obj->$method(...$args);
     }
 
 }

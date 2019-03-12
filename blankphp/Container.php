@@ -18,9 +18,9 @@ class Container
     //存储对象的类变量/静态变量
     protected static $instance;
     //共享实例在这里存放
-    protected $instances=[];
+    public $instances = [];
     //绑定---》我们的服务[$abstract,$instance]
-    protected $binds=[];
+    protected $binds = [];
 
     //单例模式，一个对象重复使用
     public static function getInstance()
@@ -31,7 +31,7 @@ class Container
         return static::$instance;
     }
 
-    public function make($abstract,$parameters=[])
+    public function make($abstract, $parameters = [])
     {
         //如果这里有实例那么就直接返回注册好的共享实例
         if (isset($this->instances[$abstract])) {
@@ -39,7 +39,7 @@ class Container
         }
         $class = $this->binds[$abstract];
 
-        return (empty($parameters)) ? $this->build($class): new $class(...$parameters);
+        return (empty($parameters)) ? $this->build($class) : new $class(...$parameters);
     }
 
     public function has($abstract)
@@ -54,14 +54,14 @@ class Container
 
     public function instance($abstract, $instance)
     {
-        unset($this->binds[$abstract]);
         $this->instances[$abstract] = $instance;
+        unset($this->binds[$abstract]);
     }
 
 
     public function notInstantiable($concrete)
     {
-        throw new \Exception("[$concrete] no Instanctiable",3);
+        throw new \Exception("[$concrete] no Instanctiable", 3);
     }
 
     public function build($concrete)
@@ -71,21 +71,26 @@ class Container
             return $this->notInstantiable($concrete);
         }
         $constructor = $reflector->getConstructor();
-        if (is_null($constructor) ) {
+        if (is_null($constructor)) {
             return new $concrete;
         }
 
         if ($reflector->isInstantiable()) {
             // 获得目标函数
-            $params=$constructor->getParameters();
+            $params = $constructor->getParameters();
             if (count($params) === 0)
-                  return new $concrete();
+                return new $concrete();
             $paramsArray = $this->resolveDepends($constructor->getParameters());
             return $reflector->newInstanceArgs($paramsArray);
         }
     }
 
-    public function resolveDepends($params=[])
+    /**
+     * @param array $params
+     * @return array
+     * 解决依赖注入问题
+     */
+    public function resolveDepends($params = [])
     {
         // 判断参数类型
         foreach ($params as $key => $param) {
@@ -93,13 +98,28 @@ class Container
                 // 获得参数类型名称
                 $paramClassName = $paramClass->getName();
                 // 获得参数类型
-                $args = $this->make($paramClassName);
+                if ($this->has($paramClassName))
+                    $args = $this->make($paramClassName);
+                else
+                    $args = $this->build($paramClassName);
                 $paramArr[] = $args;
             }
-            return $paramArr;
         }
+        return $paramArr;
     }
 
+
+    /**
+     * @param $instance
+     * @param $method
+     * @return mixed
+     * call调用容器中指定的方法
+     */
+    public function call($instance, $method)
+    {
+        $instance = $this->build($instance);
+        return $instance->$method();
+    }
 
 }
 

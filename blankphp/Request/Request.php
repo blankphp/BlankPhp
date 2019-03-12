@@ -76,7 +76,7 @@ class Request implements RequestContract
             $urlArray = array_diff($urlArray, $file);
             //去除两边的东西
             if ($urlArray) {
-                $this->uri = implode('/', $urlArray);
+                $this->uri = '/'.implode('/', $urlArray);
             } else {
                 $this->uri = '/';
             }

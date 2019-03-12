@@ -9,7 +9,10 @@
 namespace Blankphp\Route\Contract;
 
 
+use Blankphp\Facade\Application;
+
 interface Route
 {
+    public function __construct(Application $app);
 
 }

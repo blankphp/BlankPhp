@@ -15,27 +15,17 @@ require(APP_PATH . '/vendor/autoload.php');
 
 $app = require_once APP_PATH . 'Blankphp/Application.php';
 
-$config = require "config/config.php";
+$config = require "config/app.php";
 
 $kernel = $app->make(\Blankphp\Kernel\Contract\Kernel::class);
-
+//核心处理请求--->dispatcher
 $response = $kernel->handle(
     \Blankphp\Request\Facade\Request::capture()
 );
-
-//echo json_encode($response);
-
-
+var_dump($response);
+//返回请求
 //return $response;
 
-
-//$response = $kernel->handle(
-//    $request = \Blankphp\Request\Facade\Request::capture()
-//);
-//
-//$response->send();
-//
-//$kernel->terminate($request, $response);
 
 
 
