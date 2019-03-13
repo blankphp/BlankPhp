@@ -18,9 +18,10 @@ class Container
     //存储对象的类变量/静态变量
     protected static $instance;
     //共享实例在这里存放
-    public $instances = [];
+    protected $instances = [];
     //绑定---》我们的服务[$abstract,$instance]
     protected $binds = [];
+    protected $classes = [];
 
     //单例模式，一个对象重复使用
     public static function getInstance()
@@ -34,11 +35,14 @@ class Container
     public function make($abstract, $parameters = [])
     {
         //如果这里有实例那么就直接返回注册好的共享实例
+
+        if (isset($this->classes[$abstract])) {
+            return $this->classes[$abstract];
+        }
         if (isset($this->instances[$abstract])) {
             return $this->instances[$abstract];
         }
         $class = $this->binds[$abstract];
-
         return (empty($parameters)) ? $this->build($class) : new $class(...$parameters);
     }
 
@@ -54,7 +58,10 @@ class Container
 
     public function instance($abstract, $instance)
     {
-        $this->instances[$abstract] = $instance;
+        if (!isset($this->instances[$abstract]))
+            $this->instances[$abstract] = $instance;
+        if (!isset($this->classes[get_class($instance)]))
+            $this->classes[get_class($instance)] = $instance;
         unset($this->binds[$abstract]);
     }
 
@@ -98,10 +105,13 @@ class Container
                 // 获得参数类型名称
                 $paramClassName = $paramClass->getName();
                 // 获得参数类型
-                if ($this->has($paramClassName))
-                    $args = $this->make($paramClassName);
-                else
-                    $args = $this->build($paramClassName);
+                if (isset($this->classes[$paramClassName])) {
+                    $args = $this->classes[$paramClassName];
+                } else
+                    if ($this->has($paramClassName))
+                        $args = $this->make($paramClassName);
+                    else
+                        $args = $this->build($paramClassName);
                 $paramArr[] = $args;
             }
         }
@@ -119,6 +129,11 @@ class Container
     {
         $instance = $this->build($instance);
         return $instance->$method();
+    }
+
+
+    public function flush(){
+        //清理内存咯
     }
 
 }

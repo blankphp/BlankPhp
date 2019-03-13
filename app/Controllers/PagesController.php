@@ -21,4 +21,9 @@ class PagesController
         echo "a1sda5w1";
     }
 
+    public function get(Request $request){
+        echo "a1sda5w1";
+        var_dump($request->get(['name']));
+    }
+
 }

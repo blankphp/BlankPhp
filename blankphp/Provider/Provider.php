@@ -15,12 +15,14 @@ use Blankphp\Provider\Contract\ProviderContract;
 class Provider implements ProviderContract
 {
     protected $app;
-    public function __construct()
+
+    public function __construct(Application $app)
     {
-        $this->app = Application::getInstance();
+        $this->app = $app;
         $this->boot();
         $this->register();
     }
+
     public function boot()
     {
         // TODO: Implement boot() method.

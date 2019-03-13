@@ -9,7 +9,7 @@
 namespace Blankphp\Route\Contract;
 
 
-use Blankphp\Facade\Application;
+use Blankphp\Application;
 
 interface Route
 {

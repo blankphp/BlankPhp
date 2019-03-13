@@ -19,11 +19,12 @@ trait ResolveSomeDepends
     public function resolveClassMethodDependencies($parameters, $instance, $method)
     {
         //解决类方法的依赖-->反射解决
-        if (!is_null($parameters))
+        if (!empty($parameters))
             return $parameters;
         return $this->resolveMethodDependencies(
             $parameters, new \ReflectionMethod($instance, $method)
         );
+
     }
 
 
@@ -33,16 +34,14 @@ trait ResolveSomeDepends
         $values = array_values($parameters);
         foreach ($reflector->getParameters() as $key => $parameter) {
             $instance = $parameter->getClass();
-
             if (!is_null($instance)) {
                 $instanceCount++;
-                array_splice($parameters, $key, $instance);
+                array_splice($parameters, $key, 0,[$this->app->make($instance->getName())]);
             } elseif (!isset($values[$key - $instanceCount]) &&
                 $parameter->isDefaultValueAvailable()) {
-                array_splice($parameters, $key, $parameter->getDefaultValue());
+                array_splice($parameters, $key,0, [$parameter->getDefaultValue()]);
             }
         }
-
         return $parameters;
     }
 

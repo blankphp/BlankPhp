@@ -12,7 +12,7 @@ use \Blankphp\Route\Route;
 
 interface Kernel{
     
-    public function __construct(Route $route);
+    public function __construct(Application $app,Route $route);
     public function handle($request);
 
 }

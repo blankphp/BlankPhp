@@ -19,10 +19,14 @@ $config = require "config/app.php";
 
 $kernel = $app->make(\Blankphp\Kernel\Contract\Kernel::class);
 //核心处理请求--->dispatcher
+
 $response = $kernel->handle(
     \Blankphp\Request\Facade\Request::capture()
 );
-var_dump($response);
+
+
+//echo "<hr>";
+//echo json_encode($app->classes);
 //返回请求
 //return $response;
 

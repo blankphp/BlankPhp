@@ -25,9 +25,9 @@ class Blankphp implements Kernel
     ];
 
     //获取配置文件===
-    public function __construct(Route $route)
+    public function __construct(Application $app,Route $route)
     {
-        $this->app = Application::getInstance();
+        $this->app = $app;
         $this->route = $route;
     }
 

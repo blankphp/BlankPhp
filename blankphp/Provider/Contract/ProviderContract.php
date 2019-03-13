@@ -13,7 +13,7 @@ use Blankphp\Application;
 
 interface ProviderContract
 {
-    public function __construct();
+    public function __construct(Application $app);
     public function boot();
     public function register();
 }

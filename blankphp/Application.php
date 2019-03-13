@@ -9,9 +9,7 @@
 namespace Blankphp;
 
 
-use App\Provider\RouteProvider;
 use Blankphp\Kernel\Blankphp;
-use Blankphp\Provider\Provider;
 use Blankphp\Request\Request;
 use Blankphp\Route\Route;
 
@@ -21,7 +19,6 @@ class Application extends Container
     {
         //把app放如共享实例容器中
         $this->registerBase();
-
         $this->registerService();
         $this->registerProviders();
     }
@@ -32,6 +29,7 @@ class Application extends Container
             'kernel' => Blankphp::class,
             'request' => Request::class,
             'route' => Route::class,
+            'app' => Application::class,
             \Blankphp\Kernel\Contract\Kernel::class => Blankphp::class,
             \Blankphp\Route\Contract\Route::class => Route::class,
         ];
@@ -54,14 +52,14 @@ class Application extends Container
         $this->instance('app', $this);
 
     }
+
     public function registerProviders()
     {
         $this->instance('route', $this->make('route'));
     }
 
 
-
 }
 
-return new Application();
+return Application::getInstance();
 
