@@ -12,7 +12,8 @@ namespace Blankphp\Kernel;
 use App\Provider\RouteProvider;
 use Blankphp\Application;
 use Blankphp\Kernel\Contract\Kernel;
-use \Blankphp\Route\Route;
+use Blankphp\Provider\MiddleWareProvider;
+use Blankphp\Route\Router;
 
 class Blankphp implements Kernel
 {
@@ -22,10 +23,11 @@ class Blankphp implements Kernel
 
     protected $bootstraps = [
         RouteProvider::class => 'map',
+        MiddleWareProvider::class => 'middleware',
     ];
 
     //获取配置文件===
-    public function __construct(Application $app,Route $route)
+    public function __construct(Application $app, Router $route)
     {
         $this->app = $app;
         $this->route = $route;
@@ -45,14 +47,14 @@ class Blankphp implements Kernel
         //注册三大基础服务
         $this->bootstrap();
         //请求分发
-        return $this->route->dispatch($request);
+        return $this->route->dispatcher($request);
     }
 
     public function bootstrap()
     {
         //注册好基础服务---》路由等
         //调用RouteProvider
-        $this->app->instance('route',$this->route);
+        $this->app->instance('route', $this->route);
         foreach ($this->bootstraps as $k => $method) {
             $this->app->call($k, $method);
         }
@@ -63,15 +65,10 @@ class Blankphp implements Kernel
         $this->app->make($bootstrap);
     }
 
-    public function getRoute()
+
+    public function flush()
     {
-
-    }
-
-    //路由分发->从route中分发
-    public function dispatcher()
-    {
-
+        $this->app->flush();
     }
 
 

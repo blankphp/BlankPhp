@@ -21,8 +21,11 @@ trait ResolveSomeDepends
         //解决类方法的依赖-->反射解决
         if (!empty($parameters))
             return $parameters;
+
+
         return $this->resolveMethodDependencies(
-            $parameters, new \ReflectionMethod($instance, $method)
+            $parameters, $instance !== 'Closure' ?
+                new \ReflectionMethod($instance, $method) : new \ReflectionFunction($method)
         );
 
     }
@@ -36,10 +39,10 @@ trait ResolveSomeDepends
             $instance = $parameter->getClass();
             if (!is_null($instance)) {
                 $instanceCount++;
-                array_splice($parameters, $key, 0,[$this->app->make($instance->getName())]);
+                array_splice($parameters, $key, 0, [$this->app->make($instance->getName())]);
             } elseif (!isset($values[$key - $instanceCount]) &&
                 $parameter->isDefaultValueAvailable()) {
-                array_splice($parameters, $key,0, [$parameter->getDefaultValue()]);
+                array_splice($parameters, $key, 0, [$parameter->getDefaultValue()]);
             }
         }
         return $parameters;

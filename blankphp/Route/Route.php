@@ -8,9 +8,9 @@
 
 namespace Blankphp\Route;
 
-use \Blankphp\Application;
+use Blankphp\Application;
+use \Blankphp\Kernel\Contract\Container;
 use Blankphp\Route\Contract\Route as Contract;
-use Blankphp\Route\Traits\DispatcherToController;
 use Blankphp\Route\Traits\ResolveSomeDepends;
 
 
@@ -26,12 +26,22 @@ class Route implements Contract
 
     public function __construct(Application $app)
     {
-        $this->app=$app;
+        $this->app = $app;
     }
 
     public function get($uri, $action)
     {
         return $this->addRoute(['GET'], $uri, $action);
+    }
+
+    public function delete($uri, $action)
+    {
+        return $this->addRoute(['DELETE'], $uri, $action);
+    }
+
+    public function put($uri, $action)
+    {
+        return $this->addRoute(['PUT'], $uri, $action);
     }
 
     public function post($uri, $action)
@@ -54,18 +64,21 @@ class Route implements Contract
 
     public function middleware($group)
     {
-        $this->controllerNamespace=$group;
+        $this->controllerNamespace = $group;
         return $this;
     }
 
-    public function group($file){
+    public function group($file)
+    {
         require $file;
     }
 
-    public function setNamespace($namespace){
-        $this->controllerNamespace=$namespace;
+    public function setNamespace($namespace)
+    {
+        $this->controllerNamespace = $namespace;
         return $this;
     }
+
     public function findRoute($request)
     {
         //判断方法
@@ -82,8 +95,12 @@ class Route implements Contract
 
     public function getController($controller)
     {
+        //如过传递的是闭包
+        if ($controller instanceof \Closure)
+            return array('Closure', $controller);
+        //如果不是闭包
         $controller = explode('@', $controller);
-        $controllerName = !is_null($controller[0]) ? $this->controllerNamespace.'\\'.$controller[0] : '';
+        $controllerName = !is_null($controller[0]) ? $this->controllerNamespace . '\\' . $controller[0] : '';
         $method = !is_null($controller[1]) ? $controller[1] : '';
         if (!is_null($controllerName) || !is_null($method))
             return array($controllerName, $method);
@@ -93,17 +110,19 @@ class Route implements Contract
 
     public function runController($controller, $method)
     {
-        //解决方法的依赖
         $parameters = $this->resolveClassMethodDependencies(
             [], $controller, $method
         );
-        $controller= $this->app->build($controller);
+        if ($controller === 'Closure')
+            return $method(...array_values($parameters));
+        //解决方法的依赖
+        $controller = $this->app->build($controller);
         //获取控制器的对象,返回结果
-        return $controller->{$method}(...array_values($parameters));
+            return $controller->{$method}(...array_values($parameters));
     }
 
 
-    public function dispatch($request)
+    public function run($request)
     {
         //路由分发
         return $this->runController(...$this->findRoute($request));

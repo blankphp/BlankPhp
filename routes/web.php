@@ -11,3 +11,7 @@ Route::get('/','PagesController@index');
 Route::get('/1','PagesController@indx');
 
 Route::get('/2','PagesController@get');
+
+Route::get('/3',function (){
+    echo "3333";
+});

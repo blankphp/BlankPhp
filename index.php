@@ -23,8 +23,11 @@ $kernel = $app->make(\Blankphp\Kernel\Contract\Kernel::class);
 $response = $kernel->handle(
     \Blankphp\Request\Facade\Request::capture()
 );
+//发送请求ob等
+//$response->send();
 
-
+//清理空间,,容器内部消化
+$kernel->flush();
 //echo "<hr>";
 //echo json_encode($app->classes);
 //返回请求

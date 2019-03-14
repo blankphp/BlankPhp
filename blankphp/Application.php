@@ -9,6 +9,7 @@
 namespace Blankphp;
 
 
+use Blankphp\Provider\MiddleWareProvider;
 use Blankphp\Kernel\Blankphp;
 use Blankphp\Request\Request;
 use Blankphp\Route\Route;
@@ -30,6 +31,8 @@ class Application extends Container
             'request' => Request::class,
             'route' => Route::class,
             'app' => Application::class,
+            'middleware'=>MiddleWareProvider::class,
+            \Blankphp\Kernel\Contract\Container::class, Application::class,
             \Blankphp\Kernel\Contract\Kernel::class => Blankphp::class,
             \Blankphp\Route\Contract\Route::class => Route::class,
         ];

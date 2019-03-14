@@ -9,9 +9,7 @@
 namespace App\Provider;
 
 
-use Blankphp\Application;
 use Blankphp\Provider\Provider;
-use \Blankphp\Route\Contract\Route;
 
 class RouteProvider extends Provider
 {
@@ -36,10 +34,9 @@ class RouteProvider extends Provider
 
     public function mapWebRoute()
     {
-        $this->route->setNamespace($this->namespace)
+        $this->route
+            ->setNamespace($this->namespace)
             ->group(APP_PATH . 'routes/web.php');
-        var_dump( $this->app->make('request')->uri);
-
     }
 
 }

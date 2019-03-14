@@ -8,12 +8,10 @@
 
 namespace Blankphp;
 
-
-use App\Service\Mysql;
-use App\Service\Oracle;
+use \Blankphp\Kernel\Contract\Container as ContainerContract;
 
 
-class Container
+class Container implements \ArrayAccess, ContainerContract
 {
     //存储对象的类变量/静态变量
     protected static $instance;
@@ -132,9 +130,50 @@ class Container
     }
 
 
-    public function flush(){
-        //清理内存咯
+    public function flush()
+    {
+        $this->classes = [];
+        $this->binds = [];
+        $this->instances = [];
     }
+
+    /**
+     *  * 标识一个元素是否定义
+     *  * @param offset
+     *  */
+    public function offsetExists($offset)
+    {
+
+    }
+
+    /**
+     *  * 返回一个元素的值
+     *  * @param offset
+     *  */
+    public function offsetGet($offset)
+    {
+
+    }
+
+    /**
+     *  * 为一个元素的赋值
+     *  * @param offset
+     *  * @param value
+     *  */
+    public function offsetSet($offset, $value)
+    {
+
+    }
+
+    /**
+     *  * 删除一个元素
+     *  * @param offset
+     *  */
+    public function offsetUnset($offset)
+    {
+
+    }
+
 
 }
 
