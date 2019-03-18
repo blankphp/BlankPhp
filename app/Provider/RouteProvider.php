@@ -35,8 +35,9 @@ class RouteProvider extends Provider
     public function mapWebRoute()
     {
         $this->route
+            ->group('web')
             ->setNamespace($this->namespace)
-            ->group(APP_PATH . 'routes/web.php');
+            ->file(APP_PATH . 'routes/web.php');
     }
 
 }

@@ -11,7 +11,7 @@ namespace App\Controllers;
 
 use Blankphp\Request\Request;
 
-class PagesController
+class PagesController extends Controller
 {
     public function index(){
         echo "123";
@@ -21,9 +21,8 @@ class PagesController
         echo "a1sda5w1";
     }
 
-    public function get(Request $request){
+    public function get(){
         echo "a1sda5w1";
-        var_dump($request->get(['name']));
     }
 
 }

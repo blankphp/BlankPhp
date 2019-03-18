@@ -18,6 +18,7 @@ class MiddleWareProvider extends Provider
     protected $middleware = [
         MiddleWare::class,
     ];
+    protected $registerMiddleware;
 
     public function getMiddleware(){
         return $this->middleware;
@@ -36,6 +37,12 @@ class MiddleWareProvider extends Provider
     public function middleware()
     {
         //写出= =要加载的文件或者config中的中间件
+    }
+
+    public function getAliceMiddleWare($alice){
+        if (isset($this->registerMiddleware[$alice]))
+            return $this->registerMiddleware[$alice];
+//        throw new \Exception('not have this middleware '.$alice,1);
     }
 
 }

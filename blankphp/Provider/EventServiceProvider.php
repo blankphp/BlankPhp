@@ -11,5 +11,5 @@ namespace Blankphp\Provider;
 
 class EventServiceProvider extends Provider
 {
-
+    //观察者等方式
 }

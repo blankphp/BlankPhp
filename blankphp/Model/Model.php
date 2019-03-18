@@ -9,41 +9,66 @@
 namespace Blankphp\Model;
 
 
-class Model
-{
+use Blankphp\Database\Database;
+use Blankphp\Event\EventAbstract;
 
-    public function __construct()
+class Model extends EventAbstract
+{
+    protected $database;
+
+    protected $sql;
+    protected $select;
+    protected $groupBy;
+    protected $orderBy;
+    protected $where;
+    protected $from;
+
+
+    public function __construct(Database $database)
+    {
+        $this->database = $database;
+    }
+
+
+    public function createTable()
     {
 
     }
 
-
-    public function createTable(){
-
-    }
-
-    public function get(){
+    public function get()
+    {
 
     }
 
-    public function all(){
+    public function all()
+    {
 
     }
 
-    public function limit(){
+    public function limit()
+    {
 
     }
 
-    public function first(){
+    public function first()
+    {
 
     }
 
-    public function last(){
+    public function last()
+    {
 
     }
 
-    public function orderBy(){
+    public function orderBy()
+    {
 
+    }
+
+    public function getSql()
+    {
+        $this->sql = $this->select . $this->where .
+            $this->from . $this->groupBy . $this->orderBy;
     }
 
 }

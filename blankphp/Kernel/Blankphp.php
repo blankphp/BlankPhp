@@ -12,7 +12,7 @@ namespace Blankphp\Kernel;
 use App\Provider\RouteProvider;
 use Blankphp\Application;
 use Blankphp\Kernel\Contract\Kernel;
-use Blankphp\Provider\MiddleWareProvider;
+use App\Provider\MiddleWareProvider;
 use Blankphp\Route\Router;
 
 class Blankphp implements Kernel

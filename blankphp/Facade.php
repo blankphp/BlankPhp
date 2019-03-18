@@ -34,8 +34,8 @@ abstract class Facade
         if (is_object($class))
             return $class;
         if (isset(static::$resolveFacadeInstances[$class]))
-            return static::$resolveFacadeInstances;
-        return static::$resolveFacadeInstances = Application::getInstance()->make($class);
+            return static::$resolveFacadeInstances[$class];
+        return static::$resolveFacadeInstances[] = Application::getInstance()->make($class);
     }
 
     public static function __CallStatic($method, $args)

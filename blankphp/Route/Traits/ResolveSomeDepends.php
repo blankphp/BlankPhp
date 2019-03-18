@@ -9,6 +9,7 @@
 namespace Blankphp\Route\Traits;
 
 
+use Blankphp\Facade;
 use ReflectionFunctionAbstract;
 use ReflectionMethod;
 use ReflectionParameter;
@@ -39,7 +40,11 @@ trait ResolveSomeDepends
             $instance = $parameter->getClass();
             if (!is_null($instance)) {
                 $instanceCount++;
-                array_splice($parameters, $key, 0, [$this->app->make($instance->getName())]);
+                array_splice($parameters, $key, 0,
+//                    !($instance instanceof Facade)?
+                    [$this->app->make($instance->getName())]
+//                        []
+                );
             } elseif (!isset($values[$key - $instanceCount]) &&
                 $parameter->isDefaultValueAvailable()) {
                 array_splice($parameters, $key, 0, [$parameter->getDefaultValue()]);

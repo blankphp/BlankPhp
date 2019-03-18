@@ -9,7 +9,7 @@
 namespace Blankphp;
 
 
-use Blankphp\Provider\MiddleWareProvider;
+use \App\Provider\MiddleWareProvider;
 use Blankphp\Kernel\Blankphp;
 use Blankphp\Request\Request;
 use Blankphp\Route\Route;

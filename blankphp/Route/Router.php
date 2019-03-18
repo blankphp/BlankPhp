@@ -25,17 +25,21 @@ class Router
         $this->middleware = $app->make('middleware');
     }
 
-    public function getMiddleware()
+    public function getMiddleware($controller)
     {
-        $this->middleware = $this->app->make('middleware')->getMiddleware();
+        $middleware = $this->app->make('middleware')->getMiddleware();
+
+        $temp = array($this->app->make('middleware')->getAliceMiddleWare(
+            $this->route->getMiddleWare()));
+        $this->middleware = array_filter(array_merge($middleware, $temp));
     }
 
     public function dispatcher($request)
     {
         ///寻找出request
         $controller = $this->route->findRoute($request);
-        $this->getMiddleware();
 
+        $this->getMiddleware($controller);
         return (new Pipe($this->app))
             ->send($request)
             ->through($this->middleware)
