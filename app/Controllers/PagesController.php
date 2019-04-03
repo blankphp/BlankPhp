@@ -25,4 +25,8 @@ class PagesController extends Controller
         echo "a1sda5w1";
     }
 
+    public function getone($id){
+        echo "a1sda5w".$id;
+    }
+
 }

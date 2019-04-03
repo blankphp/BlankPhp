@@ -12,5 +12,5 @@ Route::get('/', 'PagesController@index');
 Route::get('/11', 'PagesController@indx')->middleware('test2');
 
 
-Route::get('/user/[id]', 'PagesController@indx')->middleware('test2');
 
+Route::get('/user/<id>', 'PagesController@getone')->middleware('test2');

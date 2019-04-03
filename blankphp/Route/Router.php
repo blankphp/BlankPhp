@@ -38,6 +38,7 @@ class Router
     {
         ///寻找出request
         $controller = $this->route->findRoute($request);
+        var_dump($controller);
         $this->getMiddleware();
         return (new Pipe($this->app))
             ->send($request)

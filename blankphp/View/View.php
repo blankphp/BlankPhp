@@ -11,5 +11,8 @@ namespace Blankphp\View;
 
 class View
 {
+    public function make($view, $data, $mergeData){
+        //创建视图,并把参数导入内部
+    }
 
 }
