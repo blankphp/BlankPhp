@@ -14,14 +14,9 @@ use Blankphp\Event\EventAbstract;
 
 class Model extends EventAbstract
 {
+    use Sql;
     protected $database;
 
-    protected $sql;
-    protected $select;
-    protected $groupBy;
-    protected $orderBy;
-    protected $where;
-    protected $from;
 
 
     public function __construct(Database $database)
@@ -30,45 +25,6 @@ class Model extends EventAbstract
     }
 
 
-    public function createTable()
-    {
 
-    }
-
-    public function get()
-    {
-
-    }
-
-    public function all()
-    {
-
-    }
-
-    public function limit()
-    {
-
-    }
-
-    public function first()
-    {
-
-    }
-
-    public function last()
-    {
-
-    }
-
-    public function orderBy()
-    {
-
-    }
-
-    public function getSql()
-    {
-        $this->sql = $this->select . $this->where .
-            $this->from . $this->groupBy . $this->orderBy;
-    }
 
 }

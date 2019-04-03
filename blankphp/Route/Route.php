@@ -23,7 +23,9 @@ class Route implements Contract
     protected $app;
     protected $container;
     protected $controllerNamespace;
-    protected $group = 'web';
+    protected $prefix;
+    protected $group;
+    protected $groupMiddleware;
 
     public function __construct(Application $app)
     {
@@ -64,21 +66,27 @@ class Route implements Contract
     public function addRoute($methods, $uri, $action)
     {
         foreach ($methods as $method) {
-            $this->route[$this->group][$method][$uri] = ['action' => $action];
-            $this->setCurrentController($this->group, $method, $uri);
-            $this->setOneMiddleWare($this->group, $method, $uri);
+            $uri = empty($this->prefix)?$uri:'/'.$this->prefix  . $uri;
+            preg_match_all('[]');
+            $this->route[$method][$uri] = ['action' => $action];
+            $this->setCurrentController($method, $uri);
+            $this->setOneMiddleWare($method, $uri);
+            empty($this->groupMiddleware)?:$this->route[$method][$uri]['middleware']['group']=$this->groupMiddleware;
         }
-
 
         return $this;
     }
 
-    public function middleware($middleware)
+    public function middleware()
     {
         //引用中间件别名[然后获取]
-        $this->tempMiddleware = $middleware;
+        $middleware = func_get_args();
         if (!empty($this->currentController)) {
-            $this->setOneMiddleWare(...$this->currentController);
+            foreach ($middleware as $item) {
+                $this->tempMiddleware = $item;
+                $this->setOneMiddleWare(...$this->currentController);
+
+            }
             $this->tempMiddleware = '';
         }
         return $this;
@@ -90,11 +98,24 @@ class Route implements Contract
         require $file;
     }
 
+    public function prefix($prefix)
+    {
+        $this->prefix = $prefix;
+        return $this;
+    }
+
     public function group($group)
     {
         $this->group = $group;
         return $this;
     }
+
+    public function GroupMiddleware($groupMiddleware)
+    {
+        $this->groupMiddleware = $groupMiddleware;
+        return $this;
+    }
+
 
     public function setNamespace($namespace)
     {
@@ -109,10 +130,9 @@ class Route implements Contract
         $method = $request->method;
         //获取访问的uri
         $uri = $request->uri;
-
-        if (isset($this->route['web'][$method][$uri])) {
+        if (isset($this->route[$method][$uri])) {
             //获取控制器
-            $temp = $this->route['web'][$method][$uri];
+            $temp = $this->route[$method][$uri];
             $controller = $this->getController($temp['action']);
             $middleware = $this->getOneMiddleWare($temp);
             !empty($middleware) ? $this->setMiddleWare($middleware) : '';

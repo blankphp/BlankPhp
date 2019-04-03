@@ -11,5 +11,17 @@ namespace Blankphp\Response;
 
 class Response
 {
+    public function setHeader(){
+
+    }
+
+    public function header(){
+
+    }
+
+    public function setContent(){
+
+    }
+
 
 }

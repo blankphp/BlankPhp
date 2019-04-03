@@ -9,7 +9,13 @@
 namespace App\Provider;
 
 
-class EventServiceProvider
+use Blankphp\Provider\Provider;
+
+class EventServiceProvider extends Provider
 {
+    //注册好监听者
+    protected  $binds=[
+//        'Model'=>'Observe'
+    ];
 
 }

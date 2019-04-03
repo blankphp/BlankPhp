@@ -29,13 +29,24 @@ class RouteProvider extends Provider
 
     public function map()
     {
-        return $this->mapWebRoute();
+        $this->mapWebRoute();
+        $this->mapApiRoute();
     }
+
+    public function mapApiRoute()
+    {
+        $this->route
+            ->GroupMiddleware('api')
+            ->prefix('api')
+            ->setNamespace($this->namespace)
+            ->file(APP_PATH . 'routes/api.php');
+    }
+
 
     public function mapWebRoute()
     {
         $this->route
-            ->group('web')
+            ->GroupMiddleware('web')
             ->setNamespace($this->namespace)
             ->file(APP_PATH . 'routes/web.php');
     }

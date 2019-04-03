@@ -25,12 +25,12 @@ class Router
         $this->middleware = $app->make('middleware');
     }
 
-    public function getMiddleware($controller)
+    public function getMiddleware()
     {
-        $middleware = $this->app->make('middleware')->getMiddleware();
-
-        $temp = array($this->app->make('middleware')->getAliceMiddleWare(
-            $this->route->getMiddleWare()));
+        $middleware = $this->app->make('middleware')
+            ->getMiddleware( $this->route->getGroupMidlleware());
+        $temp = $this->app->make('middleware')->getAliceMiddleWare(
+            $this->route->getMiddleWare());
         $this->middleware = array_filter(array_merge($middleware, $temp));
     }
 
@@ -38,8 +38,7 @@ class Router
     {
         ///寻找出request
         $controller = $this->route->findRoute($request);
-
-        $this->getMiddleware($controller);
+        $this->getMiddleware();
         return (new Pipe($this->app))
             ->send($request)
             ->through($this->middleware)

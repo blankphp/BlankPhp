@@ -71,5 +71,9 @@ class Blankphp implements Kernel
         $this->app->flush();
     }
 
+    public function config(){
+
+    }
+
 
 }
