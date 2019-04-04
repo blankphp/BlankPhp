@@ -15,9 +15,4 @@ return [
         'database'=>'test',
 
     ],
-    'middleware'=>[
-        'web'=>[
-            ''
-        ]
-    ]
 ];

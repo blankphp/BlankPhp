@@ -9,7 +9,7 @@
 namespace Blankphp\PipeLine;
 
 
-use Blankphp\Kernel\Contract\Container;
+use Blankphp\Contract\Container;
 
 class PipeLine
 {

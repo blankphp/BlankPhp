@@ -3,6 +3,7 @@
     "psr-4": {
       "App\\": "app/",
       "Blankphp\\": "blankphp/"
-    }
+    },
+    "files":["blankphp/helpers/helper.php"]
   }
 }

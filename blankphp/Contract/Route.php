@@ -6,7 +6,7 @@
  * Time: 21:33
  */
 
-namespace Blankphp\Route\Contract;
+namespace Blankphp\Contract;
 
 
 use Blankphp\Application;

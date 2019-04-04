@@ -11,8 +11,9 @@ namespace Blankphp\Kernel;
 
 use App\Provider\RouteProvider;
 use Blankphp\Application;
-use Blankphp\Kernel\Contract\Kernel;
 use App\Provider\MiddleWareProvider;
+use Blankphp\Contract\Kernel;
+use Blankphp\Provider\ConfigServiceProvider;
 use Blankphp\Route\Router;
 
 class Blankphp implements Kernel
@@ -24,6 +25,7 @@ class Blankphp implements Kernel
     protected $bootstraps = [
         RouteProvider::class => 'map',
         MiddleWareProvider::class => 'middleware',
+        ConfigServiceProvider::class=>'filter'
     ];
 
     //获取配置文件===
@@ -71,9 +73,6 @@ class Blankphp implements Kernel
         $this->app->flush();
     }
 
-    public function config(){
-
-    }
 
 
 }

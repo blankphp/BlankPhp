@@ -5,7 +5,7 @@
  * Date: 2019/3/11
  * Time: 13:22
  */
-namespace Blankphp\Kernel\Contract;
+namespace Blankphp\Contract;
 
 use Blankphp\Application;
 use Blankphp\Route\Router;

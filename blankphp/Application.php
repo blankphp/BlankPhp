@@ -10,6 +10,7 @@ namespace Blankphp;
 
 
 use \App\Provider\MiddleWareProvider;
+use Blankphp\Database\Database;
 use Blankphp\Kernel\Blankphp;
 use Blankphp\Request\Request;
 use Blankphp\Route\Route;
@@ -31,10 +32,12 @@ class Application extends Container
             'request' => Request::class,
             'route' => Route::class,
             'app' => Application::class,
-            'middleware'=>MiddleWareProvider::class,
-            \Blankphp\Kernel\Contract\Container::class, Application::class,
-            \Blankphp\Kernel\Contract\Kernel::class => Blankphp::class,
-            \Blankphp\Route\Contract\Route::class => Route::class,
+            'db' => Database::class,
+            \Blankphp\Contract\Container::class => Application::class,
+            'middleware' => MiddleWareProvider::class,
+            \Blankphp\Contract\Kernel::class => Blankphp::class,
+            \Blankphp\Contract\Route::class => Route::class,
+
         ];
         foreach ($binds as $k => $v)
             $this->bind($k, $v);
@@ -42,6 +45,9 @@ class Application extends Container
 
     public function make($abstract, $parameters = [])
     {
+        if (isset($this->signal[$abstract])) {
+            return $this->signal[$abstract];
+        }
         if (!$this->has($abstract))
             if (class_exists($abstract))
                 return new $abstract(...$parameters);

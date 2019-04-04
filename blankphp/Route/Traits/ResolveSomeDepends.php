@@ -41,9 +41,7 @@ trait ResolveSomeDepends
             if (!is_null($instance)) {
                 $instanceCount++;
                 array_splice($parameters, $key, 0,
-//                    !($instance instanceof Facade)?
                     [$this->app->make($instance->getName())]
-//                        []
                 );
             } elseif (!isset($values[$key - $instanceCount]) &&
                 $parameter->isDefaultValueAvailable()) {

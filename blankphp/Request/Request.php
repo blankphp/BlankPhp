@@ -9,7 +9,7 @@
 namespace Blankphp\Request;
 
 
-use Blankphp\Request\Contract\RequestContract;
+use Blankphp\Contract\RequestContract;
 
 class Request implements RequestContract
 {

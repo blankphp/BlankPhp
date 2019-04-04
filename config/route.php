@@ -15,8 +15,4 @@ return [
         'JWTMiddleWare'
     ],
 
-    'routeMiddleWare'=>[
-
-    ]
-
 ];

@@ -9,12 +9,13 @@
 namespace App\Controllers;
 
 
-use Blankphp\Request\Request;
+use \Blankphp\Facade\Application;
 
-class PagesController extends Controller
+class
+PagesController extends Controller
 {
     public function index(){
-        echo "123";
+
     }
 
     public function indx(){

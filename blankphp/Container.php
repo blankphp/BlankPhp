@@ -8,7 +8,7 @@
 
 namespace Blankphp;
 
-use \Blankphp\Kernel\Contract\Container as ContainerContract;
+use \Blankphp\Contract\Container as ContainerContract;
 
 
 class Container implements \ArrayAccess, ContainerContract
@@ -20,6 +20,7 @@ class Container implements \ArrayAccess, ContainerContract
     //绑定---》我们的服务[$abstract,$instance]
     protected $binds = [];
     protected $classes = [];
+    protected $signal=[];
 
     //单例模式，一个对象重复使用
     public static function getInstance()
@@ -33,7 +34,9 @@ class Container implements \ArrayAccess, ContainerContract
     public function make($abstract, $parameters = [])
     {
         //如果这里有实例那么就直接返回注册好的共享实例
-
+        if (isset($this->signal[$abstract])){
+            return $this->signal[$abstract];
+        }
         if (isset($this->classes[$abstract])) {
             return $this->classes[$abstract];
         }
@@ -52,6 +55,11 @@ class Container implements \ArrayAccess, ContainerContract
     public function bind($abstract, $instance)
     {
         $this->binds[$abstract] = $instance;
+    }
+
+    public function signal($abstract, $instance)
+    {
+        $this->signal[$abstract] = $instance;
     }
 
     public function instance($abstract, $instance)

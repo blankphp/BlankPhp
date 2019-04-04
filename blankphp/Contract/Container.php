@@ -6,7 +6,7 @@
  * Time: 17:23
  */
 
-namespace Blankphp\Kernel\Contract;
+namespace Blankphp\Contract;
 
 
 interface Container

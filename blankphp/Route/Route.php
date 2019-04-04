@@ -9,8 +9,7 @@
 namespace Blankphp\Route;
 
 use Blankphp\Application;
-use \Blankphp\Kernel\Contract\Container;
-use Blankphp\Route\Contract\Route as Contract;
+use Blankphp\Contract\Route as Contract;
 use Blankphp\Route\Traits\SetMiddleWare;
 use Blankphp\Route\Traits\ResolveSomeDepends;
 
@@ -174,7 +173,7 @@ class Route implements Contract
     }
 
 
-    public function runController($controller, $method,$parameters)
+    public function runController($controller, $method,$parameters=[])
     {
         $parameters = $this->resolveClassMethodDependencies(
             $parameters, $controller, $method
