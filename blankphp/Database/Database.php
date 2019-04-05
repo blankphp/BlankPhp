@@ -9,7 +9,14 @@
 namespace Blankphp\Database;
 
 
+use Blankphp\Application;
+use Blankphp\Contract\Container;
+
 class Database
 {
+    public function __construct(Application $app)
+    {
+        $db = $app->make('config')['db'];
+    }
 
 }

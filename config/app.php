@@ -8,11 +8,5 @@
 
 return [
     'APP_NAME'=>'test',
-    'db'=>[
-        'host'=>'localhost',
-        'port'=>'3306',
-        'charset'=>'utf8mb4',
-        'database'=>'test',
-
-    ],
+    'DEBUG'=>true
 ];

@@ -54,8 +54,6 @@ class Blankphp implements Kernel
 
     public function bootstrap()
     {
-        //注册好基础服务---》路由等
-        //调用RouteProvider
         $this->app->instance('route', $this->route);
         foreach ($this->bootstraps as $k => $method) {
             $this->app->call($k, $method);

@@ -9,7 +9,9 @@
 namespace Blankphp\Route\Traits;
 
 
+use Blankphp\Contract\RequestContract;
 use Blankphp\Facade;
+use Blankphp\Request\Request;
 use ReflectionFunctionAbstract;
 use ReflectionMethod;
 use ReflectionParameter;

@@ -9,7 +9,6 @@
 return [
     'web'=>[
         'TokenMiddleWare'
-
     ],
     'api'=>[
         'JWTMiddleWare'

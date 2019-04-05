@@ -7,6 +7,11 @@
  */
 
 return [
-    'host'=>'127.0.0.1',
-    'port'=>'3306',
+    'host' => 'localhost',
+    'port' => '3306',
+    'charset' => 'utf8mb4',
+    'database' => 'test',
+    'username' => 'root',
+    'password' => 'root',
+    'engine' => PDO::class,
 ];

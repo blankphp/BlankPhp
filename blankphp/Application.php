@@ -10,6 +10,7 @@ namespace Blankphp;
 
 
 use \App\Provider\MiddleWareProvider;
+use Blankphp\Contract\RequestContract;
 use Blankphp\Database\Database;
 use Blankphp\Kernel\Blankphp;
 use Blankphp\Request\Request;
@@ -37,7 +38,7 @@ class Application extends Container
             'middleware' => MiddleWareProvider::class,
             \Blankphp\Contract\Kernel::class => Blankphp::class,
             \Blankphp\Contract\Route::class => Route::class,
-
+            RequestContract::class=>Request::class,
         ];
         foreach ($binds as $k => $v)
             $this->bind($k, $v);

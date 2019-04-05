@@ -13,7 +13,7 @@ use Blankphp\Config\ConfigServiceProvider as BaseProvider;
 
 class ConfigServiceProvider extends BaseProvider
 {
-    protected $configPath=APP_PATH.'config/';
+    protected $configPath = APP_PATH . 'config/';
 
     public function filter()
     {
@@ -22,14 +22,14 @@ class ConfigServiceProvider extends BaseProvider
             if ($dh = opendir($this->configPath)) {
                 while (($file = readdir($dh)) !== false) {
                     if (preg_match_all("/(.+?)\.php/", $file, $matches)) {
-                        $config[$matches[1][0]] = require_once $this->configPath . $matches[0][0];
+                        $config[$matches[1][0]] = require $this->configPath . $matches[0][0];
                     }
                 }
                 closedir($dh);
             }
         }
 
-        $this->app->signal('config',$config);
+        $this->app->signal('config', $config);
     }
 
 
