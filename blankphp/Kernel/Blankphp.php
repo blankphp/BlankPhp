@@ -12,6 +12,7 @@ namespace Blankphp\Kernel;
 use App\Provider\RouteProvider;
 use Blankphp\Application;
 use App\Provider\MiddleWareProvider;
+use Blankphp\Cache\CacheServiceProvider;
 use Blankphp\Contract\Kernel;
 use Blankphp\Provider\ConfigServiceProvider;
 use Blankphp\Route\Router;
@@ -23,6 +24,7 @@ class Blankphp implements Kernel
     protected $route;
 
     protected $bootstraps = [
+        CacheServiceProvider::class=>'reload',
         RouteProvider::class => 'map',
         MiddleWareProvider::class => 'middleware',
         ConfigServiceProvider::class=>'filter'

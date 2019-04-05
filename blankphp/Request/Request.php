@@ -20,6 +20,7 @@ class Request implements RequestContract
     public function __construct()
     {
         $this->createFromGlobal();
+        $this->clear();
         $this->getUri();
         $this->getMethod();
     }
@@ -31,6 +32,14 @@ class Request implements RequestContract
         return $value;
     }
 
+    public function clear(){
+        unset($_GET);
+        unset($_POST);
+        unset($_FILES);
+        unset($_SESSION);
+        unset($_COOKIE);
+        unset($_REQUEST);
+    }
 
     public function createFromGlobal()
     {
@@ -39,11 +48,6 @@ class Request implements RequestContract
         $this->request['files'] = is_null($_FILES) ? $this->stripSlashesDeep($_FILES) : '';
         $this->request['session'] = isset($_SESSION) ? $this->stripSlashesDeep($_SESSION) : '';
         $this->request['cookie'] = !is_null($_COOKIE) ? $this->stripSlashesDeep($_COOKIE) : '';
-        unset($_GET);
-        unset($_POST);
-        unset($_FILES);
-        unset($_SESSION);
-        unset($_COOKIE);
     }
 
 

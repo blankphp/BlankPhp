@@ -17,19 +17,21 @@ class ConfigServiceProvider extends BaseProvider
 
     public function filter()
     {
-        $config = [];
-        if (is_dir($this->configPath)) {
-            if ($dh = opendir($this->configPath)) {
-                while (($file = readdir($dh)) !== false) {
-                    if (preg_match_all("/(.+?)\.php/", $file, $matches)) {
-                        $config[$matches[1][0]] = require $this->configPath . $matches[0][0];
+        if ($this->app->getSignal('config')==[]) {
+            $config = [];
+            if (is_dir($this->configPath)) {
+                if ($dh = opendir($this->configPath)) {
+                    while (($file = readdir($dh)) !== false) {
+                        if (preg_match_all("/(.+?)\.php/", $file, $matches)) {
+                            $config[$matches[1][0]] = require $this->configPath . $matches[0][0];
+                        }
                     }
+                    closedir($dh);
                 }
-                closedir($dh);
             }
+            $this->app->signal('config', $config);
         }
 
-        $this->app->signal('config', $config);
     }
 
 

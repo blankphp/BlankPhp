@@ -15,8 +15,6 @@ require(APP_PATH . '/vendor/autoload.php');
 
 $app = require_once APP_PATH . 'Blankphp/Application.php';
 
-$config = require "config/app.php";
-
 $kernel = $app->make(\Blankphp\Contract\Kernel::class);
 //核心处理请求--->dispatcher
 

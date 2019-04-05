@@ -8,5 +8,8 @@
 
 return [
     'APP_NAME'=>'test',
-    'DEBUG'=>true
+    'DEBUG'=>true,
+    'Provider'=>[
+
+    ]
 ];

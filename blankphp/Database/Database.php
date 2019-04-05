@@ -16,7 +16,7 @@ class Database
 {
     public function __construct(Application $app)
     {
-        $db = $app->make('config')['db'];
+        $db = $app->getSignal('config')['db'];
     }
 
 }

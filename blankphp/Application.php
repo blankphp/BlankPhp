@@ -46,9 +46,6 @@ class Application extends Container
 
     public function make($abstract, $parameters = [])
     {
-        if (isset($this->signal[$abstract])) {
-            return $this->signal[$abstract];
-        }
         if (!$this->has($abstract))
             if (class_exists($abstract))
                 return new $abstract(...$parameters);
@@ -68,6 +65,10 @@ class Application extends Container
         $this->instance('route', $this->make('route'));
     }
 
+    public function getSignal($abstract)
+    {
+       return isset($this->signal[$abstract])?$this->signal[$abstract]:[];
+    }
 
 }
 

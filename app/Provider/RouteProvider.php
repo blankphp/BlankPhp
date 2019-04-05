@@ -9,6 +9,8 @@
 namespace App\Provider;
 
 
+use Blankphp\Cache\Cache;
+use Blankphp\Cache\RouteCache;
 use Blankphp\Provider\Provider;
 
 class RouteProvider extends Provider
@@ -29,8 +31,11 @@ class RouteProvider extends Provider
 
     public function map()
     {
-        $this->mapWebRoute();
-        $this->mapApiRoute();
+        $this->route->setNamespace($this->namespace);
+        if ($this->route->getCache()){
+            $this->mapWebRoute();
+            $this->mapApiRoute();
+        }
     }
 
     public function mapApiRoute()
@@ -38,7 +43,6 @@ class RouteProvider extends Provider
         $this->route
             ->GroupMiddleware('api')
             ->prefix('api')
-            ->setNamespace($this->namespace)
             ->file(APP_PATH . 'routes/api.php');
     }
 
@@ -47,7 +51,6 @@ class RouteProvider extends Provider
     {
         $this->route
             ->GroupMiddleware('web')
-            ->setNamespace($this->namespace)
             ->file(APP_PATH . 'routes/web.php');
     }
 

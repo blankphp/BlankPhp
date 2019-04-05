@@ -186,6 +186,13 @@ class Route implements Contract
         return $controller->{$method}(...array_values($parameters));
     }
 
+    public function getCache(){
+        if (!is_null($route=$this->app->getSignal('route'))){
+            $this->route=$route;
+            return false;
+        }
+        return true;
+    }
 
     public function run($request)
     {

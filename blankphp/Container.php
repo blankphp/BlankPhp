@@ -19,7 +19,7 @@ class Container implements \ArrayAccess, ContainerContract
     protected $instances = [];
     protected $binds = [];
     protected $classes = [];
-    protected  $signal=[];
+    protected $signal = [];
 
 
     //单例模式，一个对象重复使用
@@ -34,9 +34,6 @@ class Container implements \ArrayAccess, ContainerContract
     public function make($abstract, $parameters = [])
     {
         //如果这里有实例那么就直接返回注册好的共享实例
-        if (isset($this->signal[$abstract])){
-            return $this->signal[$abstract];
-        }
         if (isset($this->classes[$abstract])) {
             return $this->classes[$abstract];
         }
@@ -143,7 +140,7 @@ class Container implements \ArrayAccess, ContainerContract
         $this->classes = [];
         $this->binds = [];
         $this->instances = [];
-        unset($this->instances);
+        $this->signal = [];
     }
 
     /**
