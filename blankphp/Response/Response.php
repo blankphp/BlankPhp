@@ -20,7 +20,7 @@ class Response
 
     public function __construct($result)
     {
-        $this->result = (string)$result;
+        $this->result = $result;
     }
 
     public function setHeader()
@@ -41,15 +41,15 @@ class Response
 
     public function send()
     {
+        header("Cache-Control: public");
+        header("Pragma: cache");
+        $offset = 30 * 60 * 60 * 24; // cache 1 month
+        $ExpStr = "Expires: " . gmdate("D, d M Y H:i:s", time() + $offset) . " GMT";
         if (!$this->is_json($this->result)) {
             header(self::$header['json']);
         } else {
             header(self::$header['html']);
         }
-        header("Cache-Control: public");
-        header("Pragma: cache");
-        $offset = 30 * 60 * 60 * 24; // cache 1 month
-        $ExpStr = "Expires: " . gmdate("D, d M Y H:i:s", time() + $offset) . " GMT";
         header($ExpStr);
         var_dump($this->result);
         if (function_exists('fastcgi_finish_request')) {

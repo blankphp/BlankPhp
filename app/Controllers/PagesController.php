@@ -23,7 +23,7 @@ class PagesController extends Controller
     }
 
     public function indx(){
-        return '123';
+       return '123';
     }
     public function indx1()
     {

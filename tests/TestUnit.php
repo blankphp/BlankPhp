@@ -30,6 +30,7 @@ class TestUnit extends TestCase
     {
         $this->createApplication();
         $kernel = $this->app->make(\Blankphp\Contract\Kernel::class);
+        define('APP_ENV', 'testing');
 
         $response = $kernel->handle(
             \Blankphp\Request\TestRequest::create($method, $uri, $parameters, $cookies,

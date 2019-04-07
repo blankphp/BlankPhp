@@ -3,6 +3,7 @@
   array (
     'APP_NAME' => 'test',
     'DEBUG' => true,
+    'env' => 'local',
     'Provider' => 
     array (
     ),

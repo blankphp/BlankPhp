@@ -1,10 +1,21 @@
 <?php
 if (! function_exists('app')) {
-    function app($instance)
+    function app($abstract)
     {
-
+        if (class_exists($abstract))
+            return \Blankphp\Application::getInstance()->make($abstract);
+        else
+            return \Blankphp\Application::getInstance()->getSignal($abstract);
     }
 }
+
+if (! function_exists('config')) {
+    function config($name)
+    {
+        return \Blankphp\Application::getInstance()->getSignal('config')[$name];
+    }
+}
+
 
 if (! function_exists('view')) {
     function view($view = null, $data = [], $mergeData = [])

@@ -8,7 +8,6 @@
 
 return [
     'APP_NAME'=>'test',
-    'DEBUG'=>true,
     'Provider'=>[
 
     ]

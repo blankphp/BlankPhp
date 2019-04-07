@@ -9,6 +9,7 @@
 //应用目录为当前目录
 define('APP_PATH', __DIR__ . '/');
 define('APP_DEBUG', true);
+define('APP_ENV', 'local');
 
 //psr4自动加载
 require(APP_PATH . '/vendor/autoload.php');

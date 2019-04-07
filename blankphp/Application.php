@@ -40,8 +40,8 @@ class Application extends Container
             'middleware' => MiddleWareProvider::class,
             \Blankphp\Contract\Kernel::class => Blankphp::class,
             \Blankphp\Contract\Route::class => Route::class,
-            RequestContract::class=>Request::class,
-            Grammar::class=>MysqlGrammar::class,
+            RequestContract::class => Request::class,
+            Grammar::class => MysqlGrammar::class,
         ];
         foreach ($binds as $k => $v)
             $this->bind($k, $v);
@@ -70,7 +70,7 @@ class Application extends Container
 
     public function getSignal($abstract)
     {
-       return isset($this->signal[$abstract])?$this->signal[$abstract]:[];
+        return isset($this->signal[$abstract]) ? $this->signal[$abstract] : [];
     }
 
 }
