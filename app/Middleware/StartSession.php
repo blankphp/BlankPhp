@@ -9,7 +9,7 @@ class StartSession
     public static function handle($request, \Closure $next)
     {
         session_start();
-        $next($request);
+        return $next($request);
 
     }
 }

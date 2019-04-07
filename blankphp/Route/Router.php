@@ -10,6 +10,7 @@ namespace Blankphp\Route;
 
 
 use Blankphp\Application;
+use Blankphp\Response\Response;
 
 class Router
 {
@@ -28,7 +29,7 @@ class Router
     public function getMiddleware()
     {
         $middleware = $this->app->make('middleware')
-            ->getMiddleware( $this->route->getGroupMidlleware());
+            ->getMiddleware($this->route->getGroupMidlleware());
         $temp = $this->app->make('middleware')->getAliceMiddleWare(
             $this->route->getMiddleWare());
         $this->middleware = array_filter(array_merge($middleware, $temp));
@@ -42,9 +43,21 @@ class Router
         return (new Pipe($this->app))
             ->send($request)
             ->through($this->middleware)
-            ->run(function () use ($controller) {
-                return $this->route->runController(...$controller);
+            ->run(function ($request) use ($controller) {
+                return $this->prepareResponse($request, $this->route->runController(...$controller));
             });
     }
+
+    public function prepareResponse($request, $response)
+    {
+        return self::toResponse($request, $response);
+    }
+
+    public static function toResponse($request, $response)
+    {
+        $response = new Response($response);
+        return $response->prepare($request);
+    }
+
 
 }

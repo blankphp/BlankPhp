@@ -30,7 +30,7 @@ composer install
     Router:注册到,中间件，
     //从uri定义到的变量，注入到控制器
     //匹配路由=》获取闭包=》在管道模式中间件
-    //结果传入response=》返回最终结果！！
+    //结果传入response->send()返回最终结果！！
     ---
     增加一个存放类名对应的实例，这样就不会有上面的那种问题了
     
@@ -69,7 +69,6 @@ composer install
 
 
 ```ab
-
 Server Software:        nginx/1.15.5
 Server Hostname:        www.stu.stu
 Server Port:            80
@@ -106,4 +105,39 @@ Percentage of the requests served within a certain time (ms)
   99%   2008
  100%   2172 (longest request)
 
+Server Software:        nginx/1.15.5
+Server Hostname:        www.stu.stu
+Server Port:            80
+
+Document Path:          /11
+Document Length:        157849 bytes
+
+Concurrency Level:      100
+Time taken for tests:   32.851 seconds
+Complete requests:      2000
+Failed requests:        0
+Total transferred:      316308000 bytes
+HTML transferred:       315698000 bytes
+Requests per second:    60.88 [#/sec] (mean)
+Time per request:       1642.558 [ms] (mean)
+Time per request:       16.426 [ms] (mean, across all concurrent requests)
+Transfer rate:          9402.85 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    1   0.9      1      15
+Processing:   158 1606 184.9   1622    2194
+Waiting:       44 1591 183.6   1608    2178
+Total:        159 1607 184.8   1623    2195
+
+Percentage of the requests served within a certain time (ms)
+  50%   1623
+  66%   1648
+  75%   1666
+  80%   1678
+  90%   1725
+  95%   1777
+  98%   1848
+  99%   1904
+ 100%   2195 (longest request)
 ```

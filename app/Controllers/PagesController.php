@@ -18,7 +18,7 @@ class PagesController extends Controller
     public function index(Request $request)
     {
         var_dump($request);
-        $result = DB::table('students')->find(1);
+        $result = DB::table('students')->find(2);
         return $result;
     }
 

@@ -22,7 +22,7 @@ $response = $kernel->handle(
     \Blankphp\Request\Facade\Request::capture()
 );
 //发送请求ob等
-//$response->send();
+$response->send();
 //清理空间,,容器内部消化
 $kernel->flush();
 unset($app);

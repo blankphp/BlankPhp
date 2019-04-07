@@ -32,7 +32,7 @@ class PipeLine
     {
         return function ($stack, $pipe) {
             return function () use ($stack, $pipe) {
-                return $pipe::handle($this->app->make('request'), $stack);
+                return $pipe::handle($this->request, $stack);
             };
         };
     }
