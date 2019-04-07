@@ -20,7 +20,7 @@ class Response
 
     public function __construct($result)
     {
-        $this->result = $result;
+        $this->result = (string)$result;
     }
 
     public function setHeader()
@@ -48,8 +48,8 @@ class Response
         }
         header("Cache-Control: public");
         header("Pragma: cache");
-        $offset = 30*60*60*24; // cache 1 month
-        $ExpStr = "Expires: ".gmdate("D, d M Y H:i:s", time() + $offset)." GMT";
+        $offset = 30 * 60 * 60 * 24; // cache 1 month
+        $ExpStr = "Expires: " . gmdate("D, d M Y H:i:s", time() + $offset) . " GMT";
         header($ExpStr);
         var_dump($this->result);
         if (function_exists('fastcgi_finish_request')) {
