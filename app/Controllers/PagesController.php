@@ -22,7 +22,10 @@ class PagesController extends Controller
         return $result;
     }
 
-    public function indx()
+    public function indx(){
+        return '123';
+    }
+    public function indx1()
     {
         echo '
         <!DOCTYPE html>

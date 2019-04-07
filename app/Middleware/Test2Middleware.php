@@ -13,7 +13,7 @@ class Test2Middleware
 {
     public static function handle($request, \Closure $next)
     {
-        $next($request);
+       return $next($request);
 
     }
 }

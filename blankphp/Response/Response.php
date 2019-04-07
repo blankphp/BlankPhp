@@ -71,4 +71,8 @@ class Response
     }
 
 
+    public function returnSend(){
+        return $this->result;
+    }
+
 }
