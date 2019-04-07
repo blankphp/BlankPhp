@@ -11,6 +11,10 @@ namespace Blankphp\Response;
 
 class Response
 {
+    protected static $header=[
+        'text/html',
+        
+    ];
     public function setHeader(){
 
     }
@@ -20,6 +24,10 @@ class Response
     }
 
     public function setContent(){
+
+    }
+
+    public function send(){
 
     }
 

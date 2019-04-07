@@ -12,6 +12,8 @@ namespace Blankphp;
 use \App\Provider\MiddleWareProvider;
 use Blankphp\Contract\RequestContract;
 use Blankphp\Database\Database;
+use Blankphp\Database\Grammar\Grammar;
+use Blankphp\Database\Grammar\MysqlGrammar;
 use Blankphp\Kernel\Blankphp;
 use Blankphp\Request\Request;
 use Blankphp\Route\Route;
@@ -39,6 +41,7 @@ class Application extends Container
             \Blankphp\Contract\Kernel::class => Blankphp::class,
             \Blankphp\Contract\Route::class => Route::class,
             RequestContract::class=>Request::class,
+            Grammar::class=>MysqlGrammar::class,
         ];
         foreach ($binds as $k => $v)
             $this->bind($k, $v);

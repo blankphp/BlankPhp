@@ -9,7 +9,17 @@
 namespace Blankphp\Database\Grammar;
 
 //语法生成器
-class Grammar
-{
+use Blankphp\Database\Query\Builder;
 
+abstract class Grammar
+{
+    public abstract function generateSelect(Builder $sql,$parameter=[]);
+
+    public abstract function generateUpdate(Builder $sql,$parameter=[]);
+
+    public abstract function generateDelete(Builder $sql,$parameter=[]);
+
+    public abstract function generateAlter(Builder $sql,$parameter=[]);
+
+    public abstract function generateInsert(Builder $sql,$parameter=[]);
 }

@@ -9,6 +9,8 @@
 namespace App\Controllers;
 
 
+use Blankphp\Database\Facade\Database;
+use Blankphp\Database\Facade\DB;
 use Blankphp\Request\Request;
 
 class PagesController extends Controller
@@ -16,6 +18,8 @@ class PagesController extends Controller
     public function index(Request $request)
     {
         var_dump($request);
+        $result = DB::table('students')->find(1);
+        return $result;
     }
 
     public function indx()

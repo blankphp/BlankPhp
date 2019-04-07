@@ -8,10 +8,11 @@
 
 return [
     'host' => 'localhost',
+    'driver'=>'mysql',
     'port' => '3306',
     'charset' => 'utf8mb4',
     'database' => 'test',
     'username' => 'root',
-    'password' => 'root',
+    'password' => 'admin',
     'engine' => PDO::class,
 ];
