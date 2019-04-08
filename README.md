@@ -6,7 +6,7 @@
 <a href="https://github.com/blankqwq/BlankPhp"><img src="https://img.shields.io/badge/php-7.1%2B-blue.svg" alt="PHP Version"></a>
 <a href="https://github.com/blankqwq/BlankPhp/releases"><img src="https://img.shields.io/badge/version-1.0.0-lightgrey.svg" alt="Version"></a>
 #### 介绍
-> 一个满足于基本开发的MVC轻量级框架
+> 一个满足于基本开发的MVC轻量级框架`route` `DB` `view`已经设计完成
 
     1.本框架意义在于理解IOC容器，以及依赖注入的思想
     2.本框架富含基本容器以及依赖注入
@@ -17,61 +17,24 @@
     书写该框架的流程，以及遇到的问题，会整理出来！
 
 #### 软件架构
-初步建设小型容器，满足基础的mvc服务，如何写出的会以文章形式公布
-
+    初步建设小型容器，满足基础的mvc服务，如何写出的会以文章形式公布
+    1.web路由在routes/web.php中注册
+    2.api路由在routes/api.php注册
+    3.模型设计暂未完成,但是基本的Database设计完成
+    4.暂时方便测试所以就没怎么测试
 
 #### 安装教程
 
 ```
-composer install
+composer create-project blankqwq/blankphp two --prefer-dist
 ```
 
 #### 更新说明
-    3.13
-    //组件化开发-->RouteServiceProvider
-    
-    3.14
-    Route：分发
-    Router:注册到,中间件，
-    //从uri定义到的变量，注入到控制器
-    //匹配路由=》获取闭包=》在管道模式中间件
-    //结果传入response->send()返回最终结果！！
-    ---
-    增加一个存放类名对应的实例，这样就不会有上面的那种问题了
-    
-> 3.11  用反射解决容器中的依赖注入
-    \ReflectionClass来解决依赖注入（从容器中获取实例）
-    容器设计并没有完善，对于容器中实例是否共享以及是否覆盖还没有定义
-
-> 3.13 用服务提供者来解决路由注册
-
-    三大基础服务的注册通过bootstrap来进行注册，
-    引导程序的后期执行
-
-> 3.14 中间件逻辑设计完成===下一步设计Controller基类
-
-    解决核心中的基础bootstrap,服务提供者注册组件->然后再通过多个组件完成一个功能
-    
-> 3.15 Controller基类设计，以及设计View
-
-    controller内置middleware
-    以及设计好session和cookie的加载
-    解决核心中的基础bootstrap,服务提供者注册组件->然后再通过多个组件完成一个功能
-    
-> 3.17 orm的设计
-
-    设计完model基类之后估摸着会休整一段时间,了解更多的设计模式以及思路，
-    如何优化整个框架的运行，这也是我所需要是考的
-    文章正在准备   预计先发送基本的设计模式（门面等）
-    再写如何写出类似的框架
-    最近也比较繁忙所以体谅一下更新的速度
-    
-    框架质量可能不是特别的优秀或者优雅，不过会坚持维护下去
     
     
 > 4.4 Route个人认为一般不会改变，可以缓存起来做一个中间层,之后都从route中取出会快很多
  
-
+> 4.8 完成整体的运行流程以及缓存的自动生成自动替换
 
 ```ab
 Server Software:        nginx/1.15.5

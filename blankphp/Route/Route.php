@@ -187,14 +187,7 @@ class Route implements Contract
         return $controller->{$method}(...array_values($parameters));
     }
 
-    public function getCache(){
-        if (!empty($route=$this->app->getSignal('route'))){
 
-            $this->route=$route;
-            return false;
-        }
-        return true;
-    }
 
     public function run($request)
     {
@@ -204,6 +197,18 @@ class Route implements Contract
 
     public function putCache(){
         FileCache::putCache($this->route,'route.php');
+    }
+
+    public function getCache(){
+        if (!empty($route=$this->app->getSignal('route') )&& $this->isReBuild()){
+            $this->route=$route;
+            return false;
+        }
+        return true;
+    }
+
+    private function isReBuild(){
+        return FileCache::canRebuild(APP_PATH.'routes/web.php','route.php');
     }
 
 }
