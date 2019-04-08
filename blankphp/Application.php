@@ -17,6 +17,7 @@ use Blankphp\Database\Grammar\MysqlGrammar;
 use Blankphp\Kernel\Blankphp;
 use Blankphp\Request\Request;
 use Blankphp\Route\Route;
+use Blankphp\View\View;
 
 class Application extends Container
 {
@@ -36,12 +37,14 @@ class Application extends Container
             'route' => Route::class,
             'app' => Application::class,
             'db' => Database::class,
-            \Blankphp\Contract\Container::class => Application::class,
+            'view'=>View::class,
             'middleware' => MiddleWareProvider::class,
+            \Blankphp\Contract\Container::class => Application::class,
             \Blankphp\Contract\Kernel::class => Blankphp::class,
             \Blankphp\Contract\Route::class => Route::class,
             RequestContract::class => Request::class,
             Grammar::class => MysqlGrammar::class,
+            \Blankphp\Contract\View::class=>View::class,
         ];
         foreach ($binds as $k => $v)
             $this->bind($k, $v);

@@ -20,7 +20,7 @@ class Response
 
     public function __construct($result)
     {
-        $this->result = $result;
+        $this->result =(string)$result;
     }
 
     public function setHeader()
@@ -51,7 +51,7 @@ class Response
             header(self::$header['html']);
         }
         header($ExpStr);
-        var_dump($this->result);
+        echo $this->result;
         if (function_exists('fastcgi_finish_request')) {
             fastcgi_finish_request();
         }

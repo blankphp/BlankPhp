@@ -1,4 +1,17 @@
 {
+  "name": "blankqwq/blankphp",
+  "type": "project",
+  "description": "The Blank Framework.",
+  "keywords": [
+    "framework",
+    "blankphp"
+  ],
+  "authors": [
+    {
+      "name": "blankqwq",
+      "email": "1136589038@qq.com"
+    }
+  ],
   "require-dev": {
     "phpunit/phpunit": "^7.0"
   },

@@ -78,71 +78,35 @@ Server Software:        nginx/1.15.5
 Server Hostname:        www.stu.stu
 Server Port:            80
 
-Document Path:          /11
-Document Length:        156590 bytes
+Document Path:          /
+Document Length:        504 bytes
 
 Concurrency Level:      100
-Time taken for tests:   34.539 seconds
-Complete requests:      2000
+Time taken for tests:   154.578 seconds
+Complete requests:      10000
 Failed requests:        0
-Total transferred:      313790000 bytes
-HTML transferred:       313180000 bytes
-Requests per second:    57.91 [#/sec] (mean)
-Time per request:       1726.934 [ms] (mean)
-Time per request:       17.269 [ms] (mean, across all concurrent requests)
-Transfer rate:          8872.24 [Kbytes/sec] received
+Total transferred:      7770000 bytes
+HTML transferred:       5040000 bytes
+Requests per second:    64.69 [#/sec] (mean)
+Time per request:       1545.784 [ms] (mean)
+Time per request:       15.458 [ms] (mean, across all concurrent requests)
+Transfer rate:          49.09 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
-Connect:        0    1   1.1      1      17
-Processing:   201 1677 216.0   1703    2170
-Waiting:       94 1672 216.3   1699    2166
-Total:        202 1678 215.8   1704    2172
+Connect:        0    1   0.7      1      15
+Processing:   138 1538 115.6   1530    2110
+Waiting:       61 1538 115.7   1530    2109
+Total:        138 1539 115.6   1531    2111
 
 Percentage of the requests served within a certain time (ms)
-  50%   1704
-  66%   1751
-  75%   1777
-  80%   1793
-  90%   1842
-  95%   1887
-  98%   1954
-  99%   2008
- 100%   2172 (longest request)
-
-Server Software:        nginx/1.15.5
-Server Hostname:        www.stu.stu
-Server Port:            80
-
-Document Path:          /11
-Document Length:        157849 bytes
-
-Concurrency Level:      100
-Time taken for tests:   32.851 seconds
-Complete requests:      2000
-Failed requests:        0
-Total transferred:      316308000 bytes
-HTML transferred:       315698000 bytes
-Requests per second:    60.88 [#/sec] (mean)
-Time per request:       1642.558 [ms] (mean)
-Time per request:       16.426 [ms] (mean, across all concurrent requests)
-Transfer rate:          9402.85 [Kbytes/sec] received
-
-Connection Times (ms)
-              min  mean[+/-sd] median   max
-Connect:        0    1   0.9      1      15
-Processing:   158 1606 184.9   1622    2194
-Waiting:       44 1591 183.6   1608    2178
-Total:        159 1607 184.8   1623    2195
-
-Percentage of the requests served within a certain time (ms)
-  50%   1623
-  66%   1648
-  75%   1666
-  80%   1678
-  90%   1725
-  95%   1777
-  98%   1848
-  99%   1904
- 100%   2195 (longest request)
+  50%   1531
+  66%   1557
+  75%   1576
+  80%   1590
+  90%   1640
+  95%   1708
+  98%   1777
+  99%   1825
+ 100%   2111 (longest request)
 ```

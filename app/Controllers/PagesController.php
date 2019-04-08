@@ -17,9 +17,7 @@ class PagesController extends Controller
 {
     public function index(Request $request)
     {
-        var_dump($request);
-        $result = DB::table('students')->find(2);
-        return $result;
+        return view('index.php',['name'=>'blank']);
     }
 
     public function indx(){
