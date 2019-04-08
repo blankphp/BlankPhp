@@ -10,6 +10,6 @@
 <body>
 <p align="center"><img src="https://i.loli.net/2019/04/08/5caaea849eb1f.png" alt="BlankPhp.png" title="BlankPhp.png" /><p>
 
-<h1 align="center">{$name} ---by:BlankPhp</h1>
+<h1 align="center"><?php echo $this->_valueArray['name']; ?> ---by:BlankPhp</h1>
 </body>
 </html>

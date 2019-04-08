@@ -8,6 +8,8 @@
 #### 介绍
 > 一个满足于基本开发的MVC轻量级框架`route` `DB` `view`已经设计完成
 
+![hahah.png](https://i.loli.net/2019/04/08/5cab51b97a61b.png)
+
     1.本框架意义在于理解IOC容器，以及依赖注入的思想
     2.本框架富含基本容器以及依赖注入
     3.框架具有路由以及中间件和基本orm功能，满足一个基本的快速开发概念
@@ -26,7 +28,7 @@
 #### 安装教程
 
 ```
-composer create-project blankqwq/blankphp two --prefer-dist
+composer create-project blankqwq/blankphp:"dev-master" <name>
 ```
 
 #### 更新说明

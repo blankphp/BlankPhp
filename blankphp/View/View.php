@@ -15,6 +15,7 @@ class View
     protected $cacheDir = APP_PATH . 'cache/view/';
     //模板文件目录
     protected $templateDir = APP_PATH . 'public/template/';
+
     public $_valueArray = [];
     static $pregArray = [
         '#\{\\$([a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*)\}#',
@@ -41,12 +42,12 @@ class View
 
     public function setFileName($fileName)
     {
-        $this->fileName = $fileName;
+        $this->fileName = $fileName.'.php';
     }
 
     public function setDescFile($fileName)
     {
-        $this->descFile = hash_file('md5',$fileName) . '.php';
+        $this->descFile = hash_file('md5',$fileName.'.php') . '.php';
     }
 
     public function getDescFile()
@@ -93,7 +94,7 @@ class View
         $this->make($filename);
         $this->makeValueArray($data);
         //1.查找是否具有视图文件的缓存，有直接载入，无，编译
-        if ((!$this->existsFile() && is_file($this->getFile())) || $this->isRecompile()) {
+        if (!$this->existsFile() || $this->isRecompile()) {
             $this->compile();
         }
         //载入内容,返回内容
@@ -120,6 +121,6 @@ class View
 
     private function isRecompile()
     {
-        return filemtime($this->getFile()) - filemtime($this->getDescFile()) > $this->cacheTime;
+        return filectime($this->getFile()) - filectime($this->getDescFile()) > $this->cacheTime;
     }
 }

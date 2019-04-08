@@ -66,11 +66,11 @@ class Route implements Contract
     public function addRoute($methods, $uri, $action)
     {
         foreach ($methods as $method) {
-            $uri = empty($this->prefix)?$uri:'/'.$this->prefix  . $uri;
+            $uri = empty($this->prefix) ? $uri : '/' . $this->prefix . $uri;
             $this->route[$method][$uri] = ['action' => $action];
             $this->setCurrentController($method, $uri);
             $this->setOneMiddleWare($method, $uri);
-            empty($this->groupMiddleware)?:$this->route[$method][$uri]['middleware']['group']=$this->groupMiddleware;
+            empty($this->groupMiddleware) ?: $this->route[$method][$uri]['middleware']['group'] = $this->groupMiddleware;
         }
 
         return $this;
@@ -137,22 +137,22 @@ class Route implements Contract
             $middleware = $this->getOneMiddleWare($temp);
             !empty($middleware) ? $this->setMiddleWare($middleware) : '';
             return $controller;
-        }else{
-            $temps=array_filter(explode('/',$uri));
-            $parameters=[];
-            for ($i=1;$i<=count($temps);$i++){
-                if (is_numeric($temps[$i])){
-                    $parameters[]=$temps[$i];
-                    $temps[$i]='<id>';
+        } else {
+            $temps = array_filter(explode('/', $uri));
+            $parameters = [];
+            for ($i = 1; $i <= count($temps); $i++) {
+                if (is_numeric($temps[$i])) {
+                    $parameters[] = $temps[$i];
+                    $temps[$i] = '<id>';
                 }
             }
-            $uri='/'.implode('/',$temps);
-            if (isset($this->route[$method][$uri])){
+            $uri = '/' . implode('/', $temps);
+            if (isset($this->route[$method][$uri])) {
                 $temp = $this->route[$method][$uri];
                 $controller = $this->getController($temp['action']);
                 $middleware = $this->getOneMiddleWare($temp);
                 !empty($middleware) ? $this->setMiddleWare($middleware) : '';
-                array_push($controller,$parameters);
+                array_push($controller, $parameters);
                 return $controller;
             }
         }
@@ -174,7 +174,7 @@ class Route implements Contract
     }
 
 
-    public function runController($controller, $method,$parameters=[])
+    public function runController($controller, $method, $parameters = [])
     {
         $parameters = $this->resolveClassMethodDependencies(
             $parameters, $controller, $method
@@ -188,27 +188,32 @@ class Route implements Contract
     }
 
 
-
     public function run($request)
     {
         //路由分发
         return $this->runController(...$this->findRoute($request));
     }
 
-    public function putCache(){
-        FileCache::putCache($this->route,'route.php');
+    public function putCache()
+    {
+        FileCache::putCache($this->route, 'route.php');
     }
 
-    public function getCache(){
-        if (!empty($route=$this->app->getSignal('route') )&& $this->isReBuild()){
-            $this->route=$route;
+    public function getCache()
+    {
+//        if ($this->isReBuild()) {
+//            return true;
+//        }
+        if (!empty($route = $this->app->getSignal('route'))) {
+            $this->route = $route;
             return false;
         }
         return true;
     }
 
-    private function isReBuild(){
-        return FileCache::canRebuild(APP_PATH.'routes/web.php','route.php');
+    private function isReBuild()
+    {
+        return FileCache::canRebuild(APP_PATH . 'routes/web.php', 'route.php');
     }
 
 }

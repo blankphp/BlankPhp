@@ -2,15 +2,13 @@
   'app' => 
   array (
     'APP_NAME' => 'test',
-    'DEBUG' => true,
-    'env' => 'local',
     'Provider' => 
     array (
     ),
   ),
   'db' => 
   array (
-    'host' => 'localhost',
+    'host' => '127.0.0.1',
     'driver' => 'mysql',
     'port' => '3306',
     'charset' => 'utf8mb4',
