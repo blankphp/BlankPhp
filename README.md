@@ -1,8 +1,10 @@
-# BlankFramework
+<p align="center"><img src="https://i.loli.net/2019/04/08/5caaea849eb1f.png" alt="BlankPhp.png" title="BlankPhp.png" /><p>
+
 [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
 [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
 [![Build Status](https://travis-ci.org/blankqwq/BlankPhp.svg?branch=master)](https://travis-ci.org/blankqwq/BlankPhp)
 <a href="https://github.com/blankqwq/BlankPhp"><img src="https://img.shields.io/badge/php-7.1%2B-blue.svg" alt="PHP Version"></a>
+<a href="https://github.com/blankqwq/BlankPhp/releases"><img src="https://img.shields.io/badge/version-1.0.0-lightgrey.svg" alt="Version"></a>
 #### 介绍
 > 一个满足于基本开发的MVC轻量级框架
 
