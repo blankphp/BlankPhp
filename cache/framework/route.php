@@ -1,5 +1,4 @@
-<?php
-return array (
+<?php return array (
   'GET' => 
   array (
     '/' => 
@@ -16,10 +15,6 @@ return array (
       'middleware' => 
       array (
         'group' => 'web',
-        'alice' => 
-        array (
-          0 => 'test2',
-        ),
       ),
     ),
     '/user/<id>' => 

@@ -37,7 +37,7 @@ class View
 
     protected $fileName;
     protected $descFile;
-
+    protected $cacheTime=0;
 
     public function setFileName($fileName)
     {
@@ -46,7 +46,7 @@ class View
 
     public function setDescFile($fileName)
     {
-        $this->descFile = md5($fileName) . '.php';
+        $this->descFile = hash_file('md5',$fileName) . '.php';
     }
 
     public function getDescFile()
@@ -81,7 +81,7 @@ class View
     public function cacheFile($content)
     {
         $file = $this->getDescFile();
-        if (!file_exists($file)) {
+        if (!is_file($file)) {
             $f = fopen($file, 'w');
             fclose($f);
         }
@@ -93,7 +93,7 @@ class View
         $this->make($filename);
         $this->makeValueArray($data);
         //1.查找是否具有视图文件的缓存，有直接载入，无，编译
-        if (!$this->existsFile() && is_file($this->getFile())) {
+        if ((!$this->existsFile() && is_file($this->getFile())) || $this->isRecompile()) {
             $this->compile();
         }
         //载入内容,返回内容
@@ -117,4 +117,9 @@ class View
         return preg_replace(self::$pregArray, self::$descArray, $content);
     }
 
+
+    private function isRecompile()
+    {
+        return filemtime($this->getFile()) - filemtime($this->getDescFile()) > $this->cacheTime;
+    }
 }

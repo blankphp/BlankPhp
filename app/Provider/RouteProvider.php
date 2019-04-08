@@ -35,6 +35,7 @@ class RouteProvider extends Provider
         if ($this->route->getCache()){
             $this->mapWebRoute();
             $this->mapApiRoute();
+            $this->route->putCache();
         }
     }
 

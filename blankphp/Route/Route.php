@@ -9,6 +9,7 @@
 namespace Blankphp\Route;
 
 use Blankphp\Application;
+use Blankphp\Cache\FileCache;
 use Blankphp\Contract\Route as Contract;
 use Blankphp\Route\Traits\SetMiddleWare;
 use Blankphp\Route\Traits\ResolveSomeDepends;
@@ -187,7 +188,8 @@ class Route implements Contract
     }
 
     public function getCache(){
-        if (!is_null($route=$this->app->getSignal('route'))){
+        if (!empty($route=$this->app->getSignal('route'))){
+
             $this->route=$route;
             return false;
         }
@@ -200,5 +202,8 @@ class Route implements Contract
         return $this->runController(...$this->findRoute($request));
     }
 
+    public function putCache(){
+        FileCache::putCache($this->route,'route.php');
+    }
 
 }

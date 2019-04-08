@@ -17,7 +17,7 @@ class PagesController extends Controller
 {
     public function index(Request $request)
     {
-        return view('index.php',['name'=>'blank']);
+        return view('index.php',['name'=>'hello world']);
     }
 
     public function indx(){
