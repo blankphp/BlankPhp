@@ -1,15 +1,17 @@
 <!doctype html>
-<html lang="en">
+<html lang="ch">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>BlankPhp</title>
+    <title>學生</title>
 </head>
 <body>
-<p align="center"><img src="https://i.loli.net/2019/04/08/5caaea849eb1f.png" alt="BlankPhp.png" title="BlankPhp.png" /><p>
-
-<h1 align="center"><?php echo $this->_valueArray['name']; ?> ---by:BlankPhp</h1>
+    {if 1==1}
+    <h1>{$student}</h1>
+{else}
+    <h2>21321</h2>
+{endif}
 </body>
 </html>

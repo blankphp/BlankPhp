@@ -8,7 +8,11 @@
     <title>BlankPhp</title>
 </head>
 <body>
+<p align="center"><img src="/public/static/images/BlankPhp.png" alt="BlankPhp.png" title="BlankPhp.png" /><p>
 
-<h1 align="center"><?php echo $this->_valueArray['name']; ?> ---by:BlankPhp</h1>
+<h1 align="center"><?php $this->getValue($this->_name); ?><br>
+    <?php print_r(1); ?>
+      =  =<br>
+    ---by:BlankPhp</h1>
 </body>
 </html>

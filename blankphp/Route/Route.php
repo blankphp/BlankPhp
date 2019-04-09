@@ -156,6 +156,7 @@ class Route implements Contract
                 return $controller;
             }
         }
+        header("Status Code: 404 NOTFOUND");
         throw new \Exception('该路由暂无控制器', 5);
     }
 
@@ -201,9 +202,9 @@ class Route implements Contract
 
     public function getCache()
     {
-//        if ($this->isReBuild()) {
-//            return true;
-//        }
+        if (!$this->isReBuild()) {
+            return true;
+        }
         if (!empty($route = $this->app->getSignal('route'))) {
             $this->route = $route;
             return false;

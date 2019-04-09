@@ -8,8 +8,11 @@
     <title>BlankPhp</title>
 </head>
 <body>
-<p align="center"><img src="https://i.loli.net/2019/04/08/5caaea849eb1f.png" alt="BlankPhp.png" title="BlankPhp.png" /><p>
+<p align="center"><img src="/public/static/images/BlankPhp.png" alt="BlankPhp.png" title="BlankPhp.png" /><p>
 
-<h1 align="center">{$name} ---by:BlankPhp</h1>
+<h1 align="center">{$name}<br>
+    {_print_r(1)}
+      =  =<br>
+    ---by:BlankPhp</h1>
 </body>
 </html>

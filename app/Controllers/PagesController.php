@@ -17,7 +17,7 @@ class PagesController extends Controller
 {
     public function index(Request $request)
     {
-        return view('index',['name'=>'hello world']);
+        return view('index',['name'=>['name'=>'blankqwq','message'=>'hello world!']]);
     }
 
     public function indx(){
@@ -650,7 +650,8 @@ if(navigator.cookieEnabled){
 
     public function getone($id)
     {
-        echo "a1sda5w" . $id;
+        $student = DB::table('students')->find($id) ;
+        return view('stu',['student'=>$student]);
     }
 
 }
