@@ -2,6 +2,7 @@
   "name": "blankqwq/blankphp",
   "type": "project",
   "description": "The Blank Framework.",
+  "license": "MIT",
   "keywords": [
     "framework",
     "blankphp"
