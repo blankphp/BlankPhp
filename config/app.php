@@ -8,6 +8,9 @@
 
 return [
     'APP_NAME'=>'test',
+    'url'=>'',
+    'static'=>'',
+    'template'=>'',
     'Provider'=>[
 
     ]

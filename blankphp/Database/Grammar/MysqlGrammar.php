@@ -20,7 +20,9 @@ class MysqlGrammar extends Grammar
         //终极大拼装
         $sqlString.='select '.implode(',',$sql->select).' from '.$sql->table;
         if (!is_null($sql->wheres))
-            $sqlString.=' where '.implode(',',$sql->wheres);
+            $sqlString.=' where '.implode(' ',$sql->wheres);
+        if (!is_null($sql->orderBy))
+            $sqlString.='order by '.implode(' ',$sql->orderBy);
         return $sqlString;
     }
 

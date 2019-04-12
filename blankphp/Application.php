@@ -17,6 +17,7 @@ use Blankphp\Database\Grammar\MysqlGrammar;
 use Blankphp\Kernel\Blankphp;
 use Blankphp\Request\Request;
 use Blankphp\Route\Route;
+use Blankphp\View\StaticView;
 use Blankphp\View\View;
 
 class Application extends Container
@@ -38,6 +39,7 @@ class Application extends Container
             'app' => Application::class,
             'db' => Database::class,
             'view'=>View::class,
+            'view.static'=>StaticView::class,
             'middleware' => MiddleWareProvider::class,
             \Blankphp\Contract\Container::class => Application::class,
             \Blankphp\Contract\Kernel::class => Blankphp::class,

@@ -41,11 +41,11 @@ class View
 
     protected $fileName;
     protected $descFile;
-    protected $cacheTime=0;
+    protected $cacheTime = 0;
 
     public function setFileName($fileName)
     {
-        $this->fileName = $fileName.'.php';
+        $this->fileName = $fileName . '.php';
     }
 
     public function setDescFile($fileName)
@@ -66,23 +66,24 @@ class View
     //判断是否存在缓存文件
     public function existsFile()
     {
-        if (file_exists($this->getDescFile()))
+        if (is_file($this->getDescFile()))
             return true;
         return false;
     }
 
-    public function getValue($result){
-        if (is_array($result)){
+    public function getValue($result)
+    {
+        if (is_array($result)) {
             var_dump($result);
-        }else{
+        } else {
             echo $result;
         }
     }
 
     public function makeValueArray($datas)
     {
-        foreach ($datas as $key=>$value){
-            $this->{'_'.$key}=$value;
+        foreach ($datas as $key => $value) {
+            $this->{'_' . $key} = $value;
         }
     }
 
@@ -91,7 +92,6 @@ class View
         $this->setFileName($filename);
         $this->setDescFile($filename);
     }
-
 
 
     public function cacheFile($content)
@@ -140,7 +140,10 @@ class View
         return filectime($this->getFile()) - filectime($this->getDescFile()) > $this->cacheTime;
     }
 
-    private function deleteCache(){
+    private function deleteCache()
+    {
         //刪除文件
     }
+
+
 }

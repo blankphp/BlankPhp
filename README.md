@@ -6,10 +6,11 @@
 <a href="https://github.com/blankqwq/BlankPhp"><img src="https://img.shields.io/badge/php-7.1%2B-blue.svg" alt="PHP Version"></a>
 <a href="https://github.com/blankqwq/BlankPhp/releases"><img src="https://img.shields.io/badge/version-1.0.0-lightgrey.svg" alt="Version"></a>
 #### 介绍
-> 一个满足于基本开发的MVC轻量级框架`route` `DB` `view`已经设计完成
+
+> 一个满足于基本开发的MVC轻量级框架`route` `IOC` `DB` `view` `middleware`已经设计完基本使用
 
 ![hahah.png](https://i.loli.net/2019/04/08/5cab51b97a61b.png)
-
+    1.view  
     1.本框架意义在于理解IOC容器，以及依赖注入的思想
     2.本框架富含基本容器以及依赖注入
     3.框架具有路由以及中间件和基本orm功能，满足一个基本的快速开发概念
@@ -22,6 +23,7 @@
     初步建设小型容器，满足基础的mvc服务，如何写出的会以文章形式公布
     1.web路由在routes/web.php中注册
     2.api路由在routes/api.php注册
+    3.中间件注册在MiddleWareProvider中注册
     3.模型设计暂未完成,但是基本的Database设计完成
     4.暂时方便测试所以就没怎么测试
 
@@ -37,6 +39,8 @@ composer create-project blankqwq/blankphp:"dev-master" <name>
 > 4.4 Route个人认为一般不会改变，可以缓存起来做一个中间层,之后都从route中取出会快很多
  
 > 4.8 完成整体的运行流程以及缓存的自动生成自动替换
+
+> 4.11 orm模型映射开始设计
 
 ```ab
 Server Software:        nginx/1.15.5

@@ -7,7 +7,7 @@ create table students
   tel      varchar(11) not null,
   class_id int         not null
 )engine=InnoDB;
-
+create database test1 default character set utf8mb4;
 create table class
 (
   id         int primary key auto_increment,

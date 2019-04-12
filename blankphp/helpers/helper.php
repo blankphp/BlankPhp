@@ -2,7 +2,7 @@
 if (! function_exists('app')) {
     function app($abstract)
     {
-        if (class_exists($abstract) || interface_exists($abstract))
+        if (class_exists($abstract) || interface_exists($abstract) ||!is_null(\Blankphp\Application::getInstance()->make($abstract)))
             return \Blankphp\Application::getInstance()->make($abstract);
         else
             return \Blankphp\Application::getInstance()->getSignal($abstract);
@@ -25,5 +25,37 @@ if (! function_exists('view')) {
             return $factory;
         }
         return $factory->view($view, $data);
+    }
+}
+
+if (! function_exists('view_static')) {
+    function view_static($view = null, $data = [],$time=30000)
+    {
+        $factory = app('view.static');
+        if (func_num_args() === 0) {
+            return $factory;
+        }
+        return $factory->view($view, $data,$time);
+    }
+}
+
+
+if (! function_exists('url')) {
+    function url($uri,$data=[])
+    {
+        //编译为目标地址
+        $config = config('app')['url'];
+        $url = $config.'/'.$uri;
+        return $url;
+    }
+}
+
+if (! function_exists('asset')) {
+    function asset($uri,$data=[])
+    {
+        //获取静态资源
+        $config = config('app')['url'];
+        $url = $config.'/'.$uri;
+        return $url;
     }
 }

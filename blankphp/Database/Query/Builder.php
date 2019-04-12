@@ -29,7 +29,7 @@ class Builder
 
     public $wheres;
     public $join;
-    public $select=['*'];
+    public $select = ['*'];
     public $table;
     public $groupBy;
     public $orderBy;
@@ -64,7 +64,7 @@ class Builder
     public function where($column, $operator, $value)
     {
         $operators = in_array($operator, $this->operators) ? $operator : '=';
-        $this->wheres[] = sprintf("%s %s %s", $column, $operators, $value);
+        $this->wheres[] = sprintf("%s %s '%s'", $column, $operators, $value);
         $this->addBinds('where', $value);
         return $this;
     }
@@ -119,6 +119,31 @@ class Builder
     public function toSql()
     {
         return $this->grammar->generateSelect($this);
+    }
+
+    public function orWhere($column, $operator, $value)
+    {
+        $operators = in_array($operator, $this->operators) ? $operator : '=';
+        $this->wheres[] = 'or';
+        $this->wheres[] = sprintf("%s %s %s", $column, $operators, $value);
+        $this->addBinds('where', $value);
+        return $this;
+    }
+
+    public function andWhere($column, $operator, $value)
+    {
+        $operators = in_array($operator, $this->operators) ? $operator : '=';
+        $this->wheres[] = 'and';
+        $this->wheres[] = sprintf("%s %s %s", $column, $operators, $value);
+        $this->addBinds('where', $value);
+        return $this;
+    }
+
+    public function whereIn($array=[]){
+        $value=implode(', ',$array);
+        $this->wheres[] = sprintf("%s %s (%s)", 'id', 'in', $value);
+        $this->addBinds('where', $value);
+        return $this;
     }
 
 }
