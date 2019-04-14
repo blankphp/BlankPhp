@@ -35,6 +35,8 @@ class Builder
     public $orderBy;
     public $unions;
     public $grammar;
+    public $values;
+    public $type='select';
 
     public function __construct(MysqlGrammar $grammar)
     {
@@ -116,10 +118,7 @@ class Builder
         return $this;
     }
 
-    public function toSql()
-    {
-        return $this->grammar->generateSelect($this);
-    }
+
 
     public function orWhere($column, $operator, $value)
     {
@@ -139,11 +138,59 @@ class Builder
         return $this;
     }
 
-    public function whereIn($array=[]){
-        $value=implode(', ',$array);
+    public function whereIn($array = [])
+    {
+        $value = implode(', ', $array);
         $this->wheres[] = sprintf("%s %s (%s)", 'id', 'in', $value);
         $this->addBinds('where', $value);
         return $this;
+    }
+
+    public function createTable(array $array)
+    {
+
+    }
+
+    public function insertSome(array $array)
+    {
+        $this->type='insert';
+        $this->values[] = $array;
+        return $this;
+    }
+
+    public function deleteSome($id = null, $where = null)
+    {
+        $this->type='delete';
+        if (!is_null($id)) {
+            $this->wheres[]=sprintf("%s = %s", 'id',  $id);
+        } elseif (!is_null($where)) {
+            $this->wheres[]=sprintf("%s %s %s", $where[0], $where[1], $where[2]);
+        }
+        return $this;
+    }
+
+    public function updateSome($id = null, $where = null)
+    {
+        $this->type='update';
+        if (!is_null($id)) {
+            $this->wheres[]=sprintf("%s = %s", 'id',  $id);
+        } elseif (!is_null($where)) {
+            $this->wheres[]=sprintf("%s %s %s", $where[0], $where[1], $where[2]);
+        }
+        return $this;
+
+    }
+
+    public function toSql()
+    {
+        if ($this->type=='select')
+            return $this->grammar->generateSelect($this);
+        elseif ($this->type=='update')
+            return $this->grammar->generateUpdate($this);
+        elseif ($this->type=='delete')
+            return $this->grammar->generateDelete($this);
+        elseif ($this->type=='insert')
+            return $this->grammar->generateInsert($this);
     }
 
 }

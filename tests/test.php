@@ -49,3 +49,9 @@
 ////$result = filectime('../public/template/index.php') - filectime('../public/template/stu.php') > 0;
 //$stop=time();
 //var_dump($start-$stop,$start,$stop);
+
+
+$chars= join("",range(0,9));
+$chars= str_shuffle($chars);
+//打乱chars
+var_dump($chars);

@@ -11,11 +11,14 @@ namespace Blankphp\Model;
 
 use Blankphp\Database\Database;
 use Blankphp\Event\EventAbstract;
+use Blankphp\Model\Traits\CreateTable;
 
 class Model extends EventAbstract
 {
-    use Sql;
+    use CreateTable;
     protected $database;
+    protected $tableName;
+    protected $primaryKey;
 
 
 
@@ -25,6 +28,12 @@ class Model extends EventAbstract
     }
 
 
+
+    //查询语句的核心--以及获取数据
+    public function __call($name, $arguments)
+    {
+        $this->database->{$name}(...$arguments);
+    }
 
 
 }
