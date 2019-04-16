@@ -1,6 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+
 class TestUnit extends TestCase
 {
     protected $app;
@@ -18,8 +19,9 @@ class TestUnit extends TestCase
     public function testBasicTest()
     {
         $response = $this->get('/11');
-        $this->assertEquals('123', $response);
+        $this->assertEquals('this is a test', $response);
     }
+
     public function get($uri)
     {
         return $this->call('GET', $uri, [], [], []);

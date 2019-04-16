@@ -1,15 +1,15 @@
 <?php
-if (! function_exists('app')) {
+if (!function_exists('app')) {
     function app($abstract)
     {
-        if (class_exists($abstract) || interface_exists($abstract) ||!is_null(\Blankphp\Application::getInstance()->make($abstract)))
+        if (class_exists($abstract) || interface_exists($abstract) || !is_null(\Blankphp\Application::getInstance()->make($abstract)))
             return \Blankphp\Application::getInstance()->make($abstract);
         else
             return \Blankphp\Application::getInstance()->getSignal($abstract);
     }
 }
 
-if (! function_exists('config')) {
+if (!function_exists('config')) {
     function config($name)
     {
         return \Blankphp\Application::getInstance()->getSignal('config')[$name];
@@ -17,7 +17,7 @@ if (! function_exists('config')) {
 }
 
 
-if (! function_exists('view')) {
+if (!function_exists('view')) {
     function view($view = null, $data = [])
     {
         $factory = app(\Blankphp\Contract\View::class);
@@ -28,34 +28,38 @@ if (! function_exists('view')) {
     }
 }
 
-if (! function_exists('view_static')) {
-    function view_static($view = null, $data = [],$time=30000)
+if (!function_exists('view_static')) {
+    function view_static($view = null, $data = [], $time = 30000)
     {
         $factory = app('view.static');
         if (func_num_args() === 0) {
             return $factory;
         }
-        return $factory->view($view, $data,$time);
+        return $factory->view($view, $data, $time);
     }
 }
 
 
-if (! function_exists('url')) {
-    function url($uri,$data=[])
+if (!function_exists('url')) {
+    function url($uri, $data = [])
     {
         //编译为目标地址
         $config = config('app')['url'];
-        $url = $config.'/'.$uri;
+        $url = $config . '/' . $uri;
         return $url;
     }
 }
 
-if (! function_exists('asset')) {
-    function asset($uri,$data=[])
+if (!function_exists('asset')) {
+    function asset($uri, $data = [])
     {
-        //获取静态资源
-        $config = config('app')['url'];
-        $url = $config.'/'.$uri;
+        //获取静态资源，按/分割
+        $url = config('app')['url'];
+        $static = config('app')['static'];
+        $url = $url . '/' . $static . '/' . $uri;
+//        var_dump($config.'/'.$static.'/'.$uri);
         return $url;
     }
 }
+
+

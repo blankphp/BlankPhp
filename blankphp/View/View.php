@@ -14,7 +14,7 @@ class View
     //缓存的目录
     protected $cacheDir = APP_PATH . 'cache/view/';
     //模板文件目录
-    protected $templateDir = APP_PATH . 'public/template/';
+    protected $templateDir = APP_PATH . 'resource/template/';
 
     public $_valueArray = [];
     static $pregArray = [

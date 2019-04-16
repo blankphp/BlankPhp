@@ -70,8 +70,6 @@ class Database
                 $this->sql->deleteSome($arg);
             }
         }
-        var_dump($this->sql->toSql());
-//        $this->sql->deleteSome($id,$value);
         $stmt = self::$pdo->prepare($this->sql->toSql());
         $stmt->execute();
         return $stmt->rowCount();

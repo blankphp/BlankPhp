@@ -7,11 +7,12 @@
  */
 
 return [
-    'APP_NAME'=>'test',
-    'url'=>'',
-    'static'=>'',
-    'template'=>'',
-    'Provider'=>[
+    'APP_NAME' => 'test',
+    'url' => 'http://localhost/one',
+    'static' => '',
+    'template' => 'resource/template',
+    'static' => 'public/static',
+    'Provider' => [
 
     ]
 ];

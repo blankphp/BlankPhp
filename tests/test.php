@@ -15,19 +15,19 @@
 //echo __DIR__."/../config";
 //$matches=[];
 //$config=[];
-//$config=[];
-//if (is_dir(__DIR__.'/../config')){
-//    if ($dh = opendir(__DIR__.'/../config')){
-//        while (($file = readdir($dh)) !== false){
-//            if (preg_match_all("/(.+?)\.php/",$file,$matches)){
-//                $config[$matches[1][0]]=require __DIR__.'/../config/'.$matches[0][0];
-//            }
-//        }
-//        closedir($dh);
-//    }
-//}
-//$text='<?php return '.var_export($config,true).';';
-//file_put_contents(__DIR__.'/../cache/framework/config.php',$text);
+$config=[];
+if (is_dir(__DIR__.'/../config')){
+    if ($dh = opendir(__DIR__.'/../config')){
+        while (($file = readdir($dh)) !== false){
+            if (preg_match_all("/(.+?)\.php/",$file,$matches)){
+                $config[$matches[1][0]]=require __DIR__.'/../config/'.$matches[0][0];
+            }
+        }
+        closedir($dh);
+    }
+}
+$text='<?php return '.var_export($config,true).';';
+file_put_contents(__DIR__.'/../cache/framework/config.php',$text);
 //print_r($config);
 
 //function test(){
@@ -51,7 +51,7 @@
 //var_dump($start-$stop,$start,$stop);
 
 
-$chars= join("",range(0,9));
-$chars= str_shuffle($chars);
-//打乱chars
-var_dump($chars);
+//$chars= join("",range(0,9));
+//$chars= str_shuffle($chars);
+////打乱chars
+//var_dump($chars);

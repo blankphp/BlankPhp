@@ -11,6 +11,10 @@ namespace Blankphp\Controller;
 
 class Controller
 {
+    public function validate(){
+//        表单验证
+    }
+
 
 
 }

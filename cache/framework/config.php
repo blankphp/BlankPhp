@@ -2,6 +2,9 @@
   'app' => 
   array (
     'APP_NAME' => 'test',
+    'url' => 'http://localhost/one',
+    'static' => 'public/static',
+    'template' => 'resource/template',
     'Provider' => 
     array (
     ),
