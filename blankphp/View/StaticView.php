@@ -25,22 +25,35 @@ class StaticView extends View
 
     public function view($filename, $data = [],$time=3000)
     {
+        $flag=false;
         $this->make($filename);
         $this->makeValueArray($data);
         $this->cacheTime=$time;
         //1.查找是否具有视图文件的缓存，有直接载入，无，编译
         if (!$this->existsFile() || $this->isRecompile()) {
+            $flag=true;
             $this->compile();
         }
+
         //载入内容,返回内容
         ob_start();
         ob_clean();
         include($this->getDescFile());
         $content = ob_get_contents();
         ob_end_clean();
+        if ($flag)
+            $this->cacheFile($content);
         return $content;
     }
     private function isRecompile(){
         return time() - filectime($this->getDescFile()) > $this->cacheTime;
     }
+
+    protected function compile()
+    {
+        $content = file_get_contents($this->getFile());
+        $content = $this->compileContent($content);
+        $this->cacheFile($content);
+    }
+
 }

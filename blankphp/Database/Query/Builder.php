@@ -36,7 +36,7 @@ class Builder
     public $unions;
     public $grammar;
     public $values;
-    public $type='select';
+    public $type = 'select';
 
     public function __construct(MysqlGrammar $grammar)
     {
@@ -119,7 +119,6 @@ class Builder
     }
 
 
-
     public function orWhere($column, $operator, $value)
     {
         $operators = in_array($operator, $this->operators) ? $operator : '=';
@@ -153,29 +152,29 @@ class Builder
 
     public function insertSome(array $array)
     {
-        $this->type='insert';
+        $this->type = 'insert';
         $this->values[] = $array;
         return $this;
     }
 
     public function deleteSome($id = null, $where = null)
     {
-        $this->type='delete';
+        $this->type = 'delete';
         if (!is_null($id)) {
-            $this->wheres[]=sprintf("%s = %s", 'id',  $id);
+            $this->wheres[] = sprintf("%s = '%s'", 'id', $id);
         } elseif (!is_null($where)) {
-            $this->wheres[]=sprintf("%s %s %s", $where[0], $where[1], $where[2]);
+            $this->wheres[] = sprintf("%s %s '%s'", $where[0], $where[1], $where[2]);
         }
         return $this;
     }
 
     public function updateSome($id = null, $where = null)
     {
-        $this->type='update';
+        $this->type = 'update';
         if (!is_null($id)) {
-            $this->wheres[]=sprintf("%s = %s", 'id',  $id);
+            $this->wheres[] = sprintf("%s = %s", 'id', $id);
         } elseif (!is_null($where)) {
-            $this->wheres[]=sprintf("%s %s %s", $where[0], $where[1], $where[2]);
+            $this->wheres[] = sprintf("%s %s %s", $where[0], $where[1], $where[2]);
         }
         return $this;
 
@@ -183,13 +182,13 @@ class Builder
 
     public function toSql()
     {
-        if ($this->type=='select')
+        if ($this->type == 'select')
             return $this->grammar->generateSelect($this);
-        elseif ($this->type=='update')
+        elseif ($this->type == 'update')
             return $this->grammar->generateUpdate($this);
-        elseif ($this->type=='delete')
+        elseif ($this->type == 'delete')
             return $this->grammar->generateDelete($this);
-        elseif ($this->type=='insert')
+        elseif ($this->type == 'insert')
             return $this->grammar->generateInsert($this);
     }
 

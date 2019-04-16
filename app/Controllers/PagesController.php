@@ -16,10 +16,15 @@ class PagesController extends Controller
 {
     public function index(Request $request)
     {
-//       var_dump(DB::table('teacher')->whereIn([1,4,5,6,7])->orderBy('id','desc')->get());
+        var_dump(DB::table('teacher')->delete(['name','=','test']));
+        $last_id =1 ;
+        if ($last_id)
+            $array = ['name' => ['url' => 'http://localhost/one/public/static/images/BlankPhp.png', 'name' => 'blankqwq', 'message' => '插入成功']];
+        else
+            $array = ['name' => ['url' => 'http://localhost/one/public/static/images/BlankPhp.png', 'name' => 'blankqwq', 'message' => '插入失败'.$last_id]];
 //        return '<style type="text/css">*{ padding: 0; margin: 0; } .think_default_text{ padding: 4px 48px;} a{color:#2E5CD5;cursor: pointer;text-decoration: none} a:hover{text-decoration:underline; } body{ background: #fff; font-family: "Century Gothic","Microsoft yahei"; color: #333;font-size:18px} h1{ font-size: 100px; font-weight: normal; margin-bottom: 12px; } p{ line-height: 1.6em; font-size: 42px }</style><div style="padding: 24px 48px;"> <h1>:)</h1><p> Blankphp v1<br/><span style="font-size:30px">轻量级快速的麻雀虽小五脏俱全</span></p><span style="font-size:22px;">[ V1.0 版本由 <a href="http://www.qiniu.com" target="qiniu">七牛云</a> 独家赞助发布 ]</span></div><script type="text/javascript" src="https://tajs.qq.com/stats?sId=9347272" charset="UTF-8"></script><script type="text/javascript" src="https://e.topthink.com/Public/static/client.js"></script><blankphp id="1.0.0"></blankphp>\';
 //';
-        return view_static('index', ['name' => ['url' => 'http://localhost/one/public/static/images/BlankPhp.png', 'name' => 'blankqwq', 'message' => 'hello world!']]);
+        return view_static('index', $array);
     }
 
     public function indx()

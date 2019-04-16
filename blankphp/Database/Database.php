@@ -38,20 +38,48 @@ class Database
     public function commit()
     {
         try {
-            //执行语句
+            //执行语句\
             $res = self::$pdo->query($this->sql->toSql());
+            var_dump($res);
             return $res;
         } catch (\Exception $exception) {
             return $exception->getMessage();
         }
     }
 
-    public function get(){
+    public function get()
+    {
         return $this->commit()->fetchAll();
     }
 
-    public function find($id){
-        $this->sql->where('id','=',$id);
+    public function create(array $value)
+    {
+        $this->sql->insertSome($value);
+        $stmt = self::$pdo->prepare($this->sql->toSql());
+        $stmt->execute();
+        return self::$pdo->lastInsertId();
+    }
+
+    public function delete()
+    {
+        $args = func_get_args();
+        foreach ($args as $arg) {
+            if (is_array($arg)) {
+                $this->sql->deleteSome($id = null, $arg);
+            } elseif (is_numeric($arg)) {
+                $this->sql->deleteSome($arg);
+            }
+        }
+        var_dump($this->sql->toSql());
+//        $this->sql->deleteSome($id,$value);
+        $stmt = self::$pdo->prepare($this->sql->toSql());
+        $stmt->execute();
+        return $stmt->rowCount();
+    }
+
+    public function find($id)
+    {
+        $this->sql->where('id', '=', $id);
         return $this->commit()->fetchAll();
     }
 
@@ -61,6 +89,7 @@ class Database
         //修改或者创建某个表中的元素..得判断有没有获取到目标id
         // TODO: Implement __set() method.
     }
+
 
     public function __call($name, $arguments)
     {
