@@ -5,6 +5,13 @@
     'url' => 'http://localhost/one',
     'static' => 'public/static',
     'template' => 'resource/template',
+    'cookie' =>
+    array (
+      'expires' =>time()+ 604800,
+      'domain' => NULL,
+      'secure' => false,
+      'httponly' => false,
+    ),
     'Provider' => 
     array (
     ),

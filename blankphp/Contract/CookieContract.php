@@ -6,7 +6,7 @@
  * Time: 15:27
  */
 
-namespace Blankphp\Session\Contract;
+namespace Blankphp\Contract;
 
 
 interface CookieContract

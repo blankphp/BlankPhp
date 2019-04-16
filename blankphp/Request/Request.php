@@ -20,7 +20,7 @@ class Request implements RequestContract
     public function __construct()
     {
         $this->createFromGlobal();
-        $this->clear();
+//        $this->clear();
         $this->getUri();
         $this->getMethod();
     }

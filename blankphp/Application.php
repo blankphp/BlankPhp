@@ -11,6 +11,7 @@ namespace Blankphp;
 
 use \App\Provider\MiddleWareProvider;
 use Blankphp\Contract\RequestContract;
+use Blankphp\Cookie\Cookie;
 use Blankphp\Database\Database;
 use Blankphp\Database\Grammar\Grammar;
 use Blankphp\Database\Grammar\MysqlGrammar;
@@ -39,6 +40,7 @@ class Application extends Container
             'app' => Application::class,
             'db' => Database::class,
             'view'=>View::class,
+            'cookie'=>Cookie::class,
             'view.static'=>StaticView::class,
             'middleware' => MiddleWareProvider::class,
             \Blankphp\Contract\Container::class => Application::class,

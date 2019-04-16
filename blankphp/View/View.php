@@ -15,7 +15,6 @@ class View
     protected $cacheDir = APP_PATH . 'cache/view/';
     //模板文件目录
     protected $templateDir = APP_PATH . 'resource/template/';
-
     public $_valueArray = [];
     static $pregArray = [
         '#\{\\$(.+?)\}#',

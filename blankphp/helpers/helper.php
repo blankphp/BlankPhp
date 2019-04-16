@@ -53,11 +53,9 @@ if (!function_exists('url')) {
 if (!function_exists('asset')) {
     function asset($uri, $data = [])
     {
-        //获取静态资源，按/分割
         $url = config('app')['url'];
         $static = config('app')['static'];
         $url = $url . '/' . $static . '/' . $uri;
-//        var_dump($config.'/'.$static.'/'.$uri);
         return $url;
     }
 }

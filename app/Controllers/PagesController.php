@@ -9,6 +9,7 @@
 namespace App\Controllers;
 
 
+use Blankphp\Cookie\Facade\Cookie;
 use Blankphp\Database\Facade\DB;
 use Blankphp\Request\Request;
 

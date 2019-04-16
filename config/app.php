@@ -12,6 +12,13 @@ return [
     'static' => '',
     'template' => 'resource/template',
     'static' => 'public/static',
+    'cookie'=>[
+        'expires'=>time()+3600*24*7,
+        'path'=>'/',
+        'domain'=>null,
+        'secure'=>false,
+        'httponly'=>false
+    ],
     'Provider' => [
 
     ]
