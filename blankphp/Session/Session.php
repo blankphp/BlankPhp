@@ -9,10 +9,14 @@
 namespace Blankphp\Session;
 
 
-use Blankphp\Session\Contract\SessionContract;
+use Blankphp\Contract\Session as SessionContract;
 
 class Session implements SessionContract
 {
+    public function __construct()
+    {
+        $name=config('app')['session']['driver'];
+    }
 
     public function setSession($key,$value){
 
@@ -26,8 +30,8 @@ class Session implements SessionContract
 
     }
 
-    public function get(){
-
+    public function get($name){
+       return $_SESSION[$name];
     }
 
 }
