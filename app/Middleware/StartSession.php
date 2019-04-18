@@ -8,8 +8,9 @@ class StartSession
 {
     public static function handle($request, \Closure $next)
     {
-        if (APP_ENV!= 'testing' || is_null($_SESSION))
-            session_start();
+        if (APP_ENV != 'testing')
+            if (is_null($request->getSession()))
+                session_start();
         return $next($request);
     }
 }

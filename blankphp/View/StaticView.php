@@ -25,6 +25,7 @@ class StaticView extends View
 
     public function view($filename, $data = [],$time=3000)
     {
+        $content=null;
         $flag=false;
         $this->make($filename);
         $this->makeValueArray($data);
@@ -33,14 +34,15 @@ class StaticView extends View
         if (!$this->existsFile() || $this->isRecompile()) {
             $flag=true;
             $this->compile();
+            ob_start();
+            ob_clean();
+            include($this->getDescFile());
+            $content = ob_get_contents();
+            ob_end_clean();
         }
-
         //载入内容,返回内容
-        ob_start();
-        ob_clean();
-        include($this->getDescFile());
-        $content = ob_get_contents();
-        ob_end_clean();
+        if (is_null($content))
+            $content=file_get_contents($this->getDescFile());
         if ($flag)
             $this->cacheFile($content);
         return $content;

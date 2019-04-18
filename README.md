@@ -35,6 +35,15 @@
 composer create-project blankqwq/blankphp:"dev-master" <name>
 ```
 
+```nginx
+   root "<目录>/public";
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+nginx配置好重写规则
+
+```
+
 #### 更新说明
     
     

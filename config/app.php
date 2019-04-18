@@ -10,8 +10,11 @@ return [
     'APP_NAME' => 'test',
     'url' => 'http://localhost/one',
     'static' => '',
+
+
     'template' => 'resource/template',
     'static' => 'public/static',
+
     'cookie'=>[
         'expires'=>time()+3600*24*7,
         'path'=>'/',
@@ -24,7 +27,9 @@ return [
         'domain'=>null,
         'secure'=>false,
     ],
+
     'Provider' => [
 
-    ]
+    ],
+
 ];

@@ -20,7 +20,7 @@ class Request implements RequestContract
     public function __construct()
     {
         $this->createFromGlobal();
-//        $this->clear();
+        $this->clear();
         $this->getUri();
         $this->getMethod();
     }
@@ -102,6 +102,10 @@ class Request implements RequestContract
         $this->method = $method;
         return $this->method;
     }
+    public function getSession(){
+            return $this->request['session'];
+        }
+
 
 
 }
