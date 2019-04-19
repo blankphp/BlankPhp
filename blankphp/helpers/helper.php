@@ -10,9 +10,28 @@ if (!function_exists('app')) {
 }
 
 if (!function_exists('config')) {
-    function config($name)
+    function config($name, $default = null)
     {
-        return \Blankphp\Application::getInstance()->getSignal('config')[$name];
+        $descNames = explode('.', $name);
+        $descNames=array_filter($descNames);
+        try{
+            $config=\Blankphp\Application::getInstance()->getSignal('config')[$descNames[0]];
+            array_shift($descNames);
+            foreach ($descNames as $descName){
+                $config=$config[$descName];
+            }
+            return $config;
+        }catch (Exception $exception){
+            return $default;
+        }
+//        if (is_array($descName) && count($descName) > 1) {
+//            $descName = array_flip($descName);
+//            var_dump($descName);
+////            var_dump(\Blankphp\App lication::getInstance()->getSignal('config')[$descName[0]]);
+//        }
+//        if (count($descName) > 1)
+//            return \Blankphp\Application::getInstance()->getSignal('config')[$descName[0]];
+//        return \Blankphp\Application::getInstance()->getSignal('config')[$name];
     }
 }
 
@@ -44,7 +63,7 @@ if (!function_exists('url')) {
     function url($uri, $data = [])
     {
         //编译为目标地址
-        $config = config('app')['url'];
+        $config = config('app.url');
         $url = $config . '/' . $uri;
         return $url;
     }
@@ -53,8 +72,8 @@ if (!function_exists('url')) {
 if (!function_exists('asset')) {
     function asset($uri, $data = [])
     {
-        $url = config('app')['url'];
-        $static = config('app')['static'];
+        $url = config('app.url');
+        $static = config('app.static');
         $url = $url . '/' . $static . '/' . $uri;
         return $url;
     }

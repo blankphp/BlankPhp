@@ -22,6 +22,8 @@ return [
         'secure'=>false,
         'httponly'=>false
     ],
+
+    
     'session'=>[
         'driver'=>'file',
         'domain'=>null,

@@ -18,8 +18,7 @@ class Session implements SessionContract
 
     public function __construct()
     {
-        $name = config('app')['session']['driver'];
-
+        $name = config('app.session.driver');
     }
 
     public function setSessionName($name=null){

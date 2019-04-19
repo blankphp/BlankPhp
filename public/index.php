@@ -13,7 +13,7 @@ define('APP_ENV', 'local');
 //psr4自动加载
 require(APP_PATH . '/vendor/autoload.php');
 
-$app = require_once APP_PATH . 'Blankphp/Application.php';
+$app = require_once APP_PATH . 'blankphp/Application.php';
 
 $kernel = $app->make(\Blankphp\Contract\Kernel::class);
 //核心处理请求--->dispatcher

@@ -21,7 +21,7 @@ class Database
 
     public function __construct(Application $app, Builder $sql)
     {
-        $db = $app->getSignal('config')['db'];
+        $db = $app->getSignal('config.db');
         self::$pdo = DbConnect::pdo($db);
         $this->sql = $sql;
     }

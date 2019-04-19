@@ -10,6 +10,7 @@ namespace Blankphp\Cookie;
 
 
 use Blankphp\Contract\CookieContract;
+use Blankphp\Request\Facade\Request;
 
 
 class Cookie implements CookieContract
@@ -19,10 +20,12 @@ class Cookie implements CookieContract
     protected $domain = null;
     protected $secure = false;
     protected $httponly = false;
+    protected $cookie=[];
 
     public function __construct()
     {
-        $option = config('app')['cookie'];
+        $option = config('app.cookie');
+        $this->cookie=Request::getCookie();
         $this->setOption($option);
     }
 
@@ -53,11 +56,12 @@ class Cookie implements CookieContract
 
     public function get($name)
     {
-        if (isset($_COOKIE[$name])) {
-            return substr($_COOKIE[$name], 0, 1) == '{' ?
-                json_decode($_COOKIE[$name]) :
-                $_COOKIE[$name];
+        if (!empty($this->cookie)) {
+            return substr($this->cookie[$name], 0, 1) == '{' ?
+                json_decode($this->cookie[$name]) :
+                $this->cookie[$name];
         }
+        return [];
     }
 
 

@@ -16,6 +16,8 @@ class Request implements RequestContract
     public $uri;
     public $method;
     public $request = [];
+    public $session = [];
+    public $cookie = [];
 
     public function __construct()
     {
@@ -32,7 +34,8 @@ class Request implements RequestContract
         return $value;
     }
 
-    public function clear(){
+    public function clear()
+    {
         unset($_GET);
         unset($_POST);
         unset($_FILES);
@@ -46,8 +49,8 @@ class Request implements RequestContract
         $this->request['get'] = !is_null($_GET) ? $this->stripSlashesDeep($_GET) : '';
         $this->request['post'] = !is_null($_POST) ? $this->stripSlashesDeep($_POST) : '';
         $this->request['files'] = is_null($_FILES) ? $this->stripSlashesDeep($_FILES) : '';
-        $this->request['session'] = isset($_SESSION) ? $this->stripSlashesDeep($_SESSION) : '';
-        $this->request['cookie'] = !is_null($_COOKIE) ? $this->stripSlashesDeep($_COOKIE) : '';
+        $this->session = isset($_SESSION) ? $this->stripSlashesDeep($_SESSION) : [];
+        $this->cookie = !is_null($_COOKIE) ? $this->stripSlashesDeep($_COOKIE) : [];
     }
 
 
@@ -57,15 +60,31 @@ class Request implements RequestContract
     }
 
 
-    public function get($parameters = [])
+    public function get(array $array)
+    {
+        //获取指定的数组元素
+        $data = [];
+
+        foreach ($this->request as $requests) {
+            if (!empty($requests))
+                foreach ($requests as $k => $v)
+                    if (in_array($k, $array, true))
+                        $data[$k] = $v;
+        }
+        return $data;
+    }
+
+    public function getOne(string $str)
     {
         //获取指定的数组元素
         $data = [];
         foreach ($this->request as $requests) {
             if (!empty($requests))
                 foreach ($requests as $k => $v)
-                    if (in_array($k, $parameters))
+                    if (strstr($k, $str)) {
                         $data[$k] = $v;
+                        break;
+                    }
         }
         return $data;
     }
@@ -85,7 +104,7 @@ class Request implements RequestContract
             $urlArray = array_diff($urlArray, $file);
             //去除两边的东西
             if ($urlArray) {
-                $this->uri = '/'.implode('/', $urlArray);
+                $this->uri = '/' . implode('/', $urlArray);
             } else {
                 $this->uri = '/';
             }
@@ -102,10 +121,16 @@ class Request implements RequestContract
         $this->method = $method;
         return $this->method;
     }
-    public function getSession(){
-            return $this->request['session'];
-        }
 
+    public function getSession()
+    {
+        return $this->session;
+    }
+
+    public function getCookie()
+    {
+        return $this->cookie;
+    }
 
 
 }
