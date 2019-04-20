@@ -1,0 +1,10 @@
+<?php
+
+
+namespace Blankphp\Console\Stub;
+
+
+class Controller
+{
+
+}

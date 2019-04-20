@@ -44,7 +44,8 @@ class View
 
     public function setFileName($fileName)
     {
-        $this->fileName = $fileName . '.php';
+        $fileName=explode('.',$fileName);
+        $this->fileName = implode('/',$fileName) . '.php';
     }
 
     public function setDescFile($fileName)

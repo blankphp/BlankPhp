@@ -39,8 +39,6 @@ class Request implements RequestContract
         unset($_GET);
         unset($_POST);
         unset($_FILES);
-        unset($_SESSION);
-        unset($_COOKIE);
         unset($_REQUEST);
     }
 
@@ -49,8 +47,8 @@ class Request implements RequestContract
         $this->request['get'] = !is_null($_GET) ? $this->stripSlashesDeep($_GET) : '';
         $this->request['post'] = !is_null($_POST) ? $this->stripSlashesDeep($_POST) : '';
         $this->request['files'] = is_null($_FILES) ? $this->stripSlashesDeep($_FILES) : '';
-        $this->session = isset($_SESSION) ? $this->stripSlashesDeep($_SESSION) : [];
-        $this->cookie = !is_null($_COOKIE) ? $this->stripSlashesDeep($_COOKIE) : [];
+//        $this->session = isset($_SESSION) ? $this->stripSlashesDeep($_SESSION) : [];
+//        $this->cookie = !is_null($_COOKIE) ? $this->stripSlashesDeep($_COOKIE) : [];
     }
 
 

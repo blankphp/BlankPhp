@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Blankphp\Session;
+namespace Blankphp\Driver\Session;
 
 
 class FileSessionHandler implements \SessionHandlerInterface

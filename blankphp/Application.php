@@ -18,6 +18,7 @@ use Blankphp\Database\Grammar\MysqlGrammar;
 use Blankphp\Kernel\Blankphp;
 use Blankphp\Request\Request;
 use Blankphp\Route\Route;
+use Blankphp\Session\Session;
 use Blankphp\View\StaticView;
 use Blankphp\View\View;
 
@@ -40,8 +41,9 @@ class Application extends Container
             'app' => Application::class,
             'db' => Database::class,
             'view'=>View::class,
-            'cookie'=>Cookie::class,
             'view.static'=>StaticView::class,
+            'cookie'=>Cookie::class,
+            'session'=>Session::class,
             'middleware' => MiddleWareProvider::class,
             \Blankphp\Contract\Container::class => Application::class,
             \Blankphp\Contract\Kernel::class => Blankphp::class,
@@ -67,7 +69,6 @@ class Application extends Container
     public function registerBase()
     {
         $this->instance('app', $this);
-
     }
 
     public function registerProviders()

@@ -5,12 +5,19 @@
     'url' => 'http://localhost/one',
     'static' => 'public/static',
     'template' => 'resource/template',
-    'cookie' =>
+    'cookie' => 
     array (
-      'expires' =>time()+ 604800,
+      'expires' => 1556336363,
+      'path' => '/',
       'domain' => NULL,
       'secure' => false,
       'httponly' => false,
+    ),
+    'session' => 
+    array (
+      'name' => 'BlankPhp',
+      'driver' => 'file',
+      'secure' => false,
     ),
     'Provider' => 
     array (

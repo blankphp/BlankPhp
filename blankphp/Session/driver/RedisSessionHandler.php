@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Blankphp\Session;
+namespace Blankphp\Driver\Session;
 
 
-class DatabasesSessionHandler implements \SessionHandlerInterface
+class FileSessionHandler implements \SessionHandlerInterface
 {
     /**
      * Close the session

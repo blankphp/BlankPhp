@@ -25,8 +25,8 @@ return [
 
     
     'session'=>[
+        'name'=>'BlankPhp',
         'driver'=>'file',
-        'domain'=>null,
         'secure'=>false,
     ],
 

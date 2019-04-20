@@ -40,13 +40,14 @@ class Cookie implements CookieContract
         }
     }
 
-    public function set($key, $value, array $option = null)
+    public function set($key, $value, $expires=null,$option = null)
     {
         if (is_array($value) || is_object($value)) {
             $value = json_encode($value);
         }
         if (!is_null($option)) {
-            return setcookie($key, $value, ...$option
+            array_shift($option);
+            return setcookie($key, $value,$expires, ...array_values($option)
             );
         }
         return setcookie($key, $value, $this->expires, $this->path, $this->domain, $this->secure

@@ -12,6 +12,7 @@ namespace App\Controllers;
 use Blankphp\Cookie\Facade\Cookie;
 use Blankphp\Database\Facade\DB;
 use Blankphp\Request\Request;
+use Blankphp\Session\Facade\Session;
 
 class PagesController extends Controller
 {
@@ -38,10 +39,10 @@ class PagesController extends Controller
     }
 
 
-    public function getone($id)
-    {
-        $student = DB::table('students')->where('id', '=', $id)->orWhere('id', '=', 2)->get();
-        return view('stu', ['student' => $student]);
-    }
+//    public function getone($id)
+//    {
+//        $student = DB::table('students')->where('id', '=', $id)->orWhere('id', '=', 2)->get();
+//        return view('stu', ['student' => $student]);
+//    }
 
 }
