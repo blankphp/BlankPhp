@@ -2,10 +2,11 @@
 if (!function_exists('app')) {
     function app($abstract)
     {
-        if (class_exists($abstract) || interface_exists($abstract) || !is_null(\Blankphp\Application::getInstance()->make($abstract)))
-            return \Blankphp\Application::getInstance()->make($abstract);
+        $a = \Blankphp\Application::getInstance();
+        if (class_exists($abstract) || interface_exists($abstract) || !is_null($desc = $a->make($abstract)))
+            return $desc;
         else
-            return \Blankphp\Application::getInstance()->getSignal($abstract);
+            return $a->getSignal($abstract);
     }
 }
 
@@ -13,25 +14,8 @@ if (!function_exists('config')) {
     function config($name, $default = null)
     {
         $descNames = explode('.', $name);
-        $descNames=array_filter($descNames);
-        try{
-            $config=\Blankphp\Application::getInstance()->getSignal('config')[$descNames[0]];
-            array_shift($descNames);
-            foreach ($descNames as $descName){
-                $config=$config[$descName];
-            }
-            return $config;
-        }catch (Exception $exception){
-            return $default;
-        }
-//        if (is_array($descName) && count($descName) > 1) {
-//            $descName = array_flip($descName);
-//            var_dump($descName);
-////            var_dump(\Blankphp\App lication::getInstance()->getSignal('config')[$descName[0]]);
-//        }
-//        if (count($descName) > 1)
-//            return \Blankphp\Application::getInstance()->getSignal('config')[$descName[0]];
-//        return \Blankphp\Application::getInstance()->getSignal('config')[$name];
+        $descNames = array_filter($descNames);
+        return app('config.get')->get($descNames, $default);
     }
 }
 

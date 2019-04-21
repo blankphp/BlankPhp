@@ -8,13 +8,14 @@
 
 return [
     'APP_NAME' => 'test',
+    'TIME_ZONE'=>'RPC',
+
     'url' => 'http://localhost/one',
     'static' => '',
 
 
     'template' => 'resource/template',
-    'static' => 'public/static',
-
+    'static' => 'static',
     'cookie'=>[
         'expires'=>time()+3600*24*7,
         'path'=>'/',

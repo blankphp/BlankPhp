@@ -19,11 +19,11 @@ class Router
     protected $app;
     protected $middleware;
 
-    public function __construct(Application $app, Route $route)
+    public function __construct(Route $route)
     {
         $this->route = $route;
-        $this->app = $app;
-        $this->middleware = $app->make('middleware');
+        $this->app = Application::getInstance();
+        $this->middleware = $this->app->make('middleware');
     }
 
     public function getMiddleware()

@@ -10,6 +10,7 @@ namespace Blankphp;
 
 
 use \App\Provider\MiddleWareProvider;
+use Blankphp\Config\Config;
 use Blankphp\Contract\RequestContract;
 use Blankphp\Cookie\Cookie;
 use Blankphp\Database\Database;
@@ -40,17 +41,18 @@ class Application extends Container
             'route' => Route::class,
             'app' => Application::class,
             'db' => Database::class,
-            'view'=>View::class,
-            'view.static'=>StaticView::class,
-            'cookie'=>Cookie::class,
-            'session'=>Session::class,
+            'view' => View::class,
+            'view.static' => StaticView::class,
+            'cookie' => Cookie::class,
+            'config.get' => Config::class,
+            'session' => Session::class,
             'middleware' => MiddleWareProvider::class,
             \Blankphp\Contract\Container::class => Application::class,
             \Blankphp\Contract\Kernel::class => Blankphp::class,
             \Blankphp\Contract\Route::class => Route::class,
             RequestContract::class => Request::class,
             Grammar::class => MysqlGrammar::class,
-            \Blankphp\Contract\View::class=>View::class,
+            \Blankphp\Contract\View::class => View::class,
         ];
         foreach ($binds as $k => $v)
             $this->bind($k, $v);
@@ -79,6 +81,11 @@ class Application extends Container
     public function getSignal($abstract)
     {
         return isset($this->signal[$abstract]) ? $this->signal[$abstract] : [];
+    }
+
+    public function unsetSignal($abstract)
+    {
+        unset($this->signal[$abstract]) ;
     }
 
 }

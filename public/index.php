@@ -5,7 +5,6 @@
  * Date: 2019/2/1
  * Time: 18:50
  */
-
 //应用目录为当前目录
 define('APP_PATH', __DIR__ . '/../');
 define('APP_DEBUG', true);
@@ -23,6 +22,5 @@ $response = $kernel->handle(
 //发送请求ob等
 $response->send();
 //清理空间,,容器内部消化
-
-
+$kernel->flush();
 

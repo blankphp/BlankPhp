@@ -14,7 +14,7 @@ class FileCache
     {
         //获取缓存
         if (is_file(self::$dir . $file))
-            return require self::$dir . $file;
+            return include (self::$dir . $file);
     }
 
 

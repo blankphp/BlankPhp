@@ -16,9 +16,9 @@ class Provider implements ProviderContract
 {
     protected $app;
 
-    public function __construct(Application $app)
+    public function __construct()
     {
-        $this->app = $app;
+        $this->app = Application::getInstance();
         $this->boot();
         $this->register();
     }

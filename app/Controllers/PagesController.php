@@ -9,14 +9,10 @@
 namespace App\Controllers;
 
 
-use Blankphp\Cookie\Facade\Cookie;
-use Blankphp\Database\Facade\DB;
-use Blankphp\Request\Request;
-use Blankphp\Session\Facade\Session;
 
 class PagesController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         return '<style type="text/css">
                 *{ padding: 0; margin: 0;text-align: center } 
@@ -33,10 +29,10 @@ class PagesController extends Controller
                 </span></div></script><blankPhp id="dadad12596"></blankPhp>';
     }
 
-    public function indx()
-    {
-        return 'this is a test';
-    }
+//    public function indx(Request $request)
+//    {
+//        return 'this is a test';
+//    }
 
 
 //    public function getone($id)

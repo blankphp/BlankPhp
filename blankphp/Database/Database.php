@@ -19,9 +19,9 @@ class Database
     protected $sql;
     protected $id;
 
-    public function __construct(Application $app, Builder $sql)
+    public function __construct( Builder $sql)
     {
-        $db = $app->getSignal('config.db');
+        $db = config('config.db');
         self::$pdo = DbConnect::pdo($db);
         $this->sql = $sql;
     }

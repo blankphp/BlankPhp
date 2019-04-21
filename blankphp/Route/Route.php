@@ -207,6 +207,7 @@ class Route implements Contract
         }
         if (!empty($route = $this->app->getSignal('route'))) {
             $this->route = $route;
+            $this->app->unsetSignal('route');
             return false;
         }
         return true;

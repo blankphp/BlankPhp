@@ -13,6 +13,6 @@ use Blankphp\Application;
 
 interface Route
 {
-    public function __construct(Application $app);
+    public function __construct(Application $application);
 
 }

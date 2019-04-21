@@ -9,6 +9,8 @@
 namespace Blankphp\Provider;
 
 
+use Blankphp\Application;
+use Blankphp\Config\Config;
 use Blankphp\Config\ConfigServiceProvider as BaseProvider;
 
 class ConfigServiceProvider extends BaseProvider
@@ -30,9 +32,12 @@ class ConfigServiceProvider extends BaseProvider
                 }
             }
             $this->app->signal('config', $config);
+        }else{
+            $this->app->instance('config.get',new Config());
         }
-
     }
+
+
 
 
 }
