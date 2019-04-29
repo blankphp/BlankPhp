@@ -8,7 +8,7 @@
     <title>BlankPhp</title>
 </head>
 <body>
-<p align="center"><img src="<?php $this->getValue($this->_name['url']); ?>" alt="BlankPhp.png" title="BlankPhp.png" /><p>
+<p align="center"><img src="<?php asset('images/BlankPhp.png'); ?>" alt="BlankPhp.png" title="BlankPhp.png" /><p>
 
 <h1 align="center"><?php $this->getValue($this->_name['message']); ?><br>
     <?php print_r(1); ?>

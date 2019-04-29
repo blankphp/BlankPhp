@@ -8,7 +8,7 @@
     <title>BlankPhp</title>
 </head>
 <body>
-<p align="center"><img src="{$name['url']}" alt="BlankPhp.png" title="BlankPhp.png" /><p>
+<p align="center"><img src="{_asset('images/BlankPhp.png')}" alt="BlankPhp.png" title="BlankPhp.png" /><p>
 
 <h1 align="center">{$name['message']}<br>
     {_print_r(1)}

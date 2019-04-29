@@ -130,5 +130,13 @@ class Request implements RequestContract
         return $this->cookie;
     }
 
+    public function __get($name)
+    {
+        if (!isset($this->$name)){
+            return $this->get($name);
+        }
+        return $this->$name;
+    }
+
 
 }

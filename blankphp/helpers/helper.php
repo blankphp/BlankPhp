@@ -4,7 +4,7 @@ if (!function_exists('app')) {
     {
         $a = \Blankphp\Application::getInstance();
         if (class_exists($abstract) || interface_exists($abstract) || !is_null($desc = $a->make($abstract)))
-            return $desc;
+            return $a->make($abstract);
         else
             return $a->getSignal($abstract);
     }
@@ -59,6 +59,7 @@ if (!function_exists('asset')) {
         $url = config('app.url');
         $static = config('app.static');
         $url = $url . '/' . $static . '/' . $uri;
+        var_dump($url);
         return $url;
     }
 }

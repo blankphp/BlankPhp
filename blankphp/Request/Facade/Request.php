@@ -15,6 +15,7 @@ class Request extends Facade
 {
     protected static function getFacadeAccessor()
     {
+        //门面模式
         return 'request';
     }
 

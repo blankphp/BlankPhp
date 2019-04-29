@@ -9,20 +9,22 @@
 namespace Blankphp\Event;
 
 //观察者模式
-abstract class EventAbstract
+use SplSubject;
+
+abstract class EventAbstract implements \SplObserver
 {
     private $status;
-    protected $observes = [];
+    protected static $observes = [];
 
     public function attach(ObserveAbstract $abstract, $name)
     {
-        $this->observes[$name] = $abstract;
+        self::$observes[$name] = $abstract;
     }
 
     public function deattach($name)
     {
         //解除绑定关系
-        unset($this->observes[$name]);
+        unset(self::$observes[$name]);
     }
 
 
@@ -39,8 +41,12 @@ abstract class EventAbstract
     //将状态推行到每一个观察者
     public function notify(){
         if (isset($this->observes[$this->status])){
-            $this->observes[$this->status]->doListen();
+            self::$observes[$this->status]->doListen();
         }
     }
 
+    public function update(SplSubject $subject)
+    {
+        // TODO: Implement update() method.
+    }
 }

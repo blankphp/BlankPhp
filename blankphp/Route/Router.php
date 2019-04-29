@@ -53,13 +53,12 @@ class Router
         return self::toResponse($request, $response);
     }
 
+
     public static function toResponse($request, $response)
     {
         $response = new Response($response);
         return $response->prepare($request);
     }
-
-
 
 
 }
