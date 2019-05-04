@@ -8,6 +8,6 @@
 
 use \Blankphp\Route\Route;
 
-Route::get('/', 'PagesController@index');
-Route::get('/11', 'PagesController@indx')->middleware('test2');
+Route::post('/', 'PagesController@index');
+
 

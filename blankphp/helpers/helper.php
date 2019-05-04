@@ -59,7 +59,17 @@ if (!function_exists('asset')) {
         $url = config('app.url');
         $static = config('app.static');
         $url = $url . '/' . $static . '/' . $uri;
-        var_dump($url);
+        return $url;
+    }
+}
+
+if (!function_exists('real_path')) {
+    function real_path($path, $ff=null)
+    {
+        $static = config('app.static');
+        $url = APP_PATH . '/' . $static . '/' . $path;
+        if ($ff)
+            $url=str_replace("\\","/",$url);
         return $url;
     }
 }

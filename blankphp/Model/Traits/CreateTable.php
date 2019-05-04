@@ -12,15 +12,12 @@ trait CreateTable
     static $decimal=3;
     static $type=['int','varchar','char','decimal'];
     static $column=[];
-    public function len(){
 
-    }
 
     public static function column($name,array $option=[],$commant=''){
 //        开始建列逻辑
         $data=[];
 //        加入到数组中
-
         self::addColumn();
     }
 

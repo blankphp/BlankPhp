@@ -9,9 +9,9 @@
         'group' => 'web',
       ),
     ),
-    '/11' => 
+    '/image' => 
     array (
-      'action' => 'PagesController@indx',
+      'action' => 'ImageController@index',
       'middleware' => 
       array (
         'group' => 'web',
@@ -25,24 +25,15 @@
         'group' => 'web',
       ),
     ),
-    '/api/' => 
+  ),
+  'POST' => 
+  array (
+    '/api/image' => 
     array (
-      'action' => 'PagesController@index',
+      'action' => 'ImageController@save',
       'middleware' => 
       array (
         'group' => 'api',
-      ),
-    ),
-    '/api/11' => 
-    array (
-      'action' => 'PagesController@indx',
-      'middleware' => 
-      array (
-        'group' => 'api',
-        'alice' => 
-        array (
-          0 => 'test2',
-        ),
       ),
     ),
   ),

@@ -46,7 +46,7 @@ class Request implements RequestContract
     {
         $this->request['get'] = !is_null($_GET) ? $this->stripSlashesDeep($_GET) : '';
         $this->request['post'] = !is_null($_POST) ? $this->stripSlashesDeep($_POST) : '';
-        $this->request['files'] = is_null($_FILES) ? $this->stripSlashesDeep($_FILES) : '';
+        $this->request['files'] = !is_null($_FILES) ? $_FILES : '';
 //        $this->session = isset($_SESSION) ? $this->stripSlashesDeep($_SESSION) : [];
 //        $this->cookie = !is_null($_COOKIE) ? $this->stripSlashesDeep($_COOKIE) : [];
     }
@@ -62,7 +62,6 @@ class Request implements RequestContract
     {
         //获取指定的数组元素
         $data = [];
-
         foreach ($this->request as $requests) {
             if (!empty($requests))
                 foreach ($requests as $k => $v)
@@ -70,6 +69,15 @@ class Request implements RequestContract
                         $data[$k] = $v;
         }
         return $data;
+    }
+
+    public function input($name)
+    {
+        foreach ($this->request as $requests) {
+            if (!empty($requests))
+                if (isset($requests[$name]))
+                    return $requests[$name];
+        }
     }
 
     public function getOne(string $str)
@@ -115,7 +123,7 @@ class Request implements RequestContract
     {
         $method = $_SERVER['REQUEST_METHOD'];
         if ($method === 'POST')
-            $method = $this->request['post']['_method'] ? strtoupper($this->request['post']['_method']) : 'POST';
+            $method = isset($this->request['post']['_method']) ? strtoupper($this->request['post']['_method']) : 'POST';
         $this->method = $method;
         return $this->method;
     }
@@ -130,10 +138,16 @@ class Request implements RequestContract
         return $this->cookie;
     }
 
+    public function file($name)
+    {
+        if (isset($this->request['files'][$name]))
+            return $this->request['files'][$name];
+    }
+
     public function __get($name)
     {
-        if (!isset($this->$name)){
-            return $this->get($name);
+        if (!isset($this->$name)) {
+            return $this->input($name);
         }
         return $this->$name;
     }

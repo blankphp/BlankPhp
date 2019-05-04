@@ -17,14 +17,14 @@ class View
     protected $templateDir = APP_PATH . 'resource/template/';
     public $_valueArray = [];
     static $pregArray = [
-        '#\{\\$(.+?)\}#',
-        '#\{if (.*?)\}#',
-        '#\{(else if|elseif) (.*?)\}#',
-        '#\{else\}#',
-        '#\{foreach \\$([a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*)}#',
-        '#\{(endforeach|endif)}#',
-        '#\{^(k|v)\}#',
-        '#\{[^\$](.+?)\}#',
+        '#\{{\\$(.+?)\}}#',
+        '#\{{if (.*?)\}}#',
+        '#\{{(else if|elseif) (.*?)\}}#',
+        '#\{{else\}}#',
+        '#\{{foreach \\$([a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*)}}#',
+        '#\{{(endforeach|endif)}}#',
+        '#\{{^(k|v)\}}#',
+        '#\{{[^\$](.+?)\}}#',
 
     ];
     static $descArray = [

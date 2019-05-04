@@ -9,10 +9,15 @@
 namespace Blankphp\Controller;
 
 
+use Blankphp\Request\Request;
+
 class Controller
 {
-    public function validate(){
+    public function validate(Request $request,array $array){
 //        表单验证
+
+        //请求过滤
+
     }
 
 

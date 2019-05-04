@@ -10,6 +10,8 @@ namespace App\Controllers;
 
 
 
+use Blankphp\Request\Request;
+
 class PagesController extends Controller
 {
     public function index()
