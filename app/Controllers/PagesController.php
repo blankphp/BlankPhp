@@ -10,11 +10,12 @@ namespace App\Controllers;
 
 
 
+use Blankphp\Database\Facade\DB;
 use Blankphp\Request\Request;
 
 class PagesController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         return '<style type="text/css">
                 *{ padding: 0; margin: 0;text-align: center }
@@ -34,10 +35,10 @@ class PagesController extends Controller
 
 
 
-//    public function getone($id)
-//    {
-//        $student = DB::table('students')->where('id', '=', $id)->orWhere('id', '=', 2)->get();
-//        return view('stu', ['student' => $student]);
-//    }
+    public function getone($id)
+    {
+        $student = DB::table('students')->where('id', '=', $id)->orWhere('id', '=', 2)->get();
+        return view('stu', ['student' => $student]);
+    }
 
 }

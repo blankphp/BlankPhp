@@ -15,14 +15,18 @@ class Request implements RequestContract
 {
     public $uri;
     public $method;
-    public $request = [];
+    public $request = [
+        'get' => '',
+        'post' => '',
+        'files' => ''
+    ];
     public $session = [];
     public $cookie = [];
+    //php://input
+    public $input = [];
 
     public function __construct()
     {
-        $this->createFromGlobal();
-        $this->clear();
         $this->getUri();
         $this->getMethod();
     }
@@ -36,19 +40,35 @@ class Request implements RequestContract
 
     public function clear()
     {
-        unset($_GET);
         unset($_POST);
         unset($_FILES);
         unset($_REQUEST);
     }
 
-    public function createFromGlobal()
+
+
+    public function get($name='', array $optionm = [])
     {
-        $this->request['get'] = !is_null($_GET) ? $this->stripSlashesDeep($_GET) : '';
-        $this->request['post'] = !is_null($_POST) ? $this->stripSlashesDeep($_POST) : '';
-        $this->request['files'] = !is_null($_FILES) ? $_FILES : '';
-//        $this->session = isset($_SESSION) ? $this->stripSlashesDeep($_SESSION) : [];
-//        $this->cookie = !is_null($_COOKIE) ? $this->stripSlashesDeep($_COOKIE) : [];
+        if (empty($this->request['get'])) {
+            $this->request['get'] = !is_null($_GET) ? $this->stripSlashesDeep($_GET) : '';
+            unset($_GET);
+        }
+        if (isset($this->request['get'][$name]))
+            return $this->request['get'][$name];
+        else
+            return '';
+    }
+
+    public function post($name='', array $optionm = [])
+    {
+        if (empty($this->request['post'])) {
+            $this->request['post'] = !is_null($_POST) ? $this->stripSlashesDeep($_POST) : '';
+            unset($_POST);
+        }
+        if (isset($this->request['post'][$name]))
+            return $this->request['post'][$name];
+        else
+            return '';
     }
 
 
@@ -58,18 +78,20 @@ class Request implements RequestContract
     }
 
 
-    public function get(array $array)
-    {
-        //获取指定的数组元素
-        $data = [];
-        foreach ($this->request as $requests) {
-            if (!empty($requests))
-                foreach ($requests as $k => $v)
-                    if (in_array($k, $array, true))
-                        $data[$k] = $v;
-        }
-        return $data;
-    }
+//    public function get(array $array)
+//    {
+//        //获取指定的数组元素
+//        $data = [];
+//        foreach ($this->request as $requests) {
+//            if (!empty($requests))
+//                foreach ($requests as $k => $v)
+//                    if (in_array($k, $array, true))
+//                        $data[$k] = $v;
+//        }
+//        return $data;
+//    }
+
+
 
     public function input($name)
     {
@@ -80,20 +102,6 @@ class Request implements RequestContract
         }
     }
 
-    public function getOne(string $str)
-    {
-        //获取指定的数组元素
-        $data = [];
-        foreach ($this->request as $requests) {
-            if (!empty($requests))
-                foreach ($requests as $k => $v)
-                    if (strstr($k, $str)) {
-                        $data[$k] = $v;
-                        break;
-                    }
-        }
-        return $data;
-    }
 
     public function getUri()
     {
@@ -138,14 +146,23 @@ class Request implements RequestContract
         return $this->cookie;
     }
 
-    public function file($name)
+    public function file($name='')
     {
+        if (empty($this->request['files'])) {
+            $this->request['files'] = !is_null($_FILES) ? $_FILES : '';
+            unset($_FILES);
+        }
         if (isset($this->request['files'][$name]))
             return $this->request['files'][$name];
+        else
+            return '';
     }
 
     public function __get($name)
     {
+        if (empty($this->request['get'])){
+            $this->get();
+        }
         if (!isset($this->$name)) {
             return $this->input($name);
         }

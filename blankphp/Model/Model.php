@@ -29,6 +29,7 @@ class Model extends EventAbstract
 
     public function __construct(Database $database)
     {
+        //有点强耦合
         $this->database = $database;
     }
 
@@ -83,8 +84,5 @@ class Model extends EventAbstract
     {
         $this->database->{$name}(...$arguments);
     }
-
-
-
 
 }

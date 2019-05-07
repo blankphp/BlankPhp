@@ -9,14 +9,6 @@
         'group' => 'web',
       ),
     ),
-    '/image' => 
-    array (
-      'action' => 'ImageController@index',
-      'middleware' => 
-      array (
-        'group' => 'web',
-      ),
-    ),
     '/user/<id>' => 
     array (
       'action' => 'PagesController@getone',
@@ -28,9 +20,9 @@
   ),
   'POST' => 
   array (
-    '/api/image' => 
+    '/api/' => 
     array (
-      'action' => 'ImageController@save',
+      'action' => 'PagesController@index',
       'middleware' => 
       array (
         'group' => 'api',
