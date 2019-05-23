@@ -16,7 +16,7 @@ class Pipe extends PipeLine
 
     public function run(\Closure $closure)
     {
-       return call_user_func(array_reduce($this->middleware, $this->getAlice(),$closure));
+       return call_user_func(array_reduce(array_reverse($this->middleware), $this->getAlice(),$closure));
     }
 
 

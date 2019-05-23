@@ -32,6 +32,7 @@ class PipeLine
     {
         return function ($stack, $pipe) {
             return function () use ($stack, $pipe) {
+                //做异常处理-  -中间件得生成对象,不采用静态方法,而是采用对象
                 return $pipe::handle($this->request, $stack);
             };
         };
@@ -40,7 +41,7 @@ class PipeLine
     public function through($middleware)
     {
         //管道模式运行
-        $this->middleware = $middleware ? $middleware : [];
+        $this->middleware = is_array($middleware) ? $middleware : func_get_args();
         return $this;
     }
 

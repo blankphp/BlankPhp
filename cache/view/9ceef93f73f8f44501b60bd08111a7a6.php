@@ -8,10 +8,10 @@
     <title>學生</title>
 </head>
 <body>
-    {{if 1==1}}
-    <h1>{{$student}}</h1>
-{{else}}
+    <?php if (1==1) {?>
+    <h1><?php $this->getValue($this->_student); ?></h1>
+<?php }else {?>
     <h2>21321</h2>
-{{endif}}
+<?php }?>
 </body>
 </html>

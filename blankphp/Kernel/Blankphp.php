@@ -24,10 +24,11 @@ class Blankphp implements Kernel
     protected $route;
 
     protected $bootstraps = [
-        CacheServiceProvider::class=>'reload',
+//        '' => '',
+        CacheServiceProvider::class => 'reload',
         RouteProvider::class => 'map',
         MiddleWareProvider::class => 'middleware',
-        ConfigServiceProvider::class=>'filter'
+        ConfigServiceProvider::class => 'filter'
     ];
 
     //获取配置文件===
@@ -73,7 +74,6 @@ class Blankphp implements Kernel
     {
         $this->app->flush();
     }
-
 
 
 }

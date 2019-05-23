@@ -13,6 +13,7 @@ use Blankphp\Contract\RequestContract;
 
 class Request implements RequestContract
 {
+    //端口存储以及其他信息的存储！！--》  表单验证功能的实现
     public $uri;
     public $method;
     public $request = [
@@ -24,6 +25,15 @@ class Request implements RequestContract
     public $cookie = [];
     //php://input
     public $input = [];
+//    用户ip;
+    public $user_ip;
+    //访问所需的ip
+    public $server_ip;
+    public $http;
+    public $https;
+    public $userAgent;
+    public $userIp;
+    public $language;
 
     public function __construct()
     {
@@ -38,20 +48,12 @@ class Request implements RequestContract
         return $value;
     }
 
-    public function clear()
-    {
-        unset($_POST);
-        unset($_FILES);
-        unset($_REQUEST);
-    }
 
-
-
-    public function get($name='', array $optionm = [])
+    public function get($name = '', array $optionm = [])
     {
         if (empty($this->request['get'])) {
+            //是否进行过滤？递归的效率很成问题
             $this->request['get'] = !is_null($_GET) ? $this->stripSlashesDeep($_GET) : '';
-            unset($_GET);
         }
         if (isset($this->request['get'][$name]))
             return $this->request['get'][$name];
@@ -59,11 +61,10 @@ class Request implements RequestContract
             return '';
     }
 
-    public function post($name='', array $optionm = [])
+    public function post($name = '', array $optionm = [])
     {
         if (empty($this->request['post'])) {
             $this->request['post'] = !is_null($_POST) ? $this->stripSlashesDeep($_POST) : '';
-            unset($_POST);
         }
         if (isset($this->request['post'][$name]))
             return $this->request['post'][$name];
@@ -76,21 +77,6 @@ class Request implements RequestContract
     {
         return $this;
     }
-
-
-//    public function get(array $array)
-//    {
-//        //获取指定的数组元素
-//        $data = [];
-//        foreach ($this->request as $requests) {
-//            if (!empty($requests))
-//                foreach ($requests as $k => $v)
-//                    if (in_array($k, $array, true))
-//                        $data[$k] = $v;
-//        }
-//        return $data;
-//    }
-
 
 
     public function input($name)
@@ -146,7 +132,7 @@ class Request implements RequestContract
         return $this->cookie;
     }
 
-    public function file($name='')
+    public function file($name = '')
     {
         if (empty($this->request['files'])) {
             $this->request['files'] = !is_null($_FILES) ? $_FILES : '';
@@ -160,7 +146,8 @@ class Request implements RequestContract
 
     public function __get($name)
     {
-        if (empty($this->request['get'])){
+        //根据请求方式信息获取
+        if (empty($this->request['get'])) {
             $this->get();
         }
         if (!isset($this->$name)) {
@@ -169,5 +156,26 @@ class Request implements RequestContract
         return $this->$name;
     }
 
+
+    public function getUserAgent()
+    {
+        if (empty($this->userAgent))
+             $this->userAgent = $_SERVER['HTTP_USER_AGENT'];
+        return  $this->userAgent;
+    }
+
+    public function userIp()
+    {
+        if (empty($this->user_ip))
+            $this->user_ip = $_SERVER['REMOTE_ADDR'];
+        return  $this->user_ip;
+    }
+
+    public function getLanguage()
+    {
+        if (empty($this->language))
+            $this->language = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+        return  $this->language;
+    }
 
 }

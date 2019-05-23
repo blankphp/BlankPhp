@@ -21,7 +21,7 @@ class Database
 
     public function __construct( Builder $sql)
     {
-        $db = config('config.db');
+        $db = config('db');
         self::$pdo = DbConnect::pdo($db);
         $this->sql = $sql;
     }
@@ -35,12 +35,33 @@ class Database
         return $this;
     }
 
+    public function beginTransaction(){
+        self::$pdo->beginTransaction();
+    }
+
+    public function commitTransaction(){
+        self::$pdo->commit();
+    }
+
+    public function rollBack(){
+        self::$pdo->rollBack();
+    }
+
+    public function transaction(\Closure $closure){
+        try{
+            $this->beginTransaction();
+                $closure();
+            $this->commitTransaction();
+        }catch (\PDOException $exception){
+            $this->rollBack();
+        }
+    }
+
     public function commit()
     {
         try {
             //执行语句\
             $res = self::$pdo->query($this->sql->toSql());
-            var_dump($res);
             return $res;
         } catch (\Exception $exception) {
             return $exception->getMessage();

@@ -17,6 +17,7 @@ class PagesController extends Controller
 {
     public function index()
     {
+
         return '<style type="text/css">
                 *{ padding: 0; margin: 0;text-align: center }
                  body{
@@ -33,12 +34,12 @@ class PagesController extends Controller
     }
 
 
-
-
 //    public function getone($id)
 //    {
 //        $student = DB::table('students')->where('id', '=', $id)->orWhere('id', '=', 2)->get();
+//        DB::beginTransaction(function (){
+//
+//        });
 //        return view('stu', ['student' => $student]);
 //    }
-
 }
