@@ -8,8 +8,6 @@
 
 namespace App\Controllers;
 
-
-
 use Blankphp\Database\Facade\DB;
 use Blankphp\Request\Request;
 

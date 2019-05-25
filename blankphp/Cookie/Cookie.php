@@ -21,6 +21,7 @@ class Cookie implements CookieContract
     protected $secure = false;
     protected $httponly = false;
     protected $cookie=[];
+    protected $queue=[];
 
     public function __construct()
     {
@@ -39,6 +40,8 @@ class Cookie implements CookieContract
             }
         }
     }
+
+
 
     public function set($key, $value, $expires=null,$option = null)
     {
@@ -65,5 +68,13 @@ class Cookie implements CookieContract
         return [];
     }
 
+    //添加一个队列操作,从队列中加入想要的Cookie
+    public function putQueue(){
+
+    }
+
+    public function popQueue(){
+
+    }
 
 }

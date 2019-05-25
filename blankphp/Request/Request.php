@@ -19,7 +19,8 @@ class Request implements RequestContract
     public $request = [
         'get' => '',
         'post' => '',
-        'files' => ''
+        'files' => '',
+        'input'=>'',
     ];
     public $session = [];
     public $cookie = [];
@@ -48,29 +49,21 @@ class Request implements RequestContract
         return $value;
     }
 
-
-    public function get($name = '', array $optionm = [])
-    {
-        if (empty($this->request['get'])) {
-            //是否进行过滤？递归的效率很成问题
-            $this->request['get'] = !is_null($_GET) ? $this->stripSlashesDeep($_GET) : '';
+    public function get($name = '', array $optionm = []){
+        $this->{'_'.strtolower($this->method)}();
+        if (isset($this->request[strtolower($this->method)][$name])){
+            return $this->request[strtolower($this->method)][$name];
+        }else{
+            $this->getRequest();
+            foreach ($this->request as $item){
+                if (isset($item[$name]))
+                    return $item[$name];
+            }
+            return null;
         }
-        if (isset($this->request['get'][$name]))
-            return $this->request['get'][$name];
-        else
-            return '';
     }
 
-    public function post($name = '', array $optionm = [])
-    {
-        if (empty($this->request['post'])) {
-            $this->request['post'] = !is_null($_POST) ? $this->stripSlashesDeep($_POST) : '';
-        }
-        if (isset($this->request['post'][$name]))
-            return $this->request['post'][$name];
-        else
-            return '';
-    }
+
 
 
     public function capture()
@@ -79,14 +72,6 @@ class Request implements RequestContract
     }
 
 
-    public function input($name)
-    {
-        foreach ($this->request as $requests) {
-            if (!empty($requests))
-                if (isset($requests[$name]))
-                    return $requests[$name];
-        }
-    }
 
 
     public function getUri()
@@ -122,21 +107,13 @@ class Request implements RequestContract
         return $this->method;
     }
 
-    public function getSession()
-    {
-        return $this->session;
-    }
 
-    public function getCookie()
-    {
-        return $this->cookie;
-    }
 
     public function file($name = '')
     {
         if (empty($this->request['files'])) {
             $this->request['files'] = !is_null($_FILES) ? $_FILES : '';
-            unset($_FILES);
+//            unset($_FILES);
         }
         if (isset($this->request['files'][$name]))
             return $this->request['files'][$name];
@@ -146,14 +123,16 @@ class Request implements RequestContract
 
     public function __get($name)
     {
-        //根据请求方式信息获取
-        if (empty($this->request['get'])) {
-            $this->get();
-        }
         if (!isset($this->$name)) {
-            return $this->input($name);
+          return $this->get($name);
         }
         return $this->$name;
+    }
+
+    private function getRequest(){
+        $this->_get();
+        $this->_post();
+        $this->_input();
     }
 
 
@@ -176,6 +155,51 @@ class Request implements RequestContract
         if (empty($this->language))
             $this->language = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
         return  $this->language;
+    }
+
+    public function getHttp(){
+
+    }
+
+    public function getServicePort(){
+
+    }
+
+    private function _get($name = '', array $optionm = [])
+    {
+        if (empty($this->request['get'])) {
+            //是否进行过滤？递归的效率很成问题
+            $this->request['get'] = !is_null($_GET) ? $this->stripSlashesDeep($_GET) : '';
+        }
+        if (isset($this->request['get'][$name]))
+            return $this->request['get'][$name];
+        else
+            return '';
+    }
+    private function _post($name = '', array $optionm = [])
+    {
+        if (empty($this->request['post'])) {
+            $this->request['post'] = !is_null($_POST) ? $this->stripSlashesDeep($_POST) : '';
+        }
+        if (isset($this->request['post'][$name]))
+            return $this->request['post'][$name];
+        else
+            return '';
+    }
+    private function _input($name='',array $args=[])
+    {
+        if (empty($this->request['input'])) {
+            $this->input=file_get_contents('php://input');
+            if (strstr($this->input[0],'{')){
+                $this->request['input']=json_decode( $this->input,true);
+            }else{
+                parse_str( $this->input,$this->request['input']);
+            }
+        }
+        if (isset($this->request['input'][$name]))
+            return $this->request['input'][$name];
+        else
+            return '';
     }
 
 }
