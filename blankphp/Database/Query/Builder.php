@@ -9,6 +9,8 @@ use Blankphp\Database\Grammar\MysqlGrammar;
 
 class Builder
 {
+    //过滤sql增加一个values的东西和bindValues
+
     public $binds = [
         'select' => [],
         'from' => [],
@@ -66,10 +68,11 @@ class Builder
     public function where($column, $operator, $value)
     {
         $operators = in_array($operator, $this->operators) ? $operator : '=';
-        $this->wheres[] = sprintf("%s %s '%s'", $column, $operators, $value);
+        $this->wheres[] = sprintf("%s %s ?", $column, $operators);
         $this->addBinds('where', $value);
         return $this;
     }
+
 
 
     public function orderBy($column, $direction = 'asc')
@@ -114,7 +117,6 @@ class Builder
     public function from($table)
     {
         $this->table = $table;
-        $this->addBinds('from', $table);
         return $this;
     }
 
@@ -123,7 +125,7 @@ class Builder
     {
         $operators = in_array($operator, $this->operators) ? $operator : '=';
         $this->wheres[] = 'or';
-        $this->wheres[] = sprintf("%s %s %s", $column, $operators, $value);
+        $this->wheres[] = sprintf("%s %s ?", $column, $operators);
         $this->addBinds('where', $value);
         return $this;
     }
@@ -132,7 +134,7 @@ class Builder
     {
         $operators = in_array($operator, $this->operators) ? $operator : '=';
         $this->wheres[] = 'and';
-        $this->wheres[] = sprintf("%s %s %s", $column, $operators, $value);
+        $this->wheres[] = sprintf("%s %s ?", $column, $operators);
         $this->addBinds('where', $value);
         return $this;
     }
@@ -140,7 +142,7 @@ class Builder
     public function whereIn($array = [])
     {
         $value = implode(', ', $array);
-        $this->wheres[] = sprintf("%s %s (%s)", 'id', 'in', $value);
+        $this->wheres[] = sprintf("%s %s ?", 'id', 'in');
         $this->addBinds('where', $value);
         return $this;
     }
@@ -161,9 +163,11 @@ class Builder
     {
         $this->type = 'delete';
         if (!is_null($id)) {
-            $this->wheres[] = sprintf("%s = '%s'", 'id', $id);
+            $this->wheres[] = sprintf("%s = ?", 'id');
+            $this->addBinds('where',$id);
         } elseif (!is_null($where)) {
-            $this->wheres[] = sprintf("%s %s '%s'", $where[0], $where[1], $where[2]);
+            $this->wheres[] = sprintf("%s %s ?", $where[0], $where[1]);
+            $this->addBinds('where',$where[2]);
         }
         return $this;
     }
@@ -172,9 +176,11 @@ class Builder
     {
         $this->type = 'update';
         if (!is_null($id)) {
-            $this->wheres[] = sprintf("%s = %s", 'id', $id);
+            $this->wheres[] = sprintf("%s = ?", 'id', $id);
+            $this->addBinds('where',$id);
         } elseif (!is_null($where)) {
-            $this->wheres[] = sprintf("%s %s %s", $where[0], $where[1], $where[2]);
+            $this->wheres[] = sprintf("%s %s ?", $where[0], $where[1]);
+            $this->addBinds('where',$where[2]);
         }
         return $this;
 

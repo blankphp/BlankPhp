@@ -57,6 +57,7 @@ nginx配置好重写规则
        
 
 ```ab
+<!--1H2G-->
 Server Software:        nginx/1.15.5
 Server Hostname:        www.stu.stu
 Server Port:            80

@@ -17,9 +17,10 @@ class MysqlGrammar extends Grammar
 
     public function generateSelect(Builder $sql, $parameter = [])
     {
+        //依旧拼接
         //拼装语句
         $sqlString = '';
-        //终极大拼装
+        //终极大拼装= = 没有过滤很致命
         $sqlString .= 'select ' . implode(',', $sql->select) . ' from ' . $sql->table;
         if (!is_null($sql->wheres))
             $sqlString .= ' where ' . implode(' ', $sql->wheres);
@@ -84,5 +85,8 @@ class MysqlGrammar extends Grammar
         }
         return $sqlString;
     }
+
+
+
 
 }

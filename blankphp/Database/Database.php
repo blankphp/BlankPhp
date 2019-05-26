@@ -11,13 +11,17 @@ namespace Blankphp\Database;
 
 use Blankphp\Application;
 use Blankphp\Database\Query\Builder;
+use mysql_xdevapi\Exception;
 
 class Database
 {
 
     private static $pdo = null;
     protected $sql;
-    protected $id;
+    protected $id='default';
+    protected $collection;
+    protected $PDOsmt;
+
 
     public function __construct( Builder $sql)
     {
@@ -61,8 +65,15 @@ class Database
     {
         try {
             //执行语句\
-            $res = self::$pdo->query($this->sql->toSql());
-            return $res;
+            $smt = self::$pdo->prepare($this->sql->toSql());
+            $this->PDOsmt=$smt;
+            $procedure =in_array(substr($smt->queryString,0,4),['exec','call']);
+            if ($procedure)
+                $this->bindValues($this->sql->binds);
+            else
+                $this->bindValues($this->sql->binds);
+            $smt->execute();
+            return $this->PDOsmt;
         } catch (\Exception $exception) {
             return $exception->getMessage();
         }
@@ -114,6 +125,25 @@ class Database
     {
         $this->sql->{$name}(...$arguments);
         return $this;
+    }
+
+    //将数据进行绑定,,Connect?
+    public function bindValues(array $values=[]){
+        if (is_null($this->PDOsmt)){
+            throw new Exception('异常错误');
+        }
+        foreach ($values as $key=>$value){
+            if (!empty($value)){
+                foreach ($value as $k=>$item){
+                    $b=is_numeric($k)?$k+1:':'.$k;
+                    $this->PDOsmt->bindValue($b,$item);
+                }
+            }
+        }
+    }
+
+    public function bindCall(array $values){
+
     }
 
 }

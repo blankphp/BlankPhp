@@ -29,4 +29,8 @@ class DbConnect
         return self::$pdo;
     }
 
+    public  function setConfig(){
+
+    }
+
 }

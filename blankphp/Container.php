@@ -51,7 +51,24 @@ class Container implements \ArrayAccess, ContainerContract
 
     public function bind($abstract, $instance)
     {
-        $this->binds[$abstract] = $instance;
+        if (!is_array($instance))
+            $this->binds[$abstract] = $instance;
+        else {
+            $data = [];
+            $desc = '';
+            foreach ($instance as $item) {
+                if (class_exists($item)) {
+                    $desc = $item;
+                } elseif (interface_exists($item)) {
+                    $data[] = $item;
+                }
+            }
+
+            $this->binds[$abstract] = $desc;
+            foreach ($data as $datum) {
+                $this->binds[$datum] = $desc;
+            }
+        }
     }
 
     public function signal($abstract, $instance)
