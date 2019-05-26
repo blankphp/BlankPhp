@@ -18,12 +18,12 @@ class Database
 
     private static $pdo = null;
     protected $sql;
-    protected $id='default';
+    protected $id = 'default';
     protected $collection;
     protected $PDOsmt;
 
 
-    public function __construct( Builder $sql)
+    public function __construct(Builder $sql)
     {
         $db = config('db');
         self::$pdo = DbConnect::pdo($db);
@@ -39,24 +39,28 @@ class Database
         return $this;
     }
 
-    public function beginTransaction(){
+    public function beginTransaction()
+    {
         self::$pdo->beginTransaction();
     }
 
-    public function commitTransaction(){
+    public function commitTransaction()
+    {
         self::$pdo->commit();
     }
 
-    public function rollBack(){
+    public function rollBack()
+    {
         self::$pdo->rollBack();
     }
 
-    public function transaction(\Closure $closure){
-        try{
+    public function transaction(\Closure $closure)
+    {
+        try {
             $this->beginTransaction();
-                $closure();
+            $closure();
             $this->commitTransaction();
-        }catch (\PDOException $exception){
+        } catch (\PDOException $exception) {
             $this->rollBack();
         }
     }
@@ -66,8 +70,9 @@ class Database
         try {
             //执行语句\
             $smt = self::$pdo->prepare($this->sql->toSql());
-            $this->PDOsmt=$smt;
-            $procedure =in_array(substr($smt->queryString,0,4),['exec','call']);
+            $this->PDOsmt = $smt;
+            $procedure = in_array(substr($smt->queryString, 0, 4), ['exec', 'call']);
+            var_dump($smt->queryString);
             if ($procedure)
                 $this->bindValues($this->sql->binds);
             else
@@ -87,9 +92,8 @@ class Database
     public function create(array $value)
     {
         $this->sql->insertSome($value);
-        $stmt = self::$pdo->prepare($this->sql->toSql());
-        $stmt->execute();
-        return self::$pdo->lastInsertId();
+
+        return $this->commit()->rowCount();
     }
 
     public function delete()
@@ -128,22 +132,34 @@ class Database
     }
 
     //将数据进行绑定,,Connect?
-    public function bindValues(array $values=[]){
-        if (is_null($this->PDOsmt)){
+    public function bindValues(array $values = [])
+    {
+        if (is_null($this->PDOsmt)) {
             throw new Exception('异常错误');
         }
-        foreach ($values as $key=>$value){
-            if (!empty($value)){
-                foreach ($value as $k=>$item){
-                    $b=is_numeric($k)?$k+1:':'.$k;
-                    $this->PDOsmt->bindValue($b,$item);
+        foreach ($values as $key => $value) {
+            if (!empty($value)) {
+                foreach ($value as $k => $item) {
+                    $b = is_numeric($k) ? $k + 1 : $k;
+                    $this->PDOsmt->bindValue($b, $item);
                 }
             }
         }
     }
 
-    public function bindCall(array $values){
-
+    public function bindCall(array $values)
+    {
+        if (is_null($this->PDOsmt)) {
+            throw new Exception('异常错误');
+        }
+        foreach ($values as $key => $value) {
+            if (!empty($value)) {
+                foreach ($value as $k => $item) {
+                    $b = is_numeric($k) ? $k + 1 : ':' . $k;
+                    $this->PDOsmt->bindValue($b, $item);
+                }
+            }
+        }
     }
 
 }

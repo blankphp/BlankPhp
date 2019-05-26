@@ -30,13 +30,10 @@ class PagesController extends Controller
                 </span></div></script><blankPhp id="dadad12596"></blankPhp>';
     }
 
-
-    public function getone($id)
-    {
-        $student = DB::table('students')->where('id', '=', $id)->orWhere('id', '=', 23)->get();
-        DB::beginTransaction(function (){
-
-        });
-        return view('stu', ['student' => $student]);
-    }
+//
+//    public function getone($id)
+//    {
+//        $student = DB::table('students')->create(['default','125656156','ddda','男','',1]);
+//        return view('stu', ['student' => $student]);
+//    }
 }

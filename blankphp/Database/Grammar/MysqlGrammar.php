@@ -65,24 +65,10 @@ class MysqlGrammar extends Grammar
         //拼装语句
         $sqlString = '';
         //终极大拼装
-//        insert  teacher values (default,'T20140101','test','男')
-        if (!is_int(($keys = array_keys($sql->values))[0]))
-            $sqlString .= 'insert ' . $sql->table . '(' . implode(',', $keys) . ')' . ' values';
+        if (!is_numeric(($sql->values[0][0])))
+            $sqlString .= 'insert ' . $sql->table . '(' . implode(',', $sql->values[0]) . ')'.' values(:'. implode(',:',$sql->values[0]).')';
         else
-            $sqlString .= 'insert ' . $sql->table . ' values';
-
-        foreach ($sql->values as $value) {
-            $sqlString .= '(';
-            foreach ($value as $item) {
-                if (!in_array($item, self::$index))
-                    $sqlString .= '\'' . $item . '\'' . ',';
-                else
-                    $sqlString .= $item . ',';
-            }
-            $sqlString = trim($sqlString, ',');
-            //是否截取其中的代码
-            $sqlString .= ')';
-        }
+            $sqlString .= 'insert ' . $sql->table . ' values'. '(' . implode(',',array_fill(1,count($sql->values[0]),'?') ) . ')';
         return $sqlString;
     }
 

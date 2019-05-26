@@ -19,6 +19,7 @@ class Builder
         'having' => [],
         'order' => [],
         'union' => [],
+        'insert'=>[],
     ];
     public $operators = [
         '=', '<', '>', '<=', '>=', '<>', '!=', '<=>',
@@ -45,14 +46,17 @@ class Builder
         $this->grammar = $grammar;
     }
 
-    public function addBinds($type, $value)
+    public function addBinds($type, $value,$key='')
     {
         if (!array_key_exists($type, $this->binds))
             throw new \Exception('无效的' . $type, 7);
         if (is_array($value)) {
             $this->binds[$type] = array_values(array_merge($this->binds[$type], $value));
         } else {
-            $this->binds[$type][] = $value;
+            if (empty($key))
+                 $this->binds[$type][] = $value;
+            else
+                $this->binds[$type][':'.$key] = $value;
         }
         return $this;
     }
@@ -78,7 +82,6 @@ class Builder
     public function orderBy($column, $direction = 'asc')
     {
         $this->orderBy[] = sprintf('%s %s', $column, $direction);
-        $this->addBinds('order', $column);
         return $this;
     }
 
@@ -155,7 +158,13 @@ class Builder
     public function insertSome(array $array)
     {
         $this->type = 'insert';
-        $this->values[] = $array;
+        $this->values[] = array_keys($array);
+        foreach ($array as $key=>$item){
+            if (!is_numeric($key))
+                $this->addBinds('insert',$item,$key);
+            else
+                $this->addBinds('insert',$item);
+        }
         return $this;
     }
 
