@@ -12,7 +12,6 @@ namespace Blankphp;
 use \App\Provider\MiddleWareProvider;
 use Blankphp\Config\Config;
 use Blankphp\Contract\CookieContract;
-use Blankphp\Contract\RequestContract;
 use Blankphp\Cookie\Cookie;
 use Blankphp\Database\Database;
 use Blankphp\Database\Grammar\Grammar;
@@ -38,7 +37,7 @@ class Application extends Container
     {
         $binds = [
             'kernel' => [\Blankphp\Contract\Kernel::class, Blankphp::class],
-            'request' => [RequestContract::class, Request::class],
+            'request' => [\Blankphp\Contract\Request::class, Request::class],
             'route' => [\Blankphp\Contract\Route::class, Route::class],
             'app' => [\Blankphp\Contract\Container::class, Application::class],
             'db' => Database::class,

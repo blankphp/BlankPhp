@@ -5,6 +5,7 @@ namespace App\Models;
 
 
 use Blankphp\Model\Model;
+use Blankphp\Scheme\Scheme;
 
 class User extends Model
 {
@@ -13,16 +14,15 @@ class User extends Model
     //可填充字段，create根据此来定义
     protected $fillable=['name','password','email'];
 
-    //定义字段
+    //定义字段,并创建表
     public static function createTable(){
-        //字段名加类型等约束
-        self::column('id',['int','primary key','auto_increment'],'id');
-        self::column('name',['varchar','length'=>128,'unique'],'邮箱');
-        self::column('name',['varchar','length'=>40,'not null'],'名称');
-        self::column('password',['varchar','length'=>255],'密码');
-        self::column('timestamps');
-        //创建表
-        self::createT();
+       return Scheme::create(function ($table){
+           $table->column('id',['int','primary key','auto_increment'],'id');
+           $table->column('name',['varchar','length'=>128,'unique'],'邮箱');
+           $table->column('name',['varchar','length'=>40,'not null'],'名称');
+           $table->column('password',['varchar','length'=>255],'密码');
+           $table->timestamps();
+       });
     }
 
 }

@@ -8,8 +8,7 @@
 
 namespace Blankphp\Request;
 
-
-use Blankphp\Contract\RequestContract;
+use Blankphp\Contract\Request as RequestContract;
 
 class Request implements RequestContract
 {
@@ -190,7 +189,7 @@ class Request implements RequestContract
     {
         if (empty($this->request['input'])) {
             $this->input=file_get_contents('php://input');
-            if (strstr($this->input[0],'{')){
+            if (strstr($this->input,'{')){
                 $this->request['input']=json_decode( $this->input,true);
             }else{
                 parse_str( $this->input,$this->request['input']);

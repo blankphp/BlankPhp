@@ -11,55 +11,41 @@ namespace Blankphp\Model;
 
 use Blankphp\Database\Database;
 use Blankphp\Event\EventAbstract;
+use Blankphp\Event\Observer;
 use Blankphp\Model\Traits\CreateTable;
 use SplSubject;
 
 class Model extends EventAbstract
 {
-    use CreateTable;
     protected $database;
     protected $tableName;
     protected $primaryKey;
-    protected $fillable=[];
+    protected $fillable = [];
     //原来的数据
-    public $origin;
+    protected $origin = [];
     //真实数据
-    public $data;
+    protected $data = [];
+    //sql
+    protected $sql;
 
 
     public function __construct(Database $database)
     {
-        //有点强耦合
+        //建立连接
         $this->database = $database;
+        //废弃的字段
+
+        //设定好对应关系以及
     }
 
-    public function save(){
+    public function save()
+    {
 
     }
 
-    public function builSql(){
-//        生成sql语句
-
-    }
-
-    public function get(){
-        //查询数据进行包裹
-    }
-
-    public function delete(){
-        //删除指定数据
-    }
-
-    public function  create(){
-//        创建创建指定数据
-    }
-
-    public function toArray(){
-        //转化为数组
-    }
-
-    public function toJson(){
-        //转化为json
+    public function observe(Observer $observer)
+    {
+        //根据信号进行指定更新
 
     }
 
@@ -69,14 +55,10 @@ class Model extends EventAbstract
 
     }
 
-    public static function observe(obj $obj){
-        //把一个类注册到此类中
-
-    }
 
     public function update(SplSubject $subject)
     {
-        // TODO: Implement update() method.
+        // 发送信号
     }
 
     //查询语句的核心--以及获取数据
