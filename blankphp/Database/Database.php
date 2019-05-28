@@ -22,12 +22,14 @@ class Database
     protected $collection;
     protected $PDOsmt;
 
-
     public function __construct(Builder $sql)
     {
-        $db = config('db');
-        self::$pdo = DbConnect::pdo($db);
-        $this->sql = $sql;
+        if (empty(self::$pdo=DbConnect::getPdo())){
+            $driver = config('db.default');
+            $db = config('db.database.'.$driver);
+            self::$pdo = DbConnect::pdo($db);
+            $this->sql = $sql;
+        }
     }
 
     /**
@@ -39,22 +41,26 @@ class Database
         return $this;
     }
 
-    public function beginTransaction()
+    public function update(array $values){
+        return ;
+    }
+
+    final function beginTransaction()
     {
         self::$pdo->beginTransaction();
     }
 
-    public function commitTransaction()
+    final function commitTransaction()
     {
         self::$pdo->commit();
     }
 
-    public function rollBack()
+    final function rollBack()
     {
         self::$pdo->rollBack();
     }
 
-    public function transaction(\Closure $closure)
+    final function transaction(\Closure $closure)
     {
         try {
             $this->beginTransaction();
@@ -72,7 +78,6 @@ class Database
             $smt = self::$pdo->prepare($this->sql->toSql());
             $this->PDOsmt = $smt;
             $procedure = in_array(substr($smt->queryString, 0, 4), ['exec', 'call']);
-            var_dump($smt->queryString);
             if ($procedure)
                 $this->bindValues($this->sql->binds);
             else
@@ -121,7 +126,7 @@ class Database
     public function __set($name, $value)
     {
         //修改或者创建某个表中的元素..得判断有没有获取到目标id
-        // TODO: Implement __set() method.
+
     }
 
 

@@ -8,7 +8,7 @@ class DbConnect
 {
     private static $pdo;
 
-    public static function pdo(array $db)
+    public static function pdo(array $db=[])
     {
         if (self::$pdo !== null) {
             return self::$pdo;

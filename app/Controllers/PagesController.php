@@ -8,12 +8,14 @@
 
 namespace App\Controllers;
 
+use App\Models\Students;
+use App\Models\User;
 use Blankphp\Database\Facade\DB;
 use \Blankphp\Contract\Request;
 
 class PagesController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         return '<style type="text/css">
                 *{ padding: 0; margin: 0;text-align: center }
