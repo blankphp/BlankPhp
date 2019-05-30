@@ -17,8 +17,7 @@ class PagesController extends Controller
 {
     public function index()
     {
-        return '
-        <style type="text/css">
+        return '<style type="text/css">
                 *{ padding: 0; margin: 0;text-align: center }
                  body{
                   font-family: Helvetica, "Microsoft YaHei", Arial, sans-serif;

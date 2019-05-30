@@ -31,7 +31,8 @@ class TestUnit extends TestCase
                 <h1>🚀</h1><p> BlankPhp V1<br/><span style="font-size:30px">每日练习，刻意精进 <br>
                 为phpWeb开发设计的高性能框架</span>
                 </p><span style="font-size:22px;">
-                </span></div></script><blankPhp id="dadad12596"></blankPhp>';
+                </span></div></script>
+                <blankPhp id="dadad12596"></blankPhp>';
         $this->assertEquals($res, $response);
     }
 

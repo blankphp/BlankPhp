@@ -1,30 +1,49 @@
 <?php
 //cli模式  —— 运行一定的命令
 //读取指定目录下的文件，然后运行不同的命令
-    //清理blank.php文件
+//清理blank.php文件
+use Blankphp\Database\Query\Builder;
+
 array_shift($argv);
 $mod = $argv[0];
-$command= explode(':',$mod);
-
-//分割一下,使用一个command类来进行
-if ($argv[0]='config:cache') {
-    //1.创建缓存,刷新缓存
-    $config=[];
-    if (is_dir(__DIR__.'/config')){
-        if ($dh = opendir(__DIR__.'/config')){
-            while (($file = readdir($dh)) !== false){
-                if (preg_match_all("/(.+?)\.php/",$file,$matches)){
-                    $config[$matches[1][0]]=require __DIR__.'/config/'.$matches[0][0];
+$command = explode(':', $mod);
+define('APP_PATH', __DIR__);
+require(APP_PATH . '/vendor/autoload.php');
+function cacheConfig()
+{
+    $config = [];
+    if (is_dir(__DIR__ . '/config')) {
+        if ($dh = opendir(__DIR__ . '/config')) {
+            while (($file = readdir($dh)) !== false) {
+                if (preg_match_all("/(.+?)\.php/", $file, $matches)) {
+                    $config[$matches[1][0]] = require __DIR__ . '/config/' . $matches[0][0];
                 }
             }
             closedir($dh);
         }
     }
-    $text='<?php return '.var_export($config,true).';';
-    file_put_contents(__DIR__.'/cache/framework/config.php',$text);
+    $text = '<?php return ' . var_export($config, true) . ';';
+    file_put_contents(__DIR__ . '/cache/framework/config.php', $text);
+}
 
-} elseif ($argv[0]='create:table') {
-    //创建表信息引入容器
+
+//分割一下,使用一个command类来进行
+if ($mod == 'config:cache') {
+    //1.创建缓存,刷新缓存
+    cacheConfig();
+    echo "successful create config cache";
+} elseif ($mod == 'create:table') {
+    $config = require "cache/framework/config.php";
+    //创建创建表
+    $config = $config['db'];
+    $driver = $config['default'];
+    $DbConfig = $config['database'][$driver];
+    $grammer_class = 'Blankphp\\Database\\Grammar\\' . ucwords(strtolower($driver)) . 'Grammar';
+    $grammer = new $grammer_class;
+    $builder = new Builder($grammer);
+    \Blankphp\Scheme\Scheme::setInstance($DbConfig, $builder);
+    //所要创建表的模型
+    \App\Models\User::createTable();
 
 } elseif ($argv[0]) {
     //3.执行创建数据库
@@ -35,7 +54,7 @@ if ($argv[0]='config:cache') {
 } elseif ($argv[0]) {
     //4.刷新缓存等命令
 
-}else{
+} else {
 
 }
 

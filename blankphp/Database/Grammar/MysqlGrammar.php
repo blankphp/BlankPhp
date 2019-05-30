@@ -75,6 +75,14 @@ class MysqlGrammar extends Grammar
     }
 
 
+    public function generateCreate(Builder $sql, $parameter = []){
+        $sqlString = '';
+        //终极大拼装
+        $sqlString .= 'create ' . $sql->createType .'  '. $sql->table.'(' . implode(',', $sql->columns) . ')';
+
+        return $sqlString;
+    }
+
 
 
 }

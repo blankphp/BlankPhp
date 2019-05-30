@@ -19,6 +19,7 @@ use Blankphp\Database\Grammar\MysqlGrammar;
 use Blankphp\Kernel\Blankphp;
 use Blankphp\Request\Request;
 use Blankphp\Route\Route;
+use Blankphp\Scheme\Scheme;
 use Blankphp\Session\Session;
 use Blankphp\View\StaticView;
 use Blankphp\View\View;
@@ -48,6 +49,7 @@ class Application extends Container
             'config.get' => Config::class,
             'session' => [\Blankphp\Contract\Session::class,Session::class],
             'middleware' => MiddleWareProvider::class,
+            'scheme'=>Scheme::class,
         ];
         foreach ($binds as $k => $v)
             $this->bind($k, $v);

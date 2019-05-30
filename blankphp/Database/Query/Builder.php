@@ -41,6 +41,8 @@ class Builder
     public $grammar;
     public $values;
     public $type = 'select';
+    public $createType='table';
+    public $columns=[];
 
     public function __construct(MysqlGrammar $grammar)
     {
@@ -152,10 +154,6 @@ class Builder
         return $this;
     }
 
-    public function createTable(array $array)
-    {
-
-    }
 
     public function insertSome(array $array)
     {
@@ -202,6 +200,17 @@ class Builder
             return $this->grammar->generateDelete($this);
         elseif ($this->type == 'insert')
             return $this->grammar->generateInsert($this);
+        elseif($this->type == 'create')
+            return $this->grammar->generateCreate($this);
     }
 
+
+    public function createTable($column,$type,$comment=''){
+        $this->type='create';
+        if (!empty($this->columns))
+            $this->columns[] = sprintf("`%s` %s comment '%s'", $column, $type,$comment);
+        else
+            $this->columns[] = sprintf("`%s` %s ", $column, $type);
+        return $this;
+    }
 }
