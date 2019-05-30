@@ -24,9 +24,9 @@ class Database
 
     public function __construct(Builder $sql)
     {
-        if (empty(self::$pdo=DbConnect::getPdo())){
+        if (empty(self::$pdo = DbConnect::getPdo())) {
             $driver = config('db.default');
-            $db = config('db.database.'.$driver);
+            $db = config('db.database.' . $driver);
             self::$pdo = DbConnect::pdo($db);
             $this->sql = $sql;
         }
@@ -41,21 +41,23 @@ class Database
         return $this;
     }
 
-    public function update(array $values){
-        return ;
+    public function update(array $values = [])
+    {
+        $this->sql->updateSome($values);
+        return $this->commit()->rowCount();
     }
 
-    final function beginTransaction()
+    protected function beginTransaction()
     {
         self::$pdo->beginTransaction();
     }
 
-    final function commitTransaction()
+    protected function commitTransaction()
     {
         self::$pdo->commit();
     }
 
-    final function rollBack()
+    protected function rollBack()
     {
         self::$pdo->rollBack();
     }
@@ -96,8 +98,8 @@ class Database
 
     public function create(array $value)
     {
-        $this->sql->insertSome($value);
 
+        $this->sql->insertSome($value);
         return $this->commit()->rowCount();
     }
 
@@ -111,9 +113,11 @@ class Database
                 $this->sql->deleteSome($arg);
             }
         }
-        $stmt = self::$pdo->prepare($this->sql->toSql());
-        $stmt->execute();
-        return $stmt->rowCount();
+        if (empty($args)) {
+            $this->sql->deleteSome();
+        }
+
+        return $this->commit()->rowCount();
     }
 
     public function find($id)
@@ -142,10 +146,11 @@ class Database
         if (is_null($this->PDOsmt)) {
             throw new Exception('异常错误');
         }
+        $i=0;
         foreach ($values as $key => $value) {
             if (!empty($value)) {
                 foreach ($value as $k => $item) {
-                    $b = is_numeric($k) ? $k + 1 : $k;
+                    $b = is_numeric($k) ? ++$i : $k;
                     $this->PDOsmt->bindValue($b, $item);
                 }
             }

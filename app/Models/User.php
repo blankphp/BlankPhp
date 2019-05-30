@@ -16,6 +16,7 @@ class User extends Model
 
     //定义字段,并创建表
     public static function createTable(){
+        //创建表
        return Scheme::create(function ($table){
            $table->column('id',['int','primary key','auto_increment'],'id');
            $table->column('name',['varchar','length'=>128,'unique'],'邮箱');

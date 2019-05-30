@@ -15,11 +15,12 @@ class Builder
         'select' => [],
         'from' => [],
         'join' => [],
+        'update' => [],
         'where' => [],
         'having' => [],
         'order' => [],
         'union' => [],
-        'insert'=>[],
+        'insert' => [],
     ];
     public $operators = [
         '=', '<', '>', '<=', '>=', '<>', '!=', '<=>',
@@ -46,20 +47,22 @@ class Builder
         $this->grammar = $grammar;
     }
 
-    public function addBinds($type, $value,$key='')
+    public function addBinds($type, $value, $key = null)
     {
         if (!array_key_exists($type, $this->binds))
             throw new \Exception('无效的' . $type, 7);
         if (is_array($value)) {
             $this->binds[$type] = array_values(array_merge($this->binds[$type], $value));
         } else {
-            if (empty($key))
-                 $this->binds[$type][] = $value;
+            if (is_null($key) || is_numeric($key))
+                $this->binds[$type][] = $value;
             else
-                $this->binds[$type][':'.$key] = $value;
+                $this->binds[$type][':' . $key] = $value;
         }
         return $this;
     }
+
+
 
     public function select($columns = [])
     {
@@ -76,7 +79,6 @@ class Builder
         $this->addBinds('where', $value);
         return $this;
     }
-
 
 
     public function orderBy($column, $direction = 'asc')
@@ -159,37 +161,32 @@ class Builder
     {
         $this->type = 'insert';
         $this->values[] = array_keys($array);
-        foreach ($array as $key=>$item){
+        foreach ($array as $key => $item) {
             if (!is_numeric($key))
-                $this->addBinds('insert',$item,$key);
+                $this->addBinds('insert', $item, $key);
             else
-                $this->addBinds('insert',$item);
+                $this->addBinds('insert', $item);
         }
         return $this;
     }
 
-    public function deleteSome($id = null, $where = null)
+    public function deleteSome($id = null)
     {
         $this->type = 'delete';
-        if (!is_null($id)) {
-            $this->wheres[] = sprintf("%s = ?", 'id');
-            $this->addBinds('where',$id);
-        } elseif (!is_null($where)) {
-            $this->wheres[] = sprintf("%s %s ?", $where[0], $where[1]);
-            $this->addBinds('where',$where[2]);
+        if (!empty($id)) {
+            $this->where('id', '=', $id);
         }
         return $this;
     }
 
-    public function updateSome($id = null, $where = null)
+    public function updateSome(array $values = [])
     {
         $this->type = 'update';
-        if (!is_null($id)) {
-            $this->wheres[] = sprintf("%s = ?", 'id', $id);
-            $this->addBinds('where',$id);
-        } elseif (!is_null($where)) {
-            $this->wheres[] = sprintf("%s %s ?", $where[0], $where[1]);
-            $this->addBinds('where',$where[2]);
+        if (!is_null($values)) {
+            foreach ($values as $key => $value) {
+                $this->values[] = sprintf("%s = ?", $key);
+                $this->addBinds('update', $value);
+            }
         }
         return $this;
 

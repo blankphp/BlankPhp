@@ -34,11 +34,13 @@ class MysqlGrammar extends Grammar
         //拼装语句
         $sqlString = '';
         //终极大拼装
-        $sqlString .= 'update ' . implode(',', $sql->select) . ' from ' . $sql->table;
+        $sqlString .= 'update ' . $sql->table;
+        if (!is_null($sql->values)){
+            $sqlString .= ' set '. implode(', ', $sql->values);
+        }
+
         if (!is_null($sql->wheres))
             $sqlString .= ' where ' . implode(' ', $sql->wheres);
-        if (!is_null($sql->orderBy))
-            $sqlString .= 'order by ' . implode(' ', $sql->orderBy);
         return $sqlString;
     }
 

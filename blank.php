@@ -23,8 +23,8 @@ if ($argv[0]='config:cache') {
     $text='<?php return '.var_export($config,true).';';
     file_put_contents(__DIR__.'/cache/framework/config.php',$text);
 
-} elseif ($argv[0]) {
-    //2.创建模板文件,清空
+} elseif ($argv[0]='create:table') {
+    //创建表信息引入容器
 
 } elseif ($argv[0]) {
     //3.执行创建数据库
