@@ -22,6 +22,7 @@ class RouteProvider extends Provider
     public function boot()
     {
         $this->route = $this->app->make('route');
+        $this->map();
     }
 
     public function register()

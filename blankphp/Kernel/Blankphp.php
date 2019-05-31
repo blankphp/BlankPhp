@@ -24,11 +24,8 @@ class Blankphp implements Kernel
     protected $route;
 
     protected $bootstraps = [
-//        '' => '',
-        CacheServiceProvider::class => 'reload',
-        RouteProvider::class => 'map',
-        MiddleWareProvider::class => 'middleware',
-        ConfigServiceProvider::class => 'filter'
+        CacheServiceProvider::class ,
+        ConfigServiceProvider::class
     ];
 
     //获取配置文件===
@@ -51,16 +48,26 @@ class Blankphp implements Kernel
         //路由分发=  =这里得注册好route
         //注册三大基础服务
         $this->bootstrap();
+        //注册其他服务
+        $this->registerOther();
         //请求分发
         return $this->route->dispatcher($request);
+    }
+
+    public function registerOther(){
+        //获取其他服务提供者
+        $providers = config('app.providers');
+        foreach ($providers as $provider) {
+            $this->app->call($provider);
+        }
     }
 
     public function bootstrap()
     {
         //引导框架运行
         $this->app->instance('route', $this->route);
-        foreach ($this->bootstraps as $k => $method) {
-            $this->app->call($k, $method);
+        foreach ($this->bootstraps as $provider) {
+            $this->app->call($provider);
         }
     }
 

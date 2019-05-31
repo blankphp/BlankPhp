@@ -27,6 +27,7 @@ class Model extends EventAbstract
     protected $collection;
     //sql
     protected $sql;
+    protected $status;
 
 
     public function __construct()
@@ -54,6 +55,7 @@ class Model extends EventAbstract
        if ( $this->status='new'){
            $this->event('saving');
            //可填充字段获取到，其他剔除
+           $this->data['id']='default';
            $result = $this->database->create($this->data);
            $this->event('saved');
            return $this->data=$this->collection;
@@ -70,12 +72,17 @@ class Model extends EventAbstract
     }
 
 
-    public function updateOne(array $values)
+    private function updateOne()
     {
         $this->event('updating');
-        $result = $this->database->update($values);
+        $result = $this->database->update($this->data);
         $this->event('updated');
-        return '';
+        return $result;
+    }
+
+    public static function __callStatic($name, $arguments)
+    {
+        return (new static())->{$name}(...$arguments);
     }
 
     //查询语句的核心--以及获取数据

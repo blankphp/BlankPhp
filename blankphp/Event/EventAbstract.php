@@ -12,7 +12,7 @@ namespace Blankphp\Event;
 abstract class EventAbstract
 {
     private $status;
-    protected static $observes ;
+    public static $observes ;
 
     public static function observe(Observer $observer)
     {

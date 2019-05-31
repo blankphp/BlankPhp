@@ -15,6 +15,7 @@ class CacheServiceProvider extends Provider
     ];
     public function register()
     {
+        $this->reload();
     }
 
     public function boot()

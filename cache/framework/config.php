@@ -8,7 +8,7 @@
     'static' => 'static',
     'cookie' => 
     array (
-      'expires' => 1559828559,
+      'expires' => 1559870609,
       'path' => '/',
       'domain' => NULL,
       'secure' => false,
@@ -20,12 +20,12 @@
       'driver' => 'file',
       'secure' => false,
     ),
-    'Provider' => 
+    'providers' => 
     array (
-      0 => 'App\\Provider\\AppServiceProvider',
-      1 => 'App\\Provider\\EventServiceProvider',
-      2 => 'App\\Provider\\MiddleWareProvider',
-      3 => 'App\\Provider\\RouteProvider',
+      0 => 'App\\Provider\\EventServiceProvider',
+      1 => 'App\\Provider\\MiddleWareProvider',
+      2 => 'App\\Provider\\RouteProvider',
+      3 => 'App\\Provider\\AppServiceProvider',
     ),
   ),
   'db' => 

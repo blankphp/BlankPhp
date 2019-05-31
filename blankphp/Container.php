@@ -145,9 +145,11 @@ class Container implements \ArrayAccess, ContainerContract
      * @return mixed
      * call调用容器中指定的方法
      */
-    public function call($instance, $method)
+    public function call($instance, $method=null)
     {
         $instance = $this->build($instance);
+        if (is_null($method))
+            return $instance;
         return $instance->$method();
     }
 

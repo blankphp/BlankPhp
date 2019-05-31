@@ -30,13 +30,13 @@ return [
         'secure'=>false,
     ],
 
-    'Provider' => [
-        \App\Provider\AppServiceProvider::class,
+    'providers' => [
+        \App\Provider\RouteProvider::class,
         \App\Provider\EventServiceProvider::class,
         \App\Provider\MiddleWareProvider::class,
-        \App\Provider\RouteProvider::class,
-
+        \App\Provider\AppServiceProvider::class,
         //其他服务提供者
+        
         //引入其他的服务
 
     ],

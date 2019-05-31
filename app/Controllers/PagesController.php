@@ -8,10 +8,10 @@
 
 namespace App\Controllers;
 
-use App\Models\Students;
 use App\Models\User;
 use Blankphp\Database\Facade\DB;
 use \Blankphp\Contract\Request;
+use Blankphp\Session\Facade\Session;
 
 class PagesController extends Controller
 {
