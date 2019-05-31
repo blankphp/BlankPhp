@@ -43,25 +43,7 @@ if (!function_exists('view_static')) {
 }
 
 
-if (!function_exists('url')) {
-    function url($uri, $data = [])
-    {
-        //编译为目标地址
-        $config = config('app.url');
-        $url = $config . '/' . $uri;
-        return $url;
-    }
-}
 
-if (!function_exists('asset')) {
-    function asset($uri, $data = [])
-    {
-        $url = config('app.url');
-        $static = config('app.static');
-        $url = $url . '/' . $static . '/' . $uri;
-        return $url;
-    }
-}
 
 if (!function_exists('real_path')) {
     function real_path($path, $ff=null)

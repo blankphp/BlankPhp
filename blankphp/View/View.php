@@ -25,7 +25,6 @@ class View
         '#\{{(endforeach|endif)}}#',
         '#\{{^(k|v)\}}#',
         '#\{{[^\$](.+?)\}}#',
-
     ];
     static $descArray = [
         "<?php \$this->getValue(\$this->_\\1); ?>",
@@ -46,6 +45,11 @@ class View
     {
         $fileName=explode('.',$fileName);
         $this->fileName = implode('/',$fileName) . '.php';
+    }
+
+    public function __construct()
+    {
+        include "helper.php";
     }
 
     public function setDescFile($fileName)
