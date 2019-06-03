@@ -24,6 +24,8 @@ class MysqlGrammar extends Grammar
         $sqlString .= 'select ' . implode(',', $sql->select) . ' from ' . $sql->table;
         if (!is_null($sql->wheres))
             $sqlString .= ' where ' . implode(' ', $sql->wheres);
+        if (!is_null($sql->limit))
+            $sqlString .= ' limit ' .  $sql->limit;
         if (!is_null($sql->orderBy))
             $sqlString .= 'order by ' . implode(' ', $sql->orderBy);
         return $sqlString;

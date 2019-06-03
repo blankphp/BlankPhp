@@ -79,6 +79,7 @@ class Database
             //执行语句\
             $smt = self::$pdo->prepare($this->sql->toSql());
             $this->PDOsmt = $smt;
+            var_dump($smt);
             $procedure = in_array(substr($smt->queryString, 0, 4), ['exec', 'call']);
             if ($procedure)
                 $this->bindValues($this->sql->binds);
@@ -123,9 +124,22 @@ class Database
     public function find($id)
     {
         $this->sql->where('id', '=', $id);
+        $this->limit(1);
         return $this->commit()->fetchAll();
     }
 
+    public function limit(){
+        $args = func_get_args();
+        $count = count($args);
+        if ($count>2)
+            throw new \Exception('错误的范围');
+        elseif ($count==1)
+            $this->sql->limit([0,$args[0]]);
+        elseif ($count==2)
+            $this->sql->limit($args);
+        return $this;
+
+    }
 
     public function __set($name, $value)
     {

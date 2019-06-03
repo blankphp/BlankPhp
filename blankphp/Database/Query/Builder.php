@@ -43,6 +43,7 @@ class Builder
     public $type = 'select';
     public $createType='table';
     public $columns=[];
+    public $limit;
 
     public function __construct(MysqlGrammar $grammar)
     {
@@ -74,14 +75,22 @@ class Builder
     }
 
 
-    public function where($column, $operator, $value)
+    public function where()
     {
-        $operators = in_array($operator, $this->operators) ? $operator : '=';
+        $args = func_get_args();
+        $count = count($args);
+        $column=$args[0];
+        if ($count===2){
+            $value=$args[1];
+            $operators = '=';
+        }elseif ($count===3){
+            $operators = in_array($args[1], $this->operators) ? $args[1] : '=';
+            $value=$args[2];
+        }
         $this->wheres[] = sprintf("%s %s ?", $column, $operators);
         $this->addBinds('where', $value);
         return $this;
     }
-
 
     public function orderBy($column, $direction = 'asc')
     {
@@ -154,6 +163,12 @@ class Builder
         return $this;
     }
 
+    public function limit(array $range = []){
+        $value = implode(',', $range);
+        $this->limit=$value;
+        return $this;
+    }
+
 
     public function insertSome(array $array)
     {
@@ -203,6 +218,7 @@ class Builder
         elseif($this->type == 'create')
             return $this->grammar->generateCreate($this);
     }
+
 
 
     public function createTable($column,$type,$comment=''){

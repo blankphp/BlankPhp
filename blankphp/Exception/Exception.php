@@ -4,8 +4,11 @@
 namespace Blankphp\Exception;
 
 
-class Exception
+abstract class Exception
 {
+    protected $message;
+    protected $code;
+
     public function __construct()
     {
 

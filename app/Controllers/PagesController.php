@@ -34,12 +34,13 @@ class PagesController extends Controller
     }
 
 //
-//    public function getone($id)
-//    {
-////        $student = DB::table('students')->create(['id'=>'default','sid'=>'ddd','name'=>'wudi22','sex'=>'男','tel'=>'']);
-////        $student = DB::table('students')->where('id','=','30')->get();
-////        $student = DB::table('students')->where('id','=','30')->delete();
-////        $student = DB::table('students')->where('id','=','31')->update(['name'=>'hahah']);
-////        return view('stu', ['student' => $student]);
-//    }
+    public function getone($id)
+    {
+       var_dump( User::where('id',$id)->limit(4)->get());
+//        $student = DB::table('students')->create(['id'=>'default','sid'=>'ddd','name'=>'wudi22','sex'=>'男','tel'=>'']);
+//        $student = DB::table('students')->where('id','=','30')->get();
+//        $student = DB::table('students')->where('id','=','30')->delete();
+//        $student = DB::table('students')->where('id','=','31')->update(['name'=>'hahah']);
+//        return view('stu', ['student' => $student]);
+    }
 }

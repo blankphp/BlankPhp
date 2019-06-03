@@ -72,6 +72,8 @@ class Model extends EventAbstract
     }
 
 
+
+
     private function updateOne()
     {
         $this->event('updating');

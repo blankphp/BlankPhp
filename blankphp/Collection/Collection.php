@@ -7,7 +7,6 @@ namespace Blankphp\Collection;
 class Collection implements \ArrayAccess, \Iterator,\Countable
 {
     public $item;
-
     public function __construct()
     {
 
@@ -15,7 +14,7 @@ class Collection implements \ArrayAccess, \Iterator,\Countable
 
     public function toArray(){
         return array_map(function (){
-
+            
         },$this->item);
     }
 
