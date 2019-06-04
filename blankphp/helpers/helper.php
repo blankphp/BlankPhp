@@ -56,4 +56,9 @@ if (!function_exists('real_path')) {
     }
 }
 
-
+if (!function_exists('response')) {
+    function response($a=null)
+    {
+        return \Blankphp\Application::getInstance()->make('response',[$a]);
+    }
+}

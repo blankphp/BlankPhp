@@ -29,6 +29,7 @@ return [
         'driver'=>'file',
         'secure'=>false,
     ],
+    'exception_handler'=>\Blankphp\Exception\Handler::class,
 
     'providers' => [
         \App\Provider\RouteProvider::class,

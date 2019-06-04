@@ -16,8 +16,10 @@ use Blankphp\Cookie\Cookie;
 use Blankphp\Database\Database;
 use Blankphp\Database\Grammar\Grammar;
 use Blankphp\Database\Grammar\MysqlGrammar;
+use Blankphp\Exception\Error;
 use Blankphp\Kernel\Blankphp;
 use Blankphp\Request\Request;
+use Blankphp\Response\Response;
 use Blankphp\Route\Route;
 use Blankphp\Scheme\Scheme;
 use Blankphp\Session\Session;
@@ -29,6 +31,7 @@ class Application extends Container
     public function __construct()
     {
         //把app放如共享实例容器中
+        $this->registerException();
         $this->registerBase();
         $this->registerService();
         $this->registerProviders();
@@ -50,6 +53,7 @@ class Application extends Container
             'session' => [\Blankphp\Contract\Session::class,Session::class],
             'middleware' => MiddleWareProvider::class,
             'scheme'=>Scheme::class,
+            'response'=>Response::class
         ];
         foreach ($binds as $k => $v)
             $this->bind($k, $v);
@@ -62,12 +66,16 @@ class Application extends Container
                 return new $abstract(...$parameters);
             else
                 throw new \Exception('并没有找到这个标识或者类', 2);
-        return parent::make($abstract);
+        return parent::make($abstract, $parameters);
     }
 
     public function registerBase()
     {
         $this->instance('app', $this);
+    }
+
+    public function registerException(){
+        Error::register();
     }
 
     public function registerProviders()

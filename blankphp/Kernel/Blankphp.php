@@ -35,6 +35,8 @@ class Blankphp implements Kernel
         $this->route = $route;
     }
 
+
+
     public function registerInstanceRequest($request)
     {
         $this->app->instance('request', $request);
@@ -81,6 +83,8 @@ class Blankphp implements Kernel
     {
         $this->app->flush();
     }
+
+
 
 
 }

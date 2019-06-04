@@ -8,7 +8,7 @@
     'static' => 'static',
     'cookie' => 
     array (
-      'expires' => 1559870609,
+      'expires' => 1560256834,
       'path' => '/',
       'domain' => NULL,
       'secure' => false,
@@ -20,11 +20,12 @@
       'driver' => 'file',
       'secure' => false,
     ),
+    'exception_handler' => 'Blankphp\\Exception\\Handler',
     'providers' => 
     array (
-      0 => 'App\\Provider\\EventServiceProvider',
-      1 => 'App\\Provider\\MiddleWareProvider',
-      2 => 'App\\Provider\\RouteProvider',
+      0 => 'App\\Provider\\RouteProvider',
+      1 => 'App\\Provider\\EventServiceProvider',
+      2 => 'App\\Provider\\MiddleWareProvider',
       3 => 'App\\Provider\\AppServiceProvider',
     ),
   ),
