@@ -6,22 +6,32 @@ namespace Blankphp\Collection;
 
 class Collection implements \ArrayAccess, \Iterator,\Countable
 {
-    public $item;
+    //数据的存储
+    //初始化函数
     public function __construct()
     {
 
     }
+    //去重
 
+
+    //找不同
+
+
+    //找相同
+
+    //
+    //转换为数组输出
     public function toArray(){
         return array_map(function (){
             
         },$this->item);
     }
 
-
+    //统计$this->>item
     public function count()
     {
-        // TODO: Implement count() method.
+        return count($this->item);
     }
 
     public function offsetExists($offset)

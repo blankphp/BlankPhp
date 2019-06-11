@@ -9,4 +9,4 @@
 use \Blankphp\Route\Route;
 
 Route::get('/', 'PagesController@index');
-Route::get('/user/<id>', 'PagesController@getone');
+Route::get('/user/<id>/name/<id>', 'PagesController@getone');

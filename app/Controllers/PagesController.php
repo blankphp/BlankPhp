@@ -9,9 +9,7 @@
 namespace App\Controllers;
 
 use App\Models\User;
-use Blankphp\Database\Facade\DB;
 use \Blankphp\Contract\Request;
-use Blankphp\Session\Facade\Session;
 
 class PagesController extends Controller
 {
@@ -34,9 +32,10 @@ class PagesController extends Controller
     }
 
 //
-    public function getone($id)
+    public function getone(User $user,$bd)
     {
-       var_dump( User::where('id',$id)->limit(4)->get());
+        var_dump($user->name,$bd);
+//       var_dump( User::where('id',$id)->limit(4)->get());
 //        $student = DB::table('students')->create(['id'=>'default','sid'=>'ddd','name'=>'wudi22','sex'=>'男','tel'=>'']);
 //        $student = DB::table('students')->where('id','=','30')->get();
 //        $student = DB::table('students')->where('id','=','30')->delete();

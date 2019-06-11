@@ -4,7 +4,7 @@
 namespace Blankphp\Database;
 
 
-class Collection
+class Collection extends \Blankphp\Collection\Collection
 {
 
 }

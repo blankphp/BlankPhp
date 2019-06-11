@@ -73,13 +73,17 @@ class Database
         }
     }
 
+    public function all(){
+
+
+    }
+
     public function commit()
     {
         try {
             //执行语句\
             $smt = self::$pdo->prepare($this->sql->toSql());
             $this->PDOsmt = $smt;
-            var_dump($smt);
             $procedure = in_array(substr($smt->queryString, 0, 4), ['exec', 'call']);
             if ($procedure)
                 $this->bindValues($this->sql->binds);
@@ -94,7 +98,8 @@ class Database
 
     public function get()
     {
-        return $this->commit()->fetchAll();
+        //这样只有单一的数据，需要重复的创建然后保存到一个大collection
+        return $this->commit()->fetchObject(Collection::class);
     }
 
     public function create(array $value)
@@ -125,7 +130,7 @@ class Database
     {
         $this->sql->where('id', '=', $id);
         $this->limit(1);
-        return $this->commit()->fetchAll();
+        return $this->commit()->fetchObject(Collection::class);
     }
 
     public function limit(){
@@ -146,6 +151,7 @@ class Database
         //修改或者创建某个表中的元素..得判断有没有获取到目标id
 
     }
+
 
 
     public function __call($name, $arguments)

@@ -9,7 +9,7 @@
         'group' => 'web',
       ),
     ),
-    '/user/<id>' => 
+    '/user/<id>/name/<id>' => 
     array (
       'action' => 'PagesController@getone',
       'middleware' => 

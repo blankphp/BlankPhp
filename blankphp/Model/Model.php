@@ -30,16 +30,21 @@ class Model extends EventAbstract
     protected $status;
 
 
-    public function __construct()
+    public function __construct($id =0)
     {
        //获取属性连接DB只是工具类
         //废弃的字段
         $this->makeQuery();
         $this->database->table($this->tableName);
         $this->collection=new Collection();
+        if ($id>0)
+            $this->collection = $this->find($id);
         //设定好对应关系以及
     }
-
+    public function __get($name)
+    {
+        return $this->collection->{$name};
+    }
     public function makeQuery(){
         if (empty($this->database)){
             $driver = config('db.default');

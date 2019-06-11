@@ -12,6 +12,9 @@ class Handler
     }
 
     public function handToRender( $e){
-        $e->render();
+        if ($e instanceof Exception)
+             $e->render();
+        else
+            var_dump($e);
     }
 }

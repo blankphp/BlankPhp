@@ -11,6 +11,7 @@ namespace Blankphp\Route\Traits;
 
 use Blankphp\Contract\RequestContract;
 use Blankphp\Facade;
+use Blankphp\Model\Model;
 use Blankphp\Request\Request;
 use ReflectionFunctionAbstract;
 use ReflectionMethod;
@@ -22,9 +23,13 @@ trait ResolveSomeDepends
     public function resolveClassMethodDependencies($parameters, $instance, $method)
     {
         //解决类方法的依赖-->反射解决
-        if (!empty($parameters))
+        if (!empty($parameters)){
+            $parameters=$this->resolveMethodDependencies(
+                $parameters, $instance !== 'Closure' ?
+                new \ReflectionMethod($instance, $method) : new \ReflectionFunction($method)
+            );
             return $parameters;
-
+        }
 
         return $this->resolveMethodDependencies(
             $parameters, $instance !== 'Closure' ?
@@ -42,12 +47,12 @@ trait ResolveSomeDepends
             $instance = $parameter->getClass();
             if (!is_null($instance)) {
                 $instanceCount++;
-                array_splice($parameters, $key, 0,
-                    [$this->app->make($instance->getName())]
+                array_splice($parameters, $key, $instanceCount,
+                    [$this->app->make($instance->getName(),[$values[$instanceCount]])]
                 );
             } elseif (!isset($values[$key - $instanceCount]) &&
                 $parameter->isDefaultValueAvailable()) {
-                array_splice($parameters, $key, 0, [$parameter->getDefaultValue()]);
+                array_splice($parameters, $key, $instanceCount, [$parameter->getDefaultValue()]);
             }
         }
         return $parameters;
