@@ -14,7 +14,6 @@ use Blankphp\Application;
 use App\Provider\MiddleWareProvider;
 use Blankphp\Cache\CacheServiceProvider;
 use Blankphp\Contract\Kernel;
-use Blankphp\Provider\ConfigServiceProvider;
 use Blankphp\Route\Router;
 
 class Blankphp implements Kernel
@@ -25,8 +24,8 @@ class Blankphp implements Kernel
 
     protected $bootstraps = [
         CacheServiceProvider::class ,
-        ConfigServiceProvider::class
     ];
+
 
     //获取配置文件===
     public function __construct(Application $app, Router $route)

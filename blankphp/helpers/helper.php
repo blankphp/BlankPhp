@@ -3,7 +3,7 @@ if (!function_exists('app')) {
     function app($abstract)
     {
         $a = \Blankphp\Application::getInstance();
-        if (class_exists($abstract) || interface_exists($abstract) || !is_null($desc = $a->make($abstract)))
+        if (class_exists($abstract) || interface_exists($abstract) || !is_null($a->has($abstract)))
             return $a->make($abstract);
         else
             return $a->getSignal($abstract);
@@ -15,7 +15,7 @@ if (!function_exists('config')) {
     {
         $descNames = explode('.', $name);
         $descNames = array_filter($descNames);
-        return app('config.get')->get($descNames, $default);
+        return app('config')->get($descNames, $default);
     }
 }
 

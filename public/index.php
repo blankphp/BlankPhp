@@ -11,9 +11,7 @@ define('APP_DEBUG', true);
 define('APP_ENV', 'local');
 //psr4自动加载
 require(APP_PATH . '/vendor/autoload.php');
-
 $app = require_once APP_PATH . 'blankphp/Application.php';
-
 $kernel = $app->make(\Blankphp\Contract\Kernel::class);
 //核心处理请求--->dispatcher
 $response = $kernel->handle(
@@ -23,4 +21,3 @@ $response = $kernel->handle(
 $response->send();
 //清理空间,,容器内部消化
 $kernel->flush();
-

@@ -41,7 +41,7 @@ class Container implements \ArrayAccess, ContainerContract
             return $this->instances[$abstract];
         }
         $class = $this->binds[$abstract];
-        return (empty($parameters)) ? $this->build($class) : new $class(...$parameters);
+        return (empty($parameters)) ? $this->instances[$abstract]=$this->build($class) : $this->instances[$abstract]=new $class(...$parameters);
     }
 
     public function has($abstract)
