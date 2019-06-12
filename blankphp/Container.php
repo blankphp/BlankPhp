@@ -19,7 +19,7 @@ class Container implements \ArrayAccess, ContainerContract
     protected $instances = [];
     protected $binds = [];
     protected $classes = [];
-    protected $signal = [];
+    public $signal = [];
 
 
     //单例模式，一个对象重复使用

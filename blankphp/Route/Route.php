@@ -9,7 +9,7 @@
 namespace Blankphp\Route;
 
 use Blankphp\Application;
-use Blankphp\Cache\FileCache;
+use Blankphp\Cache\Driver\File;
 use Blankphp\Contract\Route as Contract;
 use Blankphp\Route\Traits\SetMiddleWare;
 use Blankphp\Route\Traits\ResolveSomeDepends;
@@ -72,7 +72,6 @@ class Route implements Contract
             $this->setOneMiddleWare($method, $uri);
             empty($this->groupMiddleware) ?: $this->route[$method][$uri]['middleware']['group'] = $this->groupMiddleware;
         }
-
         return $this;
     }
 
@@ -84,7 +83,6 @@ class Route implements Contract
             foreach ($middleware as $item) {
                 $this->tempMiddleware = $item;
                 $this->setOneMiddleWare(...$this->currentController);
-
             }
             $this->tempMiddleware = '';
         }
@@ -191,31 +189,23 @@ class Route implements Contract
 
     public function run($request)
     {
-        //路由分发
         return $this->runController(...$this->findRoute($request));
     }
 
     public function putCache()
     {
-        FileCache::putCache($this->route, 'route.php');
+        File::putCache($this->route, 'route.php');
     }
 
     public function getCache()
     {
-        if (!$this->isReBuild()) {
-            return true;
-        }
-        if (!empty($route = $this->app->getSignal('route'))) {
-            $this->route = $route;
-            $this->app->unsetSignal('route');
+        if (is_file(APP_PATH.'/cache/framework/route.php')){
+            $this->route = include APP_PATH.'/cache/framework/route.php';
             return false;
         }
         return true;
     }
 
-    private function isReBuild()
-    {
-        return FileCache::canRebuild(APP_PATH . 'routes/web.php', 'route.php');
-    }
+
 
 }

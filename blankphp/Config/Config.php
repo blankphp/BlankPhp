@@ -11,18 +11,17 @@ class Config
     public  $config;
     protected  $configPath=APP_PATH.'config/';
     protected $app;
-    public function __construct()
+    public function __construct(Application $app)
     {
-        var_dump(1);
-        $this->app=$app=Application::getInstance();
+        $this->app=$app;
         $config= $this->loadConfig();
-        $this->app->unsetSignal('config');
         $this->config =$config;
     }
 
 
     public function loadConfig(){
-        if (empty($this->app->getSignal('config'))) {
+        //暂时耦合 -- 等会使用load解开耦合
+        if (!is_file(APP_PATH.'cache/framework/config.php')) {
             $config = [];
             if (is_dir($this->configPath)) {
                 if ($dh = opendir($this->configPath)) {
@@ -35,7 +34,7 @@ class Config
                 }
             }
         }else{
-            return $this->app->getSignal('config');
+            $config=require APP_PATH.'cache/framework/config.php';
         }
         return $config;
     }

@@ -23,7 +23,11 @@ class Blankphp implements Kernel
     protected $route;
 
     protected $bootstraps = [
-        CacheServiceProvider::class ,
+        //日志组件
+
+        //设置组件
+
+        //异常组件
     ];
 
 
@@ -36,17 +40,18 @@ class Blankphp implements Kernel
 
 
 
-    public function registerInstanceRequest($request)
+    public function registerRequestRouter($request)
     {
         $this->app->instance('request', $request);
+        $this->app->instance('route', $this->route);
+
     }
 
     //处理请求===》返回一个response，这里交给route组件
     public function handle($request)
     {
         //共享root权限
-        $this->registerInstanceRequest($request);
-        //路由分发=  =这里得注册好route
+        $this->registerRequestRouter($request);
         //注册三大基础服务
         $this->bootstrap();
         //注册其他服务
@@ -66,7 +71,6 @@ class Blankphp implements Kernel
     public function bootstrap()
     {
         //引导框架运行
-        $this->app->instance('route', $this->route);
         foreach ($this->bootstraps as $provider) {
             $this->app->call($provider);
         }

@@ -4,9 +4,11 @@
 namespace Blankphp\Cache;
 
 
-class Cache
+abstract  class Cache
 {
 
+   abstract public function set();
 
+   abstract public function get();
 
 }

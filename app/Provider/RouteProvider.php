@@ -22,7 +22,9 @@ class RouteProvider extends Provider
     public function boot()
     {
         $this->route = $this->app->make('route');
+        $this->route->setNamespace($this->namespace);
         $this->map();
+        parent::boot();
     }
 
     public function register()
@@ -32,7 +34,6 @@ class RouteProvider extends Provider
 
     public function map()
     {
-        $this->route->setNamespace($this->namespace);
         if ($this->route->getCache()){
             $this->mapWebRoute();
             $this->mapApiRoute();

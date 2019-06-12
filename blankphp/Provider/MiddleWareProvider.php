@@ -8,15 +8,12 @@
 
 namespace Blankphp\Provider;
 
-
-use Blankphp\Middleware\MiddleWare;
-
 class MiddleWareProvider extends Provider
 {
 
     protected $namespace = 'App\Middleware';
     protected $middleware = [
-        MiddleWare::class,
+
     ];
     protected $registerMiddleware;
     protected $groupMiddleware=[];
@@ -28,7 +25,9 @@ class MiddleWareProvider extends Provider
 
     public function boot()
     {
-        $this->app->bind('middleware', $this);
+//        $this->app->bind('middleware', $this);
+        $this->app->signal('GroupMiddleware', $this->groupMiddleware);
+        $this->app->signal('AliceMiddleware', $this->registerMiddleware);
     }
 
     public function register()

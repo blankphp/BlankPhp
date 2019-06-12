@@ -96,7 +96,7 @@ class Response
         }
     }
 
-    public function prepare($request)
+    public function prepare()
     {
         //准备好的结果返回给页面
         return $this;

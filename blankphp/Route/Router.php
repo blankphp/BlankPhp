@@ -10,6 +10,7 @@ namespace Blankphp\Route;
 
 
 use Blankphp\Application;
+use Blankphp\Provider\MiddleWareProvider;
 use Blankphp\Response\Response;
 
 class Router
@@ -23,16 +24,17 @@ class Router
     {
         $this->route = $route;
         $this->app = Application::getInstance();
-        $this->middleware = $this->app->make('middleware');
     }
 
     public function getMiddleware()
     {
-        $middleware = $this->app->make('middleware')
-            ->getMiddleware($this->route->getGroupMidlleware());
-        $temp = $this->app->make('middleware')->getAliceMiddleWare(
-            $this->route->getMiddleWare());
-        $this->middleware = array_filter(array_merge($middleware, $temp));
+        $middleware=[];
+        $temp='';
+        if (!empty($name=$this->route->getGroupMidlleware()))
+            $middleware = $this->app->getSignal('GroupMiddleware')[$this->route->getGroupMidlleware()];
+        if (!empty($name=$this->route->getMiddleWare()))
+            $temp = $this->app->getSignal('AliceMiddleware')[$this->route->getMiddleWare()];
+        $this->middleware = array_filter(array_merge($middleware, [$temp]));
     }
 
     public function dispatcher($request)
@@ -44,20 +46,19 @@ class Router
             ->send($request)
             ->through($this->middleware)
             ->run(function ($request) use ($controller) {
-                return $this->prepareResponse($request, $this->route->runController(...$controller));
+                return $this->prepareResponse($this->route->runController(...$controller));
             });
     }
 
-    public function prepareResponse($request, $response)
+    public function prepareResponse($response)
     {
-        return self::toResponse($request, $response);
+        return self::toResponse($response);
     }
 
-
-    public static function toResponse($request, $response)
+    public static function toResponse($response)
     {
         $response = new Response($response);
-        return $response->prepare($request);
+        return $response->prepare();
     }
 
 

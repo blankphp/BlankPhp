@@ -51,7 +51,7 @@ class Application extends Container
             'cookie' => [CookieContract::class,Cookie::class],
             'config' => Config::class,
             'session' => [\Blankphp\Contract\Session::class,Session::class],
-            'middleware' => MiddleWareProvider::class,
+//            'middleware' => MiddleWareProvider::class,
             'scheme'=>Scheme::class,
             'response'=>Response::class
         ];

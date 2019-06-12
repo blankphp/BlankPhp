@@ -8,7 +8,7 @@
     'static' => 'static',
     'cookie' => 
     array (
-      'expires' => 1560256834,
+      'expires' => 1560953461,
       'path' => '/',
       'domain' => NULL,
       'secure' => false,
