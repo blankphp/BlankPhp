@@ -7,12 +7,12 @@
  */
 
 namespace App\Provider;
-use App\Middleware\EncryptCookies;
 use App\Middleware\StartSession;
 use \Blankphp\Provider\MiddleWareProvider as BaseProvider;
 
 class MiddleWareProvider extends BaseProvider
 {
+    //假装是一个provider，实际上不是
     protected $namespace = 'App\Middleware';
     //路由中间件
     protected $middleware = [
@@ -26,11 +26,9 @@ class MiddleWareProvider extends BaseProvider
     //中间件组合
     protected $groupMiddleware=[
         'web'=>[
-            EncryptCookies::class,
             StartSession::class,
         ],
         'api'=>[
-            EncryptCookies::class,
 
         ]
     ];

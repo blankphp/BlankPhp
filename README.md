@@ -16,9 +16,8 @@
     1.本框架意义在于理解IOC容器，以及依赖注入的思想
     2.本框架富含基本容器以及依赖注入
     3.框架具有路由以及中间件和基本orm功能，满足一个基本的快速开发概念
-    4.后期设计会采用到swoole，来增加速度
+    4.blankphp-swoole扩展正在书写中
     5.安全方面目前考虑较少<正在学习php安全相关>
-    
     书写该框架的流程，以及遇到的问题，会整理出来！
     文档正在书写中，但是有点忙，请等待
 
@@ -27,8 +26,45 @@
     1.web路由在routes/web.php中注册
     2.api路由在routes/api.php注册
     3.中间件注册在MiddleWareProvider中注册
-    3.模型设计暂未完成,但是基本的Database设计完成
-    4.暂时方便测试所以就没怎么测试
+    3.模型设计完成一部分，暂不支持多对多，一对多等关系
+
+## 目录结构
+
+初始的目录结构如下：
+
+~~~
+├─app           应用目录
+│  ├─Controllers         控制器目录
+│  ├─Middleware          中间件目录
+│  │  ├─StartSession.php      session启动中间件
+│  ├─Models             模型目录
+│  ├─Observer           模型观察者目录
+│  ├─Provider           服务提供者目录
+│
+├─public                WEB目录（对外访问目录）
+│  ├─index.php          入口文件
+│  ├─static             静态目录
+│  └─.htaccess          用于apache的重写
+│
+├─blankphp              框架系统目录
+│
+├─route                 路由注册目录
+│  ├─web.php           web
+│  ├─api.php           api
+|
+├─config                 配置文件目录
+│  ├─app.php           核心配置
+│  ├─db.php           数据库配置
+|
+│
+├─cache                 缓存目录
+├─resource              资源文件目录
+├─vendor                第三方类库目录（Composer依赖库）
+├─blank.php             命令行操作入口
+├─composer.json         composer 定义文件
+├─LICENSE.txt           授权说明文件
+├─README.md             README 文件
+~~~
 
 #### 安装教程
 
@@ -47,15 +83,17 @@ nginx配置好重写规则
 
 #### 更新说明
     
-> 异常处理Exception
+> Cache的完成
 
-> Command类设计
+> Log的完成
+
+> Config等的解耦合
        
 
        
 
 ```ab
-<!--1H2G-->
+<!--1H2G Homestead 暂未优化-->
 Server Software:        nginx/1.15.5
 Server Hostname:        www.stu.stu
 Server Port:            80
