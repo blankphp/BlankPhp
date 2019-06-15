@@ -11,13 +11,12 @@ define('APP_DEBUG', true);
 define('APP_ENV', 'local');
 //psr4自动加载
 require(APP_PATH . '/vendor/autoload.php');
-$app = require_once APP_PATH . 'blankphp/Application.php';
-$kernel = $app->make(\Blankphp\Contract\Kernel::class);
-//核心处理请求--->dispatcher
+$kernel = \Blankphp\Application::init()->make(\Blankphp\Contract\Kernel::class);
+//http核心请求
 $response = $kernel->handle(
     \Blankphp\Request\Facade\Request::capture()
 );
-//发送请求ob等
+//返回响应
 $response->send();
-//清理空间,,容器内部消化
+//清理空间
 $kernel->flush();

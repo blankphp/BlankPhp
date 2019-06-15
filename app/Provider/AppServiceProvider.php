@@ -4,9 +4,9 @@
 namespace App\Provider;
 use App\Models\User;
 use App\Observer\UserObserve;
-use \Blankphp\Kernel\AppServiceProvider as BaseProvider;
+use Blankphp\Provider\Provider;
 
-class AppServiceProvider  extends BaseProvider
+class AppServiceProvider extends Provider
 {
     public function boot()
     {

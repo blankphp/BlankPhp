@@ -13,13 +13,11 @@ use Blankphp\Contract\Container;
 
 class PipeLine
 {
-    protected $app;
     protected $middleware;
     protected $request;
 
-    public function __construct(Container $app)
+    public function __construct()
     {
-        $this->app = $app;
     }
 
     public function send($request)
@@ -32,7 +30,6 @@ class PipeLine
     {
         return function ($stack, $pipe) {
             return function () use ($stack, $pipe) {
-                //做异常处理-  -中间件得生成对象,不采用静态方法,而是采用对象
                 return $pipe::handle($this->request, $stack);
             };
         };

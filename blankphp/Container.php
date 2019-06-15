@@ -143,7 +143,7 @@ class Container implements \ArrayAccess, ContainerContract
      * @param $instance
      * @param $method
      * @return mixed
-     * call调用容器中指定的方法
+     * call某类中指定的方法
      */
     public function call($instance, $method=null)
     {
@@ -157,7 +157,6 @@ class Container implements \ArrayAccess, ContainerContract
     public function flush()
     {
         $this->classes = [];
-        $this->binds = [];
         $this->instances = [];
         $this->signal = [];
     }

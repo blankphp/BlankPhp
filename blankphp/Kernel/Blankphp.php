@@ -11,9 +11,8 @@ namespace Blankphp\Kernel;
 
 use App\Provider\RouteProvider;
 use Blankphp\Application;
-use App\Provider\MiddleWareProvider;
-use Blankphp\Cache\CacheServiceProvider;
 use Blankphp\Contract\Kernel;
+use Blankphp\Log\LogServiceProvider;
 use Blankphp\Route\Router;
 
 class Blankphp implements Kernel
@@ -21,12 +20,13 @@ class Blankphp implements Kernel
     protected $config = [];
     protected $app;
     protected $route;
-
+    protected $request;
     protected $bootstraps = [
+
         //日志组件
-
-        //设置组件
-
+        LogServiceProvider::class,
+        //路由组件
+        RouteProvider::class
         //异常组件
     ];
 
@@ -36,27 +36,31 @@ class Blankphp implements Kernel
     {
         $this->app = $app;
         $this->route = $route;
+        $this->registerRouter();
     }
 
 
 
-    public function registerRequestRouter($request)
+    public function registerRouter()
     {
-        $this->app->instance('request', $request);
         $this->app->instance('route', $this->route);
+    }
 
+    public function registerRequest($request)
+    {
+        $this->request=$request;
+        $this->app->instance('request', $this->request);
     }
 
     //处理请求===》返回一个response，这里交给route组件
     public function handle($request)
     {
         //共享root权限
-        $this->registerRequestRouter($request);
         //注册三大基础服务
         $this->bootstrap();
         //注册其他服务
         $this->registerOther();
-        //请求分发
+        $this->registerRequest($request);
         return $this->route->dispatcher($request);
     }
 
@@ -66,6 +70,7 @@ class Blankphp implements Kernel
         foreach ($providers as $provider) {
             $this->app->call($provider);
         }
+
     }
 
     public function bootstrap()
@@ -84,6 +89,8 @@ class Blankphp implements Kernel
 
     public function flush()
     {
+        $this->request=[];
+        $this->route->flush();
         $this->app->flush();
     }
 

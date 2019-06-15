@@ -28,12 +28,8 @@ class Router
 
     public function getMiddleware()
     {
-        $middleware=[];
-        $temp='';
-        if (!empty($name=$this->route->getGroupMidlleware()))
-            $middleware = $this->app->getSignal('GroupMiddleware')[$this->route->getGroupMidlleware()];
-        if (!empty($name=$this->route->getMiddleWare()))
-            $temp = $this->app->getSignal('AliceMiddleware')[$this->route->getMiddleWare()];
+        $middleware = $this->app->getSignal('GroupMiddleware',$this->route->getGroupMidlleware());
+        $temp = $this->app->getSignal('AliceMiddleware',$this->route->getMiddleWare());
         $this->middleware = array_filter(array_merge($middleware, [$temp]));
     }
 
@@ -42,10 +38,10 @@ class Router
         ///寻找出request
         $controller = $this->route->findRoute($request);
         $this->getMiddleware();
-        return (new Pipe($this->app))
+        return (new Pipe)
             ->send($request)
             ->through($this->middleware)
-            ->run(function ($request) use ($controller) {
+            ->run(function () use ($controller) {
                 return $this->prepareResponse($this->route->runController(...$controller));
             });
     }
@@ -59,6 +55,10 @@ class Router
     {
         $response = new Response($response);
         return $response->prepare();
+    }
+
+    public function flush(){
+        $this->middleware=[];
     }
 
 

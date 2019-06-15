@@ -201,4 +201,8 @@ class Request implements RequestContract
             return '';
     }
 
+    public function flush(){
+
+    }
+
 }

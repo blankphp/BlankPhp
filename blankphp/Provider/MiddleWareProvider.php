@@ -42,8 +42,6 @@ class MiddleWareProvider extends Provider
             if (isset($this->registerMiddleware[$item]))
                 $temp[]=$this->registerMiddleware[$item];
         return $temp;
-
-//        throw new \Exception('not have this middleware '.$alice,1);
     }
 
 }

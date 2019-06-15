@@ -17,12 +17,12 @@ trait SetMiddleWare
 
     public function getMiddleWare()
     {
-        return isset($this->middleware['alice'])?$this->middleware['alice']:[];
+        return isset($this->middleware['alice'])?$this->middleware['alice']:'';
     }
 
     public function getGroupMidlleware()
     {
-        return isset($this->middleware['group'])?$this->middleware['group']:[];
+        return isset($this->middleware['group'])?$this->middleware['group']:'';
     }
 
     public function setMiddleWare($middleware)

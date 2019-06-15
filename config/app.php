@@ -32,14 +32,14 @@ return [
     'exception_handler'=>\Blankphp\Exception\Handler::class,
 
     'providers' => [
-        \App\Provider\RouteProvider::class,
+        //核心服务提供者
+        \App\Provider\AppServiceProvider::class,
         \App\Provider\EventServiceProvider::class,
         \App\Provider\MiddleWareProvider::class,
-        \App\Provider\AppServiceProvider::class,
         //其他服务提供者
         
         //引入其他的服务
-
     ],
+
 
 ];

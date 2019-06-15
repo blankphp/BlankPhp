@@ -9,7 +9,6 @@
 namespace Blankphp;
 
 
-use \App\Provider\MiddleWareProvider;
 use Blankphp\Config\Config;
 use Blankphp\Contract\CookieContract;
 use Blankphp\Cookie\Cookie;
@@ -28,9 +27,13 @@ use Blankphp\View\View;
 
 class Application extends Container
 {
+
+    public static function init(){
+        return self::getInstance();
+    }
     public function __construct()
     {
-        //把app放如共享实例容器中
+        //注册号一些服务
         $this->registerException();
         $this->registerBase();
         $this->registerService();
@@ -51,7 +54,6 @@ class Application extends Container
             'cookie' => [CookieContract::class,Cookie::class],
             'config' => Config::class,
             'session' => [\Blankphp\Contract\Session::class,Session::class],
-//            'middleware' => MiddleWareProvider::class,
             'scheme'=>Scheme::class,
             'response'=>Response::class
         ];
@@ -83,9 +85,12 @@ class Application extends Container
         $this->instance('route', $this->make('route'));
     }
 
-    public function getSignal($abstract)
+    public function getSignal($abstract,$name = '')
     {
-        return isset($this->signal[$abstract]) ? $this->signal[$abstract] : [];
+        if (empty($name))
+            return isset($this->signal[$abstract]) ? $this->signal[$abstract] : [];
+        else
+            return isset($this->signal[$abstract][$name]) ? $this->signal[$abstract][$name] : [];
     }
 
     public function unsetSignal($abstract)
@@ -95,5 +100,4 @@ class Application extends Container
 
 }
 
-return Application::getInstance();
 

@@ -11,8 +11,6 @@
 
 > 一个满足于基本开发的MVC轻量级框架`route` `IOC` `DB` `view` `middleware`已经设计完基本使用
 
-![hahah.png](https://i.loli.net/2019/04/08/5cab51b97a61b.png)
-
     1.本框架意义在于理解IOC容器，以及依赖注入的思想
     2.本框架富含基本容器以及依赖注入
     3.框架具有路由以及中间件和基本orm功能，满足一个基本的快速开发概念
@@ -62,7 +60,7 @@
 ├─vendor                第三方类库目录（Composer依赖库）
 ├─blank.php             命令行操作入口
 ├─composer.json         composer 定义文件
-├─LICENSE.txt           授权说明文件
+├─LICENSE               授权说明文件
 ├─README.md             README 文件
 ~~~
 

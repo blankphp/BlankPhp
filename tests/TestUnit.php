@@ -9,7 +9,7 @@ class TestUnit extends TestCase
     public function createApplication()
     {
         define('APP_PATH', __DIR__ . '/../');
-        $app = require __DIR__ . '/../blankphp/Application.php';
+        $app = \Blankphp\Application::init();
 
         $app->make(\Blankphp\Contract\Kernel::class)->bootstrap();
 
