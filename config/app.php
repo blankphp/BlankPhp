@@ -8,7 +8,7 @@
 
 return [
     'APP_NAME' => 'test',
-    'TIME_ZONE'=>'RPC',
+    'timezone'=>'Asia/Shanghai',
 
     'url' => 'http://localhost/one',
     'template' => 'resource/template',
@@ -34,7 +34,7 @@ return [
     'providers' => [
         //核心服务提供者
         \App\Provider\AppServiceProvider::class,
-        \App\Provider\EventServiceProvider::class,
+        \App\Provider\RouteProvider::class,
         \App\Provider\MiddleWareProvider::class,
         //其他服务提供者
         

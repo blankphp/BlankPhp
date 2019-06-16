@@ -8,6 +8,7 @@
 
 namespace Blankphp;
 
+use Blankphp\Cache\Driver\File;
 use \Blankphp\Contract\Container as ContainerContract;
 
 
@@ -51,6 +52,7 @@ class Container implements \ArrayAccess, ContainerContract
 
     public function bind($abstract, $instance)
     {
+
         if (!is_array($instance))
             $this->binds[$abstract] = $instance;
         else {
@@ -63,13 +65,14 @@ class Container implements \ArrayAccess, ContainerContract
                     $data[] = $item;
                 }
             }
-
             $this->binds[$abstract] = $desc;
             foreach ($data as $datum) {
                 $this->binds[$datum] = $desc;
             }
         }
     }
+
+
 
     public function signal($abstract, $instance)
     {
@@ -141,16 +144,16 @@ class Container implements \ArrayAccess, ContainerContract
 
     /**
      * @param $instance
-     * @param $method
-     * @return mixed
-     * call某类中指定的方法
+     * @param null $method
+     * @param array $param
+     * @return object|void
      */
-    public function call($instance, $method=null)
+    public function call($instance, $method=null,array $param=[])
     {
         $instance = $this->build($instance);
         if (is_null($method))
             return $instance;
-        return $instance->$method();
+        return $instance->$method(...$param);
     }
 
 

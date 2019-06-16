@@ -9,8 +9,10 @@ use Blankphp\Application;
 class Error
 {
     protected static $handler;
-    public static function register()
+    protected $app;
+    public function bootstrap(Application $app)
     {
+        $this->app= $app;
         error_reporting(E_ALL);
         set_error_handler([__CLASS__, 'Error']);
         set_exception_handler([__CLASS__, 'Exception']);

@@ -9,14 +9,14 @@
 namespace Blankphp;
 
 
+use Blankphp\Cache\Driver\File;
 use Blankphp\Config\Config;
 use Blankphp\Contract\CookieContract;
 use Blankphp\Cookie\Cookie;
 use Blankphp\Database\Database;
 use Blankphp\Database\Grammar\Grammar;
 use Blankphp\Database\Grammar\MysqlGrammar;
-use Blankphp\Exception\Error;
-use Blankphp\Kernel\Blankphp;
+use Blankphp\Kernel\HttpKernel;
 use Blankphp\Request\Request;
 use Blankphp\Response\Response;
 use Blankphp\Route\Route;
@@ -28,13 +28,14 @@ use Blankphp\View\View;
 class Application extends Container
 {
 
-    public static function init(){
+    public static function init()
+    {
         return self::getInstance();
     }
+
     public function __construct()
     {
         //注册号一些服务
-        $this->registerException();
         $this->registerBase();
         $this->registerService();
         $this->registerProviders();
@@ -42,23 +43,36 @@ class Application extends Container
 
     public function registerService()
     {
-        $binds = [
-            'kernel' => [\Blankphp\Contract\Kernel::class, Blankphp::class],
-            'request' => [\Blankphp\Contract\Request::class, Request::class],
-            'route' => [\Blankphp\Contract\Route::class, Route::class],
-            'app' => [\Blankphp\Contract\Container::class, Application::class],
-            'db' => Database::class,
-            'db.grammar' => [Grammar::class,MysqlGrammar::class],
-            'view' => [\Blankphp\Contract\View::class, View::class],
-            'view.static' => StaticView::class,
-            'cookie' => [CookieContract::class,Cookie::class],
-            'config' => Config::class,
-            'session' => [\Blankphp\Contract\Session::class,Session::class],
-            'scheme'=>Scheme::class,
-            'response'=>Response::class
-        ];
-        foreach ($binds as $k => $v)
-            $this->bind($k, $v);
+        if (is_file(APP_PATH . '/cache/framework/app.php')) {
+            $this->binds = require APP_PATH . '/cache/framework/app.php';
+        } else {
+            foreach (
+                [
+                    'kernel' => [\Blankphp\Contract\Kernel::class, HttpKernel::class],
+                    'request' => [\Blankphp\Contract\Request::class, Request::class],
+                    'route' => [\Blankphp\Contract\Route::class, Route::class],
+                    'app' => [\Blankphp\Contract\Container::class, Application::class],
+                    'db' => Database::class,
+                    'db.grammar' => [Grammar::class, MysqlGrammar::class],
+                    'view' => [\Blankphp\Contract\View::class, View::class],
+                    'view.static' => StaticView::class,
+                    'cookie' => [CookieContract::class, Cookie::class],
+                    'config' => Config::class,
+                    'session' => [\Blankphp\Contract\Session::class, Session::class],
+                    'scheme' => Scheme::class,
+                    'response' => Response::class
+                ]
+                as $k => $v) {
+                $this->bind($k, $v);
+            }
+        }
+
+    }
+
+    public function cacheBinds()
+    {
+        $file = new File();
+        $file->putCache($this->binds, 'app.php');
     }
 
     public function make($abstract, $parameters = [])
@@ -76,16 +90,14 @@ class Application extends Container
         $this->instance('app', $this);
     }
 
-    public function registerException(){
-        Error::register();
-    }
+
 
     public function registerProviders()
     {
         $this->instance('route', $this->make('route'));
     }
 
-    public function getSignal($abstract,$name = '')
+    public function getSignal($abstract, $name = '')
     {
         if (empty($name))
             return isset($this->signal[$abstract]) ? $this->signal[$abstract] : [];

@@ -11,6 +11,7 @@ namespace Blankphp\Route;
 use Blankphp\Application;
 use Blankphp\Cache\Driver\File;
 use Blankphp\Contract\Route as Contract;
+use Blankphp\Exception\HttpException;
 use Blankphp\Route\Traits\SetMiddleWare;
 use Blankphp\Route\Traits\ResolveSomeDepends;
 
@@ -26,12 +27,11 @@ class Route implements Contract
     protected $prefix;
     protected $group;
     protected $groupMiddleware;
-
+    protected $current=[];
     public function __construct(Application $app)
     {
         $this->app = $app;
     }
-
 
     public function get($uri, $action)
     {
@@ -65,12 +65,17 @@ class Route implements Contract
 
     public function addRoute($methods, $uri, $action)
     {
+        //uri {
+        //  method
+        //      action
+        //middleware
+        //}
         foreach ($methods as $method) {
-            $uri = empty($this->prefix) ? $uri : '/' . $this->prefix . $uri;
-            $this->route[$method][$uri] = ['action' => $action];
-            $this->setCurrentController($method, $uri);
-            $this->setOneMiddleWare($method, $uri);
-            empty($this->groupMiddleware) ?: $this->route[$method][$uri]['middleware']['group'] = $this->groupMiddleware;
+            $uri = empty($this->prefix) ? $uri : '/' . ltrim($this->prefix,'/') . $uri;
+            $this->route[$uri][$method] = ['action' => $action];
+            $this->setCurrentController($uri, $method);
+            $this->setOneMiddleWare($uri, $method);
+            empty($this->groupMiddleware) ?: $this->route[$uri][$method]['middleware']['group'] = $this->groupMiddleware;
         }
         return $this;
     }
@@ -120,42 +125,27 @@ class Route implements Contract
         return $this;
     }
 
-
-    public function findRoute($request)
-    {
+    public function match($request){
         //判断方法
         $method = $request->method;
         //获取访问的uri
         $uri = $request->uri;
-        //分组之后emmm把以前导入的方式转换一下
-        if (isset($this->route[$method][$uri])) {
-            //获取控制器
-            $temp = $this->route[$method][$uri];
-            $controller = $this->getController($temp['action']);
-            $middleware = $this->getOneMiddleWare($temp);
-            !empty($middleware) ? $this->setMiddleWare($middleware) : '';
-            return $controller;
-        } else {
-            $temps = array_filter(explode('/', $uri));
-            $parameters = [];
-            for ($i = 1; $i <= count($temps); $i++) {
-                if (is_numeric($temps[$i])) {
-                    $parameters[] = $temps[$i];
-                    $temps[$i] = '<id>';
-                }
-            }
-            $uri = '/' . implode('/', $temps);
-            if (isset($this->route[$method][$uri])) {
-                $temp = $this->route[$method][$uri];
-                $controller = $this->getController($temp['action']);
-                $middleware = $this->getOneMiddleWare($temp);
-                !empty($middleware) ? $this->setMiddleWare($middleware) : '';
-                array_push($controller, $parameters);
-                return $controller;
-            }
+        if (isset($this->route[$uri][$method])){
+            $this->current=$this->route[$uri][$method];
         }
-        header("Status Code: 404 NOTFOUND");
-        throw new \Exception('该路由暂无控制器', 5);
+    }
+
+    public function findRoute($request)
+    {
+        $this->match($request);
+        if (!empty($this->current)) {
+            //获取控制器
+            $controller = $this->getController($this->current['action']);
+            $middleware = $this->getOneMiddleWare($this->current);
+            $this->setMiddleWare($middleware);
+            return $controller;
+        }
+        throw new HttpException('该路由暂无控制器', 5);
     }
 
     public function getController($controller)
@@ -165,8 +155,8 @@ class Route implements Contract
             return array('Closure', $controller);
         //如果不是闭包
         $controller = explode('@', $controller);
-        $controllerName = !is_null($controller[0]) ? $this->controllerNamespace . '\\' . $controller[0] : '';
-        $method = !is_null($controller[1]) ? $controller[1] : '';
+        $controllerName = $this->controllerNamespace . '\\' . $controller[0] ;
+        $method = $controller[1] ;
         if (!is_null($controllerName) || !is_null($method))
             return array($controllerName, $method);
         throw new \Exception('控制器方法错误', 4);
@@ -206,6 +196,13 @@ class Route implements Contract
         return true;
     }
 
+    public function parseVar(){
+        //转换为普通变量
 
+    }
 
+    public function parseModel(){
+        //绑定模型变量
+
+    }
 }

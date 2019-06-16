@@ -40,17 +40,17 @@ trait SetMiddleWare
             return [];
     }
 
-    public function setOneMiddleWare( $method, $uri)
+    public function setOneMiddleWare( $uri, $method)
     {
         if (!empty($this->tempMiddleware)) {
-            $this->route[$method][$uri]['middleware']['alice']=[];
-            array_push($this->route[$method][$uri]['middleware']['alice'], $this->tempMiddleware);
+            $this->route[$uri][$method]['middleware']['alice']=[];
+            array_push($this->route[$uri][$method]['middleware']['alice'], $this->tempMiddleware);
         }
     }
 
-    public function setCurrentController($method, $uri)
+    public function setCurrentController($uri, $method)
     {
-        $this->currentController = array($method, $uri);
+        $this->currentController = array($uri, $method);
     }
 
     public function getCurrentController()
