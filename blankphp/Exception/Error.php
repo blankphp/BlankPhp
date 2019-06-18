@@ -10,7 +10,7 @@ class Error
 {
     protected static $handler;
     protected $app;
-    public function bootstrap(Application $app)
+    public function register(Application $app)
     {
         $this->app= $app;
         error_reporting(E_ALL);

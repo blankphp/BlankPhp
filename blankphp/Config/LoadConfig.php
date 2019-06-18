@@ -8,7 +8,7 @@ use Blankphp\Application;
 
 class LoadConfig
 {
-    public function bootstrap(Application $app)
+    public function load(Application $app)
     {
         if (!is_file(APP_PATH . 'cache/framework/config.php')) {
             $config= $this->loadConfigFile();

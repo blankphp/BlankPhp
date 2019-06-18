@@ -72,9 +72,12 @@ class Response
 
     }
 
-    public function header($code)
+    public function header($item)
     {
-        header(self::$httpStatus[$code]);
+        if (is_numeric($item))
+            header(self::$httpStatus[$item]);
+        elseif(in_array($item,self::$header))
+            header($item);
         return $this;
     }
 

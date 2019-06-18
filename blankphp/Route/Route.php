@@ -65,11 +65,6 @@ class Route implements Contract
 
     public function addRoute($methods, $uri, $action)
     {
-        //uri {
-        //  method
-        //      action
-        //middleware
-        //}
         foreach ($methods as $method) {
             $uri = empty($this->prefix) ? $uri : '/' . ltrim($this->prefix,'/') . $uri;
             $this->route[$uri][$method] = ['action' => $action];

@@ -7,6 +7,7 @@ namespace Blankphp\Collection;
 class Collection implements \ArrayAccess, \Iterator,\Countable
 {
     //数据的存储
+    protected $item = [];
     //初始化函数
     public function __construct()
     {

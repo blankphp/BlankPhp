@@ -18,7 +18,7 @@ class TestUnit extends TestCase
 
     public function testBasicTest()
     {
-        $response = $this->get('//');
+        $response = $this->get('/');
         $res='<style type="text/css">
                 *{ padding: 0; margin: 0;text-align: center }
                  body{
