@@ -15,12 +15,11 @@
   ],
   "autoload": {
     "psr-4": {
-      "App\\": "app/",
-      "Blankphp\\": "blankphp/"
-    },
-    "files": [
-      "blankphp/helpers/helper.php"
-    ]
+      "App\\": "app/"
+    }
   },
-  "prefer-stable": true
+  "prefer-stable": true,
+  "require": {
+    "blankqwq/framework": "v0.1.2"
+  }
 }

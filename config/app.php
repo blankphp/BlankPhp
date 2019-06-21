@@ -7,13 +7,18 @@
  */
 
 return [
+    //系统名称
     'APP_NAME' => 'test',
+    //时区
     'timezone'=>'Asia/Shanghai',
-
+    //url
     'url' => 'http://localhost/one',
+    //模板文件地址
     'template' => 'resource/template',
+    //静态文件地址
     'static' => 'static',
-
+    //配置缓存采用file
+    'configCache'=>'file',
 
     'cookie'=>[
         'expires'=>time()+3600*24*7,

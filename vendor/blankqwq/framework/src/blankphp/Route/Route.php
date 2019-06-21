@@ -79,6 +79,7 @@ class Route implements Contract
     {
         //引用中间件别名[然后获取]
         $middleware = func_get_args();
+
         if (!empty($this->currentController)) {
             foreach ($middleware as $item) {
                 $this->tempMiddleware = $item;

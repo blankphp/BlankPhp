@@ -1,1 +1,46 @@
-[]
+[
+    {
+        "name": "blankqwq/framework",
+        "version": "v0.1.2",
+        "version_normalized": "0.1.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/blankqwq/framework.git",
+            "reference": "72035e57da5e29a0a90f479449bd3c0f237efaf1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/blankqwq/framework/zipball/72035e57da5e29a0a90f479449bd3c0f237efaf1",
+            "reference": "72035e57da5e29a0a90f479449bd3c0f237efaf1",
+            "shasum": "",
+            "mirrors": [
+                {
+                    "url": "https://dl.laravel-china.org/%package%/%reference%.%type%",
+                    "preferred": true
+                }
+            ]
+        },
+        "time": "2019-06-21T12:40:15+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Blankphp\\": "src/blankphp/"
+            },
+            "files": [
+                "src/helpers/helper.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "沉迷",
+                "email": "1136589038@qq.com"
+            }
+        ],
+        "description": "a mvc framework"
+    }
+]

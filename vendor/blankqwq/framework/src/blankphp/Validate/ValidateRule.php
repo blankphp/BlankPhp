@@ -4,7 +4,8 @@
 namespace Blankphp\Validate;
 
 
-class Validate
+class ValidateRule
 {
+
 
 }

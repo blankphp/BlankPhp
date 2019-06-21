@@ -4,16 +4,18 @@
 namespace Blankphp\Cache\Driver;
 
 
-class File
+use Blankphp\Cache\Contract\Driver;
+
+class File implements Driver
 {
     public static $key;
-    public static $dir = APP_PATH . 'cache/framework/';
     protected static $cacheTime = 0;
+
     public function __construct()
     {
     }
 
-    public  function get($file)
+    public  function file($file)
     {
         //获取缓存
         if (is_file(self::$dir . $file))
@@ -37,4 +39,23 @@ class File
 
     }
 
+    public function set($key, $value, $ttl = null)
+    {
+        // TODO: Implement set() method.
+    }
+
+    public function remember($array, \Closure $closure)
+    {
+        // TODO: Implement remember() method.
+    }
+
+    public function has($key)
+    {
+        // TODO: Implement has() method.
+    }
+
+    public function get($key, $default)
+    {
+        // TODO: Implement get() method.
+    }
 }

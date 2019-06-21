@@ -1,0 +1,20 @@
+{
+    "name": "blankqwq/framework",
+    "description": "a mvc framework",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "沉迷",
+            "email": "1136589038@qq.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+          "Blankphp\\": "src/blankphp/"
+        },
+        "files": [
+            "src/helpers/helper.php"
+        ]
+    },
+     "prefer-stable": true
+}

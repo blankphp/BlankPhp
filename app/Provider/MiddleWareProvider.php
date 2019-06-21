@@ -8,6 +8,7 @@
 
 namespace App\Provider;
 use App\Middleware\StartSession;
+use App\Middleware\TestMiddleware;
 use \Blankphp\Provider\MiddleWareProvider as BaseProvider;
 
 class MiddleWareProvider extends BaseProvider
@@ -20,7 +21,7 @@ class MiddleWareProvider extends BaseProvider
     ];
     //注册中间件别名
     protected $registerMiddleware= [
-
+        'aa'=>TestMiddleware::class
     ];
 
     //中间件组合

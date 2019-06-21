@@ -8,6 +8,8 @@ use Blankphp\Application;
 
 class LoadConfig
 {
+    private $configPath=APP_PATH . 'config/';
+
     public function load(Application $app)
     {
         if (!is_file(APP_PATH . 'cache/framework/config.php')) {
@@ -24,17 +26,13 @@ class LoadConfig
     {
         //暂时耦合 -- 等会使用load解开耦合
         $config = [];
-        if (is_dir($this->configPath)) {
-            if ($dh = opendir($this->configPath)) {
-                while (($file = readdir($dh)) !== false) {
-                    if (preg_match_all("/(.+?)\.php/", $file, $matches)) {
-                        $config[$matches[1][0]] = require $this->configPath . $matches[0][0];
-                    }
-                }
-                closedir($dh);
-            }
+        foreach ( glob($this->configPath."*.php") as $file){
+            $fileName = substr($file, strlen($this->configPath), strlen($file));
+            $position = strpos($fileName, '.');
+            //是否截取其中的代码
+            $fileName = substr($fileName, 0, $position);
+            $config[$fileName] = require $file;
         }
-
         return $config;
     }
 

@@ -30,7 +30,8 @@ class Router
     {
         $middleware = $this->app->getSignal('GroupMiddleware',$this->route->getGroupMidlleware());
         $temp = $this->app->getSignal('AliceMiddleware',$this->route->getMiddleWare());
-        $this->middleware = array_filter(array_merge($middleware, [$temp]));
+        $this->middleware = array_filter(array_merge($middleware, $temp));
+
     }
 
     public function dispatcher($request)
