@@ -52,33 +52,34 @@ class Swoole
             $response->end();
         }
         unset($_GET);
-        if (!empty($request->get))
+        if (!empty($request->get)){
             foreach ($request->get as $key=>$value)
-                $_GET[$key]=$value;
+                $_GET[$key]=$value;}
 
         unset($_POST);
-        if (!empty($request->post))
+        if (!empty($request->post)){
             foreach ($request->post as $key=>$value)
-                $_POST[$key]=$value;
+                $_POST[$key]=$value;}
 
         unset($_SERVER);
-        if (!empty($request->server))
+        if (!empty($request->server)){
             foreach ($request->server as $key=>$value)
-                $_SERVER[strtoupper($key)]=$value;
+                $_SERVER[strtoupper($key)]=$value;}
 
         unset($_FILES);
-        if (!empty($request->files))
+        if (!empty($request->files)){
             foreach ($request->files as $key=>$value)
-                $_FILES[$key]=$value;
+                $_FILES[$key]=$value;}
 
         unset($_SESSION);
-        if (!empty($request->session))
+        if (!empty($request->session)){
             foreach ($request->session as $key=>$value)
-                $_SESSION[$key]=$value;
+                $_SESSION[$key]=$value;}
+        
         unset($_COOKIE);
-        if (!empty($request->cookie))
+        if (!empty($request->cookie)){
             foreach ($request->cookie as $key=>$value)
-                $_COOKIE[$key]=$value;
+                $_COOKIE[$key]=$value;}
         $app = Application::getInstance();
         $kernel = $app->make(\Blankphp\Contract\Kernel::class);
         //核心处理请求--->dispatcher
