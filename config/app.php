@@ -10,7 +10,7 @@ return [
     //系统名称
     'APP_NAME' => 'test',
     //时区
-    'timezone'=>'Asia/Shanghai',
+    'timezone' => 'Asia/Shanghai',
     //url
     'url' => 'http://localhost/one',
     //模板文件地址
@@ -18,23 +18,29 @@ return [
     //静态文件地址
     'static' => 'static',
     //配置缓存采用file
-    'configCache'=>'file',
-
-    'cookie'=>[
-        'expires'=>time()+3600*24*7,
-        'path'=>'/',
-        'domain'=>null,
-        'secure'=>false,
-        'httponly'=>false
+    'configCache' => 'file',
+    //日志存储方式
+    'log_driver' => 'file',
+    //缓存配置
+    'cache' => [
+        'driver' => 'redis'
     ],
 
-    
-    'session'=>[
-        'name'=>'BlankPhp',
-        'driver'=>'file',
-        'secure'=>false,
+    'cookie' => [
+        'expires' => time() + 3600 * 24 * 7,
+        'path' => '/',
+        'domain' => null,
+        'secure' => false,
+        'httponly' => false
     ],
-    'exception_handler'=>\Blankphp\Exception\Handler::class,
+
+
+    'session' => [
+        'name' => 'BlankPhp',
+        'driver' => 'redis',
+        'secure' => false,
+    ],
+    'exception_handler' => \Blankphp\Exception\Handler::class,
 
     'providers' => [
         //核心服务提供者
@@ -42,9 +48,22 @@ return [
         \App\Provider\RouteProvider::class,
         \App\Provider\MiddleWareProvider::class,
         //其他服务提供者
-        
         //引入其他的服务
     ],
+
+    'alice'=>[
+        'Application' =>Blankphp\Facade\Application::class,
+        'Cache'=>Blankphp\Facade\Cache::class,
+        'Cookie'=>Blankphp\Facade\Cookie::class,
+        'DB'=>Blankphp\Facade\DB::class,
+        'Route'=>Blankphp\Facade\Route::class,
+        'Request'=>Blankphp\Facade\Request::class,
+        'Scheme'=>Blankphp\Facade\Scheme::class,
+        'Session'=>Blankphp\Facade\Session::class,
+        'Log'=>Blankphp\Facade\Log::class,
+        'Redis'=>Blankphp\Facade\Redis::class,
+
+    ]
 
 
 ];

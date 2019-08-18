@@ -68,14 +68,16 @@
 
 ```
 composer create-project blankqwq/blankphp:"dev-master" <name>
+
 ```
+> `php blank config:cache` 生成/更新配置文件
 
 ```nginx
    root "<目录>/public";
     location / {
         try_files $uri $uri/ /index.php?$query_string;
     }
-nginx配置好重写规则
+//nginx配置好重写规则
 
 ```
 

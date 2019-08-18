@@ -16,15 +16,15 @@ return [
            'port' => '3306',
            'charset' => 'utf8mb4',
            'database' => 'test',
-           'username' => 'root',
-           'password' => 'admin',
+           'username' => 'homestead',
+           'password' => 'secret',
            'engine' => PDO::class,
        ],
 
 
        'redis'=>[
            'host'=>'127.0.0.1',
-           'port'=>'6379',
+           'port'=>6379,
            'password'=>null
        ],
    ]

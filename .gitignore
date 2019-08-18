@@ -1,2 +1,11 @@
 # ide
 *.idea/
+/cache/view
+/cache/static
+/cache/framework
+/vendor
+/coverage
+sftp-config.json
+composer.lock
+.subsplit
+.php_cs.cache
