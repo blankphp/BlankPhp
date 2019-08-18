@@ -7,5 +7,4 @@
  */
 
 
-Route::middleware('aa')->get('/', 'PagesController@index');
-Route::get('/user', 'PagesController@getone');
+Route::get('/', 'PagesController@index');
