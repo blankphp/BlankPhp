@@ -19,6 +19,25 @@
     书写该框架的流程，以及遇到的问题，会整理出来！
     文档正在书写中，但是有点忙，请等待
 
+
+#### 安装教程
+
+```
+composer create-project blankqwq/blankphp:"dev-master" <目录名称>
+```
+
+> `php blank config:cache` 生成/更新配置文件
+
+```nginx
+   root "<目录>/public";
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+//nginx配置好重写规则
+
+```
+
+
 #### 软件架构
     初步建设小型容器，满足基础的mvc服务，如何写出的会以文章形式公布
     1.web路由在routes/web.php中注册
@@ -64,22 +83,8 @@
 ├─README.md             README 文件
 ~~~
 
-#### 安装教程
 
-```
-composer create-project blankqwq/blankphp:"dev-master" <name>
 
-```
-> `php blank config:cache` 生成/更新配置文件
-
-```nginx
-   root "<目录>/public";
-    location / {
-        try_files $uri $uri/ /index.php?$query_string;
-    }
-//nginx配置好重写规则
-
-```
 
 #### 更新说明
     

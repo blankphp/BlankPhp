@@ -18,6 +18,12 @@
       "App\\": "app/"
     }
   },
+  "repositories": {
+    "blankqwq": {
+      "type": "path",
+      "url": "/home/vagrant/chart/framework/"
+    }
+  },
   "prefer-stable": true,
   "require": {
     "blankqwq/framework": "dev-master"
