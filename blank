@@ -22,7 +22,13 @@ function cacheConfig()
         }
     }
     $text = '<?php return ' . var_export($config, true) . ';';
-    file_put_contents(__DIR__ . '/cache/framework/config.php', $text);
+    if (is_file(__DIR__ . '/cache/framework/config.php')){
+        file_put_contents(__DIR__ . '/cache/framework/config.php', $text);
+    }else{
+        $handle = fopen(__DIR__ . '/cache/framework/config.php','w');
+        file_put_contents(__DIR__ . '/cache/framework/config.php', $text);
+        fclose($handle);
+    }
 }
 
 
