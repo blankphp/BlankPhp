@@ -3,6 +3,7 @@
 /cache/view/*
 /cache/static/*
 /cache/framework/*
+/cache/log/*
 /vendor
 /coverage
 sftp-config.json
