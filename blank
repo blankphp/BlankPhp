@@ -29,7 +29,7 @@ function cacheConfig()
     if (is_file(__DIR__ . '/cache/framework/config.php')){
         file_put_contents(__DIR__ . '/cache/framework/config.php', $text);
     }else{
-        $handle = fopen(__DIR__ . '/cache/framework/config.php','w');
+        $handle = fopen(__DIR__ . '/cache/framework/config.php','a');
         file_put_contents(__DIR__ . '/cache/framework/config.php', $text);
         fclose($handle);
     }

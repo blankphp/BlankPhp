@@ -9,4 +9,4 @@
 
 Route::get('/', 'PagesController@index');
 
-//Route::post('/qq', 'QqController@index');
+Route::post('/qq', 'QqController@index');
