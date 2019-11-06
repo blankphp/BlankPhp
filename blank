@@ -11,6 +11,7 @@ require(APP_PATH . '/vendor/autoload.php');
 function cacheConfig()
 {
     $config = [];
+
     if (is_dir(__DIR__ . '/config')) {
         if ($dh = opendir(__DIR__ . '/config')) {
             while (($file = readdir($dh)) !== false) {
@@ -20,6 +21,9 @@ function cacheConfig()
             }
             closedir($dh);
         }
+    }
+    if (!is_dir(__DIR__ . '/cache/framework')){
+        mkdir(__DIR__ . '/cache/framework');
     }
     $text = '<?php return ' . var_export($config, true) . ';';
     if (is_file(__DIR__ . '/cache/framework/config.php')){
@@ -36,7 +40,7 @@ function cacheConfig()
 if ($mod == 'config:cache') {
     //1.创建缓存,刷新缓存
     cacheConfig();
-    echo "successful create config cache";
+    echo "successful create config cache".PHP_EOL;
 } elseif ($mod == 'create:table') {
     $config = require "cache/framework/config.php";
     //创建创建表

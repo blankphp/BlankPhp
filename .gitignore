@@ -1,8 +1,8 @@
 # ide
 *.idea/
-/cache/view
-/cache/static
-/cache/framework
+/cache/view/*
+/cache/static/*
+/cache/framework/*
 /vendor
 /coverage
 sftp-config.json

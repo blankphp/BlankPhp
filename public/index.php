@@ -11,7 +11,7 @@ use Blankphp\Application;
 use Blankphp\Contract\Kernel;
 use Blankphp\Facade\Request;
 
-define('APP_PATH', __DIR__ . '/../');
+define('APP_PATH', dirname(__DIR__).'/');
 define('APP_DEBUG', true);
 define('APP_ENV', 'local');
 //psr4自动加载

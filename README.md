@@ -17,7 +17,6 @@
     4.blankphp-swoole扩展正在书写中
     5.安全方面目前考虑较少<正在学习php安全相关>
     书写该框架的流程，以及遇到的问题，会整理出来！
-    文档正在书写中，但是有点忙，请等待
 
 
 #### 安装教程
@@ -63,7 +62,6 @@ composer create-project blankqwq/blankphp:"dev-master" <目录名称>
 │  ├─static             静态目录
 │  └─.htaccess          用于apache的重写
 │
-├─blankphp              框架系统目录
 │
 ├─route                 路由注册目录
 │  ├─web.php           web
@@ -95,7 +93,6 @@ composer create-project blankqwq/blankphp:"dev-master" <目录名称>
 > Config等的解耦合
        
 
-       
 
 ```ab
 <!--1H2G Homestead 暂未优化-->

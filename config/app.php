@@ -51,19 +51,18 @@ return [
         //引入其他的服务
     ],
 
-    'alice'=>[
-        'Application' =>Blankphp\Facade\Application::class,
-        'Cache'=>Blankphp\Facade\Cache::class,
-        'Cookie'=>Blankphp\Facade\Cookie::class,
-        'DB'=>Blankphp\Facade\DB::class,
-        'Route'=>Blankphp\Facade\Route::class,
-        'Request'=>Blankphp\Facade\Request::class,
-        'Scheme'=>Blankphp\Facade\Scheme::class,
-        'Session'=>Blankphp\Facade\Session::class,
-        'Log'=>Blankphp\Facade\Log::class,
-        'Redis'=>Blankphp\Facade\Redis::class,
+    'alice' => [
+        'Application' => Blankphp\Facade\Application::class,
+        'Cache' => Blankphp\Facade\Cache::class,
+        'Cookie' => Blankphp\Facade\Cookie::class,
+        'DB' => Blankphp\Facade\DB::class,
+        'Route' => Blankphp\Facade\Route::class,
+        'Request' => Blankphp\Facade\Request::class,
+        'Scheme' => Blankphp\Facade\Scheme::class,
+        'Session' => Blankphp\Facade\Session::class,
+        'Log' => Blankphp\Facade\Log::class,
+        'Redis' => Blankphp\Facade\Redis::class,
 
     ]
-
 
 ];
