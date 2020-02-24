@@ -6,11 +6,11 @@ use Blankphp\Database\Query\Builder;
 array_shift($argv);
 $mod = $argv[0];
 $command = explode(':', $mod);
-
-define('APP_PATH', dirname(__DIR__).'/');
+define('DS',DIRECTORY_SEPARATOR);
+define('APP_PATH', dirname(__FILE__).DS);
 define('APP_DEBUG', true);
 //psr4自动加载
-require APP_PATH . '/vendor/autoload.php';
+require APP_PATH . 'vendor'.DS.'autoload.php';
 //IOC
 $kernel = Blankphp\Application::getInstance()->make(Blankphp\Contract\Kernel::class);
 
