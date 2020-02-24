@@ -15,7 +15,7 @@ return [
            'driver'=>'mysql',
            'port' => '3306',
            'charset' => 'utf8mb4',
-           'database' => 'test',
+           'database' => 'test3',
            'username' => 'homestead',
            'password' => 'secret',
            'engine' => PDO::class,

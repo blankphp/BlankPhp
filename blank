@@ -6,8 +6,15 @@ use Blankphp\Database\Query\Builder;
 array_shift($argv);
 $mod = $argv[0];
 $command = explode(':', $mod);
-define('APP_PATH', __DIR__);
-require(APP_PATH . '/vendor/autoload.php');
+
+define('APP_PATH', dirname(__DIR__).'/');
+define('APP_DEBUG', true);
+//psr4自动加载
+require APP_PATH . '/vendor/autoload.php';
+//IOC
+$kernel = Blankphp\Application::getInstance()->make(Blankphp\Contract\Kernel::class);
+
+
 function cacheConfig()
 {
     $config = [];
@@ -23,7 +30,7 @@ function cacheConfig()
         }
     }
     if (!is_dir(__DIR__ . '/cache/framework')){
-        mkdir(__DIR__ . '/cache/framework');
+        mkdir(__DIR__ . '/cache/framework',$mode = 0777, $recursive = true);
     }
     $text = '<?php return ' . var_export($config, true) . ';';
     if (is_file(__DIR__ . '/cache/framework/config.php')){
@@ -52,7 +59,8 @@ if ($mod == 'config:cache') {
     $builder = new Builder($grammer);
     \Blankphp\Scheme\Scheme::setInstance($DbConfig, $builder);
     //所要创建表的模型
-    \App\Models\User::createTable();
+
+    \App\Models\Story::createTable();
 
 } elseif ($argv[0]) {
     //3.执行创建数据库

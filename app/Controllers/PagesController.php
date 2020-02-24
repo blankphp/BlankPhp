@@ -8,6 +8,9 @@
 
 namespace App\Controllers;
 
+use App\Lib\CoolQ;
+use App\Lib\CQ;
+use App\Lib\HttpCurl;
 use App\Models\User;
 use \Blankphp\Contract\Request;
 use \Blankphp\Facade\Cache;
@@ -34,15 +37,5 @@ class PagesController extends Controller
                 <blankPhp id="dadad12596"></blankPhp>';
     }
 
-////
-//    public function getone($id)
-//    {
-//        var_dump($id);
-////        $student = DB::table('users')->create(['id'=>'default','sid'=>'ddd','name'=>'wudi22','sex'=>'男','tel'=>'']);
-//        $student = DB::table('users')->where('id', '=', '30')->get();
-//        $student = DB::table('users')->where('id', '=', '30')->delete();
-//        $student = DB::table('users')->where('id', '=', '31')->update(['name' => 'hahah']);
-////        return view('stu', ['student' => $student]);
-//        var_dump($student);
-//    }
+
 }

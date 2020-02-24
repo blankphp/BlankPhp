@@ -3,10 +3,10 @@
 [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
 [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
 [![Build Status](https://travis-ci.org/blankqwq/BlankPhp.svg?branch=master)](https://travis-ci.org/blankqwq/BlankPhp)
-<a href="https://github.com/blankqwq/BlankPhp"><img src="https://img.shields.io/badge/php-7.1%2B-blue.svg" alt="PHP Version"></a>
-<a href="https://github.com/blankqwq/BlankPhp/releases"><img src="https://img.shields.io/badge/version-1.0.0-lightgrey.svg" alt="Version"></a>
-<a href="https://github.com/blankqwq/BlankPhp"><img src="https://poser.pugx.org/fastd/fastd/license" /></a>
-[![codecov](https://codecov.io/gh/blankqwq/BlankPhp/branch/master/graph/badge.svg)](https://codecov.io/gh/blankqwq/BlankPhp)
+<a href="https://github.com/blankphp/BlankPhp"><img src="https://img.shields.io/badge/php-7.2%2B-blue.svg" alt="PHP Version"></a>
+<a href="https://github.com/blankphp/BlankPhp/releases"><img src="https://img.shields.io/badge/version-1.0.0-lightgrey.svg" alt="Version"></a>
+<a href="https://github.com/blankphp/BlankPhp"><img src="https://poser.pugx.org/fastd/fastd/license" /></a>
+[![codecov](https://codecov.io/gh/blankphp/BlankPhp/branch/master/graph/badge.svg)](https://codecov.io/gh/blankphp/BlankPhp)
 #### 介绍
 
 > 一个满足于基本开发的MVC轻量级框架`route` `IOC` `DB` `view` `middleware`已经设计完基本使用
@@ -86,11 +86,7 @@ composer create-project blankqwq/blankphp:"dev-master" <目录名称>
 
 #### 更新说明
     
-> Cache的完成
-
-> Log的完成
-
-> Config等的解耦合
+> 基本完成
        
 
 
