@@ -23,7 +23,7 @@ return [
     'log_driver' => 'file',
     //缓存配置
     'cache' => [
-        'driver' => 'redis'
+
     ],
 
     'cookie' => [

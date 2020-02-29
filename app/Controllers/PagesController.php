@@ -13,7 +13,7 @@ use App\Lib\CQ;
 use App\Lib\HttpCurl;
 use App\Models\User;
 use \Blankphp\Contract\Request;
-use \Blankphp\Facade\Cache;
+use Blankphp\Facade\Cache;
 use \Blankphp\Facade\DB;
 use \Blankphp\Facade\Session;
 
@@ -21,6 +21,7 @@ class PagesController extends Controller
 {
     public function index(Request $request)
     {
+
         return '<style type="text/css">
                 *{ padding: 0; margin: 0;text-align: center }
                  body{
