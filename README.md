@@ -2,7 +2,7 @@
 
 [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
 [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
-[![Build Status](https://travis-ci.org/blankqwq/BlankPhp.svg?branch=master)](https://travis-ci.org/blankqwq/BlankPhp)
+[![Build Status](https://travis-ci.org/blankphp/BlankPhp.svg?branch=master)](https://travis-ci.org/blankphp/BlankPhp)
 <a href="https://github.com/blankphp/BlankPhp"><img src="https://img.shields.io/badge/php-7.2%2B-blue.svg" alt="PHP Version"></a>
 <a href="https://github.com/blankphp/BlankPhp/releases"><img src="https://img.shields.io/badge/version-1.0.0-lightgrey.svg" alt="Version"></a>
 <a href="https://github.com/blankphp/BlankPhp"><img src="https://poser.pugx.org/fastd/fastd/license" /></a>
