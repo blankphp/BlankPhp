@@ -8,3 +8,4 @@
 
 
 Route::get('/', 'PagesController@index');
+

@@ -16,6 +16,7 @@ use \Blankphp\Contract\Request;
 use Blankphp\Facade\Cache;
 use \Blankphp\Facade\DB;
 use \Blankphp\Facade\Session;
+use \Blankphp\Facade\Cookie;
 
 class PagesController extends Controller
 {

@@ -10,8 +10,9 @@
 use Blankphp\Application;
 use Blankphp\Contract\Kernel;
 use Blankphp\Facade\Request;
+
 define('DS', DIRECTORY_SEPARATOR);
-define('APP_PATH', dirname(__DIR__).DS);
+define('APP_PATH', dirname(__DIR__) . DS);
 define('APP_DEBUG', true);
 define('APP_ENV', 'local');
 //psr4自动加载

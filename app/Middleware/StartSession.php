@@ -12,11 +12,11 @@ class StartSession
     public function handle($request, \Closure $next)
     {
         if (APP_ENV != 'testing') {
-            if (PHP_SESSION_ACTIVE !== session_status())
-                Session::start();
+            Session::start();
         }
         $response = $next($request);
-//存储和发送cookie
+        //存储和发送cookie
+        Session::end();
         return $response;
     }
 }

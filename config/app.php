@@ -39,6 +39,8 @@ return [
         'name' => 'BlankPhp',
         'driver' => 'redis',
         'secure' => false,
+        'expire' => 60 * 60 * 24 * 7,
+        'handler' => '\Blankphp\Session\Driver\Redis'
     ],
     'exception_handler' => \Blankphp\Exception\Handler::class,
 

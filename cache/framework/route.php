@@ -9,7 +9,7 @@
       'middleware' => 
       array (
       ),
-      'group' => 'api',
+      'group' => 'web',
       'method' => 
       array (
         0 => 'GET',
@@ -26,7 +26,7 @@
       'middleware' => 
       array (
       ),
-      'group' => 'web',
+      'group' => 'api',
       'method' => 
       array (
         0 => 'POST',

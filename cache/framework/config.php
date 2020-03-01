@@ -13,7 +13,7 @@
     ),
     'cookie' => 
     array (
-      'expires' => 1583644126,
+      'expires' => 1583668405,
       'path' => '/',
       'domain' => NULL,
       'secure' => false,
@@ -24,6 +24,8 @@
       'name' => 'BlankPhp',
       'driver' => 'redis',
       'secure' => false,
+      'expire' => 604800,
+      'handler' => '\\Blankphp\\Session\\Driver\\Redis',
     ),
     'exception_handler' => 'Blankphp\\Exception\\Handler',
     'providers' => 

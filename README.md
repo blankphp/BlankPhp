@@ -96,40 +96,39 @@ composer create-project blankqwq/blankphp:"dev-master" <目录名称>
 
 
 ```ab
-<!--1H2G Homestead 暂未优化-->
+<!--2H2G Homestead 暂未优化(关闭gzip等)-->
 Server Software:        nginx/1.15.5
 Server Hostname:        www.stu.stu
 Server Port:            80
 
 Document Path:          /
 Document Length:        504 bytes
-
 Concurrency Level:      100
-Time taken for tests:   154.578 seconds
-Complete requests:      10000
+Time taken for tests:   6.250 seconds
+Complete requests:      500
 Failed requests:        0
-Total transferred:      7770000 bytes
-HTML transferred:       5040000 bytes
-Requests per second:    64.69 [#/sec] (mean)
-Time per request:       1545.784 [ms] (mean)
-Time per request:       15.458 [ms] (mean, across all concurrent requests)
-Transfer rate:          49.09 [Kbytes/sec] received
+Total transferred:      483500 bytes
+HTML transferred:       391000 bytes
+Requests per second:    80.00 [#/sec] (mean)
+Time per request:       1249.962 [ms] (mean)
+Time per request:       12.500 [ms] (mean, across all concurrent requests)
+Transfer rate:          75.55 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
-Connect:        0    1   0.7      1      15
-Processing:   138 1538 115.6   1530    2110
-Waiting:       61 1538 115.7   1530    2109
-Total:        138 1539 115.6   1531    2111
+Connect:        0    0   0.3      0       1
+Processing:    17  949 235.8   1033    1112
+Waiting:       17  948 235.9   1031    1111
+Total:         17  949 235.8   1033    1112
 
 Percentage of the requests served within a certain time (ms)
-  50%   1531
-  66%   1557
-  75%   1576
-  80%   1590
-  90%   1640
-  95%   1708
-  98%   1777
-  99%   1825
- 100%   2111 (longest request)
+  50%   1033
+  66%   1046
+  75%   1061
+  80%   1069
+  90%   1079
+  95%   1084
+  98%   1090
+  99%   1094
+ 100%   1112 (longest request)
 ```
