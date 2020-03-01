@@ -8,18 +8,16 @@ class TestUnit extends TestCase
 
     public function createApplication()
     {
-        define('APP_PATH', __DIR__ . '/../');
+        define('APP_PATH', dirname(__DIR__));
         $app = \Blankphp\Application::init();
-
-        $app->make(\Blankphp\Contract\Kernel::class)->bootstrap();
-
+        $app->make(\Blankphp\Contract\Kernel::class);
         return $this->app = $app;
     }
 
     public function testBasicTest()
     {
         $response = $this->get('/');
-        $res='<style type="text/css">
+        $res = '<style type="text/css">
                 *{ padding: 0; margin: 0;text-align: center }
                  body{
                   font-family: Helvetica, "Microsoft YaHei", Arial, sans-serif;
