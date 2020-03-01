@@ -16,7 +16,9 @@ class StartSession
         }
         $response = $next($request);
         //存储和发送cookie
-        Session::end();
+        if (APP_ENV != 'testing') {
+            Session::end();
+        }
         return $response;
     }
 }
