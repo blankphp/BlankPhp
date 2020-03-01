@@ -5,7 +5,7 @@ php:
   - 7.4
 before_script:
   - composer install
-  - php blank config:cache
+  - php blank cache:config
 script:
     - phpunit --coverage-clover=coverage.xml
 after_success:
