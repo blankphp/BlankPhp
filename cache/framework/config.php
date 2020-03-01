@@ -13,7 +13,7 @@
     ),
     'cookie' => 
     array (
-      'expires' => 1583668405,
+      'expires' => 1583677983,
       'path' => '/',
       'domain' => NULL,
       'secure' => false,

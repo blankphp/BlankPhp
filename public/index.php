@@ -26,7 +26,3 @@ $response = $kernel->handle(
 //返回响应
 $response->send();
 //清理空间
-
-
-
-
