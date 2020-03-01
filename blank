@@ -1,80 +1,14 @@
 <?php
-//cli模式  —— 运行一定的命令
-
-use Blankphp\Database\Query\Builder;
-
-array_shift($argv);
-$mod = $argv[0];
-$command = explode(':', $mod);
-define('DS',DIRECTORY_SEPARATOR);
-define('APP_PATH', dirname(__FILE__).DS);
-define('APP_DEBUG', true);
+//cli模式  —— 待更新,目前为垃圾模式
+define('DS', DIRECTORY_SEPARATOR);
+define('APP_PATH', __DIR__ . DS);
 //psr4自动加载
-require APP_PATH . 'vendor'.DS.'autoload.php';
+require APP_PATH . 'vendor/autoload.php';
 //IOC
-$kernel = Blankphp\Application::getInstance()->make(Blankphp\Contract\Kernel::class);
-
-
-function cacheConfig()
-{
-    $config = [];
-
-    if (is_dir(__DIR__ . '/config')) {
-        if ($dh = opendir(__DIR__ . '/config')) {
-            while (($file = readdir($dh)) !== false) {
-                if (preg_match_all("/(.+?)\.php/", $file, $matches)) {
-                    $config[$matches[1][0]] = require __DIR__ . '/config/' . $matches[0][0];
-                }
-            }
-            closedir($dh);
-        }
-    }
-    if (!is_dir(__DIR__ . '/cache/framework')){
-        mkdir(__DIR__ . '/cache/framework',$mode = 0777, $recursive = true);
-    }
-    $text = '<?php return ' . var_export($config, true) . ';';
-    if (is_file(__DIR__ . '/cache/framework/config.php')){
-        file_put_contents(__DIR__ . '/cache/framework/config.php', $text);
-    }else{
-        $handle = fopen(__DIR__ . '/cache/framework/config.php','a');
-        file_put_contents(__DIR__ . '/cache/framework/config.php', $text);
-        fclose($handle);
-    }
-}
-
-
-//分割一下,使用一个command类来进行
-if ($mod == 'config:cache') {
-    //1.创建缓存,刷新缓存
-    cacheConfig();
-    echo "successful create config cache".PHP_EOL;
-} elseif ($mod == 'create:table') {
-    $config = require "cache/framework/config.php";
-    //创建创建表
-    $config = $config['db'];
-    $driver = $config['default'];
-    $DbConfig = $config['database'][$driver];
-    $grammer_class = 'Blankphp\\Database\\Grammar\\' . ucwords(strtolower($driver)) . 'Grammar';
-    $grammer = new $grammer_class;
-    $builder = new Builder($grammer);
-    \Blankphp\Scheme\Scheme::setInstance($DbConfig, $builder);
-    //所要创建表的模型
-
-    \App\Models\Story::createTable();
-
-} elseif ($argv[0]) {
-    //3.执行创建数据库
-
-} elseif ($argv[0]) {
-    //4.刷新缓存等命令
-
-} elseif ($argv[0]) {
-    //4.刷新缓存等命令
-
-} else {
-
-}
-
-
-
-
+$kernel = Blankphp\Application::getInstance()->make(Blankphp\Kernel\ConsoleKernel::class);
+//http核心请求
+$response = $kernel->handle(
+    Blankphp\Console\Args::capture($argv)
+);
+//返回响应
+$response->send();
