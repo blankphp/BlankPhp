@@ -21,7 +21,6 @@ class PagesController extends Controller
 {
     public function index(Request $request)
     {
-
         return '<style type="text/css">
                 *{ padding: 0; margin: 0;text-align: center }
                  body{

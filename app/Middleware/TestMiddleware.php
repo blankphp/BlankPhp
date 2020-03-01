@@ -9,10 +9,8 @@ use Blankphp\Facade\Session;
 
 class TestMiddleware
 {
-    public static function handle($request, \Closure $next)
+    public function handle($request, \Closure $next)
     {
-
-
         $response = $next($request);
 //存储和发送cookie
         return $response;
