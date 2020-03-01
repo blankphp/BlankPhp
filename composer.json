@@ -22,6 +22,6 @@
   "prefer-stable": true,
   "require": {
     "php": ">=7.1.0",
-    "blankqwq/framework": "^dev-master"
+    "blankqwq/framework": "dev-master"
   }
 }
