@@ -25,6 +25,11 @@
 composer create-project blankqwq/blankphp:"dev-master" <目录名称>
 ```
 
+## 参与开发
+
+<a href="https://github.com/blankphp/framework">核心包</a>
+
+
 > `php blank config:cache` 生成/更新配置文件
 
 ```nginx

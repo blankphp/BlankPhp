@@ -1,13 +1,9 @@
 # ide
 *.idea/
-/cache/view/*
-/cache/static/*
-/cache/framework/*
-/cache/log/*
 /vendor
 /coverage
 sftp-config.json
 composer.lock
 .subsplit
 .php_cs.cache
-.git
+composer.phar
