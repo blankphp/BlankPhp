@@ -7,25 +7,20 @@
  */
 
 return [
-    'default'=>'mysql',
+    //数据库配置
+    'default' => 'mysql',
 
-   'database'=>[
-       'mysql'=>[
-           'host' => '127.0.0.1',
-           'driver'=>'mysql',
-           'port' => '3306',
-           'charset' => 'utf8mb4',
-           'database' => 'test3',
-           'username' => 'homestead',
-           'password' => 'secret',
-           'engine' => PDO::class,
-       ],
+    'database' => [
+        'mysql' => [
+            'host' => '127.0.0.1',
+            'driver' => 'mysql',
+            'port' => '3306',
+            'charset' => 'utf8mb4',
+            'database' => 'test3',
+            'username' => 'homestead',
+            'password' => 'secret',
+            'engine' => PDO::class,
+        ],
 
-
-       'redis'=>[
-           'host'=>'127.0.0.1',
-           'port'=>6379,
-           'password'=>null
-       ],
-   ]
+    ]
 ];
