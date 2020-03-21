@@ -9,7 +9,7 @@ class TestUnit extends TestCase
     public function createApplication()
     {
         define('APP_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR);
-        $app = \Blankphp\Application::getInstance();
+        $app = \BlankPhp\Application::getInstance();
         return $this->app = $app;
     }
 
@@ -30,10 +30,10 @@ class TestUnit extends TestCase
     public function call($method, $uri, $parameters = [], $cookies = [], $files = [], $server = [], $content = null)
     {
         $this->createApplication();
-        $kernel = $this->app->make(\Blankphp\Contract\Kernel::class);
+        $kernel = $this->app->make(\BlankPhp\Contract\Kernel::class);
         define('APP_ENV', 'testing');
         $response = $kernel->handle(
-            \Blankphp\Request\TestRequest::create($method, $uri, $parameters, $cookies,
+            \BlankPhp\Request\TestRequest::create($method, $uri, $parameters, $cookies,
                 $files, $server, $content)
         );
         return $response->returnSend();

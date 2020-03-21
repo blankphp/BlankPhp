@@ -11,12 +11,59 @@
 
 > 一个满足于基本开发的MVC轻量级框架`route` `IOC` `DB` `view` `middleware`已经设计完基本使用
 
-    1.本框架意义在于理解IOC容器，以及依赖注入的思想
-    2.本框架富含基本容器以及依赖注入
-    3.框架具有路由以及中间件和基本orm功能，满足一个基本的快速开发概念
-    4.blankphp-swoole扩展正在书写中
-    5.安全方面目前考虑较少<正在学习php安全相关>
+1. 本框架意义在于理解IOC容器，以及依赖注入的思想
+2. 本框架富含基本容器以及依赖注入
+3. 框架具有路由以及中间件和基本orm功能，满足一个基本的快速开发概念
+4. blankphp-swoole，blank-coolQ,blank-oauth2扩展正在书写中
+
     书写该框架的流程，以及遇到的问题，会整理出来！
+
+
+#### 更新说明
+
+- [ ] 文档
+- [x] 容器
+    - [x] 依赖注入
+    - [x] 容器清理与重新注册
+- [x] 管道
+    - [x] 中间件
+    - [ ] Pipeline扩展与异常
+- [x] 门面
+    - [x] 基本完成
+    - [ ] 清理门面中的对象
+- [x] 服务提供者
+    - [x] register
+    - [x] boot
+    - [ ] publish
+- [x] Session
+    - [x] RedisSessionHandler
+    - [ ] FileSessionHandler
+    - [ ] DatabaseSessionHandler
+- [x] Database
+    - [x] Builder
+    - [x] Grammar
+    - [ ] Secure
+- [x] Cookie
+- [x] View
+    - [x] Builder
+    - [ ] make
+    - [ ] Diy
+- [ ] 国际化
+    - [ ] 国际化支持
+- [ ] 安全
+    - [ ] 验证码
+    - [ ] 加密
+    - [ ] xss
+    - [x] 防注入
+- [ ] Swoole
+    - [ ] Websocket
+    - [ ] Process
+    - [ ] Job
+    - [ ] RPC
+    - [ ] ...
+- [ ] FormValidate
+- [ ] Console
+    - [x] ConsoleKernel
 
 
 #### 安装教程
@@ -86,56 +133,9 @@ composer create-project blankqwq/blankphp:"dev-master" <目录名称>
 ├─README.md             README 文件
 ~~~
 
-#### 更新说明
-
-- [ ] 文档
-- [x] 容器
-    - [x] 依赖注入
-    - [x] 容器清理与重新注册
-- [x] 管道
-    - [x] 中间件
-    - [ ] Pipeline扩展与异常
-- [x] 门面
-    - [x] 基本完成
-    - [ ] 清理门面中的对象
-- [x] 服务提供者
-    - [x] register
-    - [x] boot
-    - [ ] publish
-- [x] Session
-    - [x] RedisSessionHandler
-    - [ ] FileSessionHandler
-    - [ ] DatabaseSessionHandler
-- [x] Database
-    - [x] Builder
-    - [ ] Grammar
-    - [ ] Secure
-- [x] Cookie
-- [x] View
-    - [x] Builder
-    - [ ] make
-    - [ ] Diy
-- [ ] 国际化
-    - [ ] 国际化支持
-- [ ] 安全
-    - [ ] 验证码
-    - [ ] 加密
-    - [ ] xss
-    - [ ] 防注入
-- [ ] Swoole
-    - [ ] Websocket
-    - [ ] Process
-    - [ ] Job
-    - [ ] RPC
-    - [ ] ...
-- [ ] FormValidate
-- [ ] Console
-    - [x] ConsoleKernel
-       
-
 
 ```ab
-<!--2H2G Homestead 暂未优化(关闭gzip等)-->
+<!--2H2G Homestead 暂未优化(关闭gzip，缓存配置文件，路由等等等)-->
 Server Software:        nginx
 Server Hostname:        localhost
 Server Port:            80

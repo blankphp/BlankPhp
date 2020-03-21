@@ -5,10 +5,10 @@ define('APP_PATH', __DIR__ . DS);
 //psr4自动加载
 require APP_PATH . 'vendor/autoload.php';
 //IOC
-$kernel = Blankphp\Application::getInstance()->make(Blankphp\Kernel\ConsoleKernel::class);
+$kernel = BlankPhp\Application::getInstance()->make(BlankPhp\Kernel\ConsoleKernel::class);
 //http核心请求
 $response = $kernel->handle(
-    Blankphp\Console\Args::capture($argv)
+    BlankPhp\Console\Args::capture($argv)
 );
 //返回响应
 $response->send();

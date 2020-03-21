@@ -7,7 +7,7 @@
  */
 
 namespace App\Controllers;
-use \Blankphp\Controller\Controller as BaseController;
+use \BlankPhp\Controller\Controller as BaseController;
 
 class Controller extends BaseController
 {

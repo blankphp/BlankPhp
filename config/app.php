@@ -38,12 +38,12 @@ return [
         'expire' => 60 * 60 * 24 * 7,
     ],
     //异常处理
-    'exception_handler' => \Blankphp\Exception\Handler::class,
-    'error_handler' => \Blankphp\Exception\Handler::class,
+    'exception_handler' => \BlankPhp\Exception\Handler::class,
+    'error_handler' => \BlankPhp\Exception\Handler::class,
     //服务提供者
     'providers' => [
         //核心服务提供者
-        \Blankphp\Driver\DriverProvider::class,
+        \BlankPhp\Driver\DriverProvider::class,
         \App\Provider\AppServiceProvider::class,
         \App\Provider\RouteProvider::class,
         \App\Provider\MiddleWareProvider::class,
@@ -54,16 +54,16 @@ return [
 
     //别名配置
     'alice' => [
-        'Application' => Blankphp\Facade\Application::class,
-        'Cache' => Blankphp\Facade\Cache::class,
-        'Cookie' => Blankphp\Facade\Cookie::class,
-        'DB' => Blankphp\Facade\DB::class,
-        'Route' => Blankphp\Facade\Route::class,
-        'Request' => Blankphp\Facade\Request::class,
-        'Scheme' => Blankphp\Facade\Scheme::class,
-        'Session' => Blankphp\Facade\Session::class,
-        'Log' => Blankphp\Facade\Log::class,
-        'Redis' => Blankphp\Facade\Redis::class,
+        'Application' => BlankPhp\Facade\Application::class,
+        'Cache' => BlankPhp\Facade\Cache::class,
+        'Cookie' => BlankPhp\Facade\Cookie::class,
+        'DB' => BlankPhp\Facade\DB::class,
+        'Route' => BlankPhp\Facade\Route::class,
+        'Request' => BlankPhp\Facade\Request::class,
+        'Scheme' => BlankPhp\Facade\Scheme::class,
+        'Session' => BlankPhp\Facade\Session::class,
+        'Log' => BlankPhp\Facade\Log::class,
+        'Redis' => BlankPhp\Facade\Redis::class,
     ]
 
 ];

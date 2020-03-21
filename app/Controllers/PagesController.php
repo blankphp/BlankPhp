@@ -12,11 +12,11 @@ use App\Lib\CoolQ;
 use App\Lib\CQ;
 use App\Lib\HttpCurl;
 use App\Models\User;
-use \Blankphp\Contract\Request;
-use Blankphp\Facade\Cache;
-use \Blankphp\Facade\DB;
-use \Blankphp\Facade\Session;
-use \Blankphp\Facade\Cookie;
+use \BlankPhp\Contract\Request;
+use BlankPhp\Facade\Cache;
+use \BlankPhp\Facade\DB;
+use \BlankPhp\Facade\Session;
+use \BlankPhp\Facade\Cookie;
 
 class PagesController extends Controller
 {

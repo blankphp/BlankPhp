@@ -6,7 +6,7 @@
  * Time: 9:04
  */
 
-use \Blankphp\Route\Route;
+use \BlankPhp\Route\Route;
 
 Route::post('/', 'PagesController@index');
 
