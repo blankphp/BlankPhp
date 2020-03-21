@@ -9,9 +9,9 @@
 namespace App\Provider;
 
 
-use Blankphp\Cache\Cache;
-use Blankphp\Cache\RouteCache;
-use Blankphp\Provider\Provider;
+use BlankPhp\Cache\Cache;
+use BlankPhp\Cache\RouteCache;
+use BlankPhp\Provider\Provider;
 
 class RouteProvider extends Provider
 {

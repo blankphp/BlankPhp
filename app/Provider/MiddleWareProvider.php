@@ -9,7 +9,7 @@
 namespace App\Provider;
 use App\Middleware\StartSession;
 use App\Middleware\TestMiddleware;
-use \Blankphp\Provider\MiddleWareProvider as BaseProvider;
+use \BlankPhp\Provider\MiddleWareProvider as BaseProvider;
 
 class MiddleWareProvider extends BaseProvider
 {

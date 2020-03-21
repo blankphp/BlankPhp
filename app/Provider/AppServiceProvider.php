@@ -4,7 +4,7 @@
 namespace App\Provider;
 use App\Models\User;
 use App\Observer\UserObserve;
-use Blankphp\Provider\Provider;
+use BlankPhp\Provider\Provider;
 
 class AppServiceProvider extends Provider
 {

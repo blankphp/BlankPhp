@@ -4,8 +4,8 @@
 namespace App\Middleware;
 
 
-use Blankphp\Facade\Cookie;
-use Blankphp\Facade\Session;
+use BlankPhp\Facade\Cookie;
+use BlankPhp\Facade\Session;
 
 class TestMiddleware
 {
