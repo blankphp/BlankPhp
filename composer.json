@@ -23,5 +23,11 @@
   "require": {
     "php": ">=7.1.0",
     "blankqwq/framework": "dev-master"
+  },
+  "repositories": {
+    "blankqwq": {
+      "type": "path",
+      "url": "../framework"
+    }
   }
 }

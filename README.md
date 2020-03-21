@@ -86,49 +86,90 @@ composer create-project blankqwq/blankphp:"dev-master" <目录名称>
 ├─README.md             README 文件
 ~~~
 
-
-
-
 #### 更新说明
-    
-> 基本完成
+
+- [ ] 文档
+- [x] 容器
+    - [x] 依赖注入
+    - [x] 容器清理与重新注册
+- [x] 管道
+    - [x] 中间件
+    - [ ] Pipeline扩展与异常
+- [x] 门面
+    - [x] 基本完成
+    - [ ] 清理门面中的对象
+- [x] 服务提供者
+    - [x] register
+    - [x] boot
+    - [ ] publish
+- [x] Session
+    - [x] RedisSessionHandler
+    - [ ] FileSessionHandler
+    - [ ] DatabaseSessionHandler
+- [x] Database
+    - [x] Builder
+    - [ ] Grammar
+    - [ ] Secure
+- [x] Cookie
+- [x] View
+    - [x] Builder
+    - [ ] make
+    - [ ] Diy
+- [ ] 国际化
+    - [ ] 国际化支持
+- [ ] 安全
+    - [ ] 验证码
+    - [ ] 加密
+    - [ ] xss
+    - [ ] 防注入
+- [ ] Swoole
+    - [ ] Websocket
+    - [ ] Process
+    - [ ] Job
+    - [ ] RPC
+    - [ ] ...
+- [ ] FormValidate
+- [ ] Console
+    - [x] ConsoleKernel
        
 
 
 ```ab
 <!--2H2G Homestead 暂未优化(关闭gzip等)-->
-Server Software:        nginx/1.15.5
-Server Hostname:        www.stu.stu
+Server Software:        nginx
+Server Hostname:        localhost
 Server Port:            80
 
 Document Path:          /
-Document Length:        504 bytes
-Concurrency Level:      100
-Time taken for tests:   6.250 seconds
-Complete requests:      500
-Failed requests:        0
-Total transferred:      483500 bytes
-HTML transferred:       391000 bytes
-Requests per second:    80.00 [#/sec] (mean)
-Time per request:       1249.962 [ms] (mean)
-Time per request:       12.500 [ms] (mean, across all concurrent requests)
-Transfer rate:          75.55 [Kbytes/sec] received
+Document Length:        1326 bytes
+
+Concurrency Level:      1000
+Time taken for tests:   4.686 seconds
+Complete requests:      10000
+Failed requests:        113
+   (Connect: 0, Receive: 0, Length: 113, Exceptions: 0)
+Total transferred:      15581912 bytes
+HTML transferred:       13110162 bytes
+Requests per second:    2133.83 [#/sec] (mean)
+Time per request:       468.641 [ms] (mean)
+Time per request:       0.469 [ms] (mean, across all concurrent requests)
+Transfer rate:          3246.99 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
-Connect:        0    0   0.3      0       1
-Processing:    17  949 235.8   1033    1112
-Waiting:       17  948 235.9   1031    1111
-Total:         17  949 235.8   1033    1112
+Connect:       83  206  50.3    206     317
+Processing:    51  248  61.9    247     481
+Waiting:        0  173  58.0    175     315
+Total:        206  454  75.6    459     698
 
 Percentage of the requests served within a certain time (ms)
-  50%   1033
-  66%   1046
-  75%   1061
-  80%   1069
-  90%   1079
-  95%   1084
-  98%   1090
-  99%   1094
- 100%   1112 (longest request)
+  50%    459
+  66%    481
+  75%    502
+  80%    519
+  90%    552
+  95%    569
+  98%    579
+  99%    605
+ 100%    698 (longest request)
 ```
