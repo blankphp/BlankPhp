@@ -7,5 +7,7 @@
  */
 
 
+use BlankPhp\Facade\Route;
+
 Route::get('/', 'PagesController@index');
 

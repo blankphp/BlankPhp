@@ -63,7 +63,7 @@ return [
         'Scheme' => BlankPhp\Facade\Scheme::class,
         'Session' => BlankPhp\Facade\Session::class,
         'Log' => BlankPhp\Facade\Log::class,
-        'Redis' => BlankPhp\Facade\Redis::class,
+//        'Redis' => BlankPhp\Facade\Redis::class,
     ]
 
 ];

@@ -12,6 +12,7 @@ namespace App\Provider;
 use BlankPhp\Cache\Cache;
 use BlankPhp\Cache\RouteCache;
 use BlankPhp\Provider\Provider;
+use BlankPhp\Route\Route;
 
 class RouteProvider extends Provider
 {
@@ -21,8 +22,8 @@ class RouteProvider extends Provider
 
     public function boot()
     {
+        /** @var Route route */
         $this->route = $this->app->make('route');
-        $this->route->setNamespace($this->namespace);
         $this->map();
         parent::boot();
     }
@@ -39,6 +40,7 @@ class RouteProvider extends Provider
         $this->route
             ->group('api')
             ->prefix('api')
+            ->namespace($this->namespace)
             ->file(APP_PATH . 'routes/api.php');
     }
 
@@ -47,6 +49,7 @@ class RouteProvider extends Provider
     {
         $this->route
             ->group('web')
+            ->namespace($this->namespace)
             ->file(APP_PATH . 'routes/web.php');
     }
 
